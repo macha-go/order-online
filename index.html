@@ -47,13 +47,13 @@
         addressDisplay: 'Perumahan Griya Airlangga Blok C8, Wonorejo, Rungkut, Surabaya, Jawa Timur',
         mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Perumahan+Griya+Airlangga+Blok+C8,+Wonorejo,+Rungkut,+Surabaya,+Jawa+Timur',
         openingHours: [
-          { day: 'Monday', hours: '09:00 – 18:00 WIB • homecafe 24 hours!' },
-          { day: 'Tuesday', hours: '09:00 – 18:00 WIB • homecafe 24 hours!' },
-          { day: 'Wednesday', hours: '09:00 – 18:00 WIB • homecafe 24 hours!' },
-          { day: 'Thursday', hours: '09:00 – 18:00 WIB • homecafe 24 hours!' },
-          { day: 'Friday', hours: '09:00 – 18:00 WIB • homecafe 24 hours!' },
-          { day: 'Saturday', hours: '09:00 – 19:00 WIB • homecafe 24 hours!' },
-          { day: 'Sunday', hours: '09:00 – 19:00 WIB • homecafe 24 hours!' }
+          { day: 'Monday', hours: '09:00 – 18:00 WIB • online order 24 hours!' },
+          { day: 'Tuesday', hours: '09:00 – 18:00 WIB • online order 24 hours!' },
+          { day: 'Wednesday', hours: '09:00 – 18:00 WIB • online order 24 hours!' },
+          { day: 'Thursday', hours: '09:00 – 18:00 WIB • online order 24 hours!' },
+          { day: 'Friday', hours: '09:00 – 18:00 WIB • online order 24 hours!' },
+          { day: 'Saturday', hours: '09:00 – 19:00 WIB • online order 24 hours!' },
+          { day: 'Sunday', hours: '09:00 – 19:00 WIB • online order 24 hours!' }
         ]
       },
 
@@ -61,9 +61,9 @@
       onlineFood: {
         heading: 'Also Available On',
         subtext: 'Mau pesan instan lewat aplikasi ojek online favoritmu? Klik platform di bawah:',
-        gofoodUrl: 'https://gofood.co.id',
-        shopeefoodUrl: 'https://shopee.co.id/m/shopeefood',
-        grabfoodUrl: 'https://food.grab.com/id/id/'
+        gofoodUrl: 'https://gofood.link/a/SE9BgKb',
+        shopeefoodUrl: 'https://shopee.co.id/universal-link/now-food/shop/22739076?deep_and_deferred=1&shareChannel=copy_link',
+        grabfoodUrl: 'https://app.grab.com/s/YX9NzMpT'
       },
 
       // 7. TEMPLATE CHAT REKAP ORDER YANG TERHUBUNG KE WHATSAPP
@@ -71,7 +71,7 @@
       // {order_id}, {nama}, {no_wa}, {metode}, {alamat}, {tanggal}, {jam}, {catatan_order}, {items}, {subtotal}
       whatsappTemplate: {
         messagePattern: [
-          'Halo *măcha go*! 🍵✨ Saya mau konfirmasi self-checkout order:',
+          'Halo *macha.go*! 🍵✨ Saya mau konfirmasi self-checkout order:',
           'Order ID: *#{order_id}*',
           '────────────────────────',
           '*Data Pemesan:*',
@@ -92,13 +92,13 @@
       // 8. COMPANY PROFILE (ABOUT US) + FOTO DOKUMENTASI BRAND
       about: {
         eyebrow: 'ABOUT US',
-        headline: 'A home bar, a bamboo whisk, and a lot of heart.',
-        shortText: 'măcha go started in Surabaya from a simple daily ritual: slowing down with a bowl of freshly whisked green tea before the city rushes in. Certified Halal Indonesia, we craft each cup to order using pure & ceremonial grade matcha powders paired with creamy Oatside oatmilk or our signature 50:50 house blend.',
-        moreText: 'From intimate home deliveries in Rungkut to inclusive community workshops and pop-up matcha bars across Surabaya, every cup is whisked by hand with warmth, honest ingredients, and zero shortcuts.',
+        headline: 'your daily matcha on the go.',
+        shortText: 'macha.go started with a simple love for matcha. Our founder has always been a matcha lover, and that love sparked an idea: to create matcha drinks that are not only delicious but also more mindful and enjoyable for different lifestyles. We wanted to make something for people who love matcha but are also trying to reduce their sugar intake, maintain a balanced diet, or simply make better everyday choices.',
+        moreText: 'And that's how macha.go was born! We believe enjoying matcha shouldn't mean having to compromise on what goes into your drink. That's why we use **100% pure matcha**, with no creamer or premixed powders. Every drink is homemade and freshly crafted, using stevia as an alternative sweetener. From the ingredients we choose to the way we craft each drink, we pay attention to the little details to bring out the best of matcha in every sip. For us, matcha is more than just a trending drink. It's about enjoying something you love while being more mindful of what you consume.',
         // Paste maksimal 2 link Google Drive foto brand/bar di sini
         photos: [
-          'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=85',
-          'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=85'
+          'https://drive.google.com/file/d/1wyDgXySXV5JGx-fXoRTHJyIM1bBRqMQf/view?usp=drivesdk',
+          'https://drive.google.com/file/d/1sqHkzG1dCblAwnMKqJLTk7A1wbD5e-mV/view?usp=drivesdk'
         ]
       },
 
@@ -111,8 +111,8 @@
           category: 'Signature Latte',
           badge: 'Best Seller',
           isNew: false,
-          description: 'Classic hand-whisked matcha poured smoothly over chilled creamy milk.',
-          image: '' // <-- Paste link Google Drive foto Matcha Latte di sini
+          description: 'Classic poured smoothly over creamy milk.',
+          image: 'https://drive.google.com/file/d/102kffIbo-BKidZ3Vxua0ItOKxJOlCjlT/view?usp=drivesdk' // <-- Paste link Google Drive foto Matcha Latte di sini
         },
         {
           id: 'ube-matcha',
@@ -121,8 +121,8 @@
           category: 'Fruity & Sweet',
           badge: 'New',
           isNew: true,
-          description: 'Velvety purple ube paste layered with creamy milk and ceremonial-grade matcha cloud.',
-          image: '' // <-- Paste link Google Drive foto Ube Matcha di sini
+          description: 'smooth, creamy and sweet ube',
+          image: 'https://drive.google.com/file/d/1YL3S-OM52Dh7cihNXNGBHNZsSdoc4N08/view?usp=drivesdk' // <-- Paste link Google Drive foto Ube Matcha di sini
         },
         {
           id: 'coconut-matcha',
@@ -131,8 +131,8 @@
           category: 'Fruity & Sweet',
           badge: 'Refreshing',
           isNew: false,
-          description: 'Refreshing tropical coconut water and light cream topped with frothy green matcha.',
-          image: '' // <-- Paste link Google Drive foto Coconut Matcha di sini
+          description: 'Refreshing and light.',
+          image: 'https://drive.google.com/file/d/10H8ZpYJBnpykuAFB7T0xzNMNY6CVBtTo/view?usp=drivesdk' // <-- Paste link Google Drive foto Coconut Matcha di sini
         },
         {
           id: 'ichigo-matcha',
@@ -141,8 +141,8 @@
           category: 'Fruity & Sweet',
           badge: 'New',
           isNew: true,
-          description: 'Housemade chunky strawberry compote, silky milk, and vibrant whisked matcha.',
-          image: '' // <-- Paste link Google Drive foto Ichigo Matcha di sini
+          description: 'sweet and sour balance.',
+          image: 'https://drive.google.com/file/d/1vh0lbrK9_BtwaRWFWjdwKDavDTeM0-7u/view?usp=drivesdk' // <-- Paste link Google Drive foto Ichigo Matcha di sini
         },
         {
           id: 'chocolate-matcha',
@@ -151,19 +151,9 @@
           category: 'Signature Latte',
           badge: 'Rich Cocoa',
           isNew: false,
-          description: 'Rich dark chocolate ganache base layered beneath chilled milk and earthy matcha.',
-          image: '' // <-- Paste link Google Drive foto Chocolate Matcha di sini
+          description: 'Rich dark chocolate, creamy and sweet.',
+          image: 'https://drive.google.com/file/d/1zIY3tI2ZcMDCgWhZMvZ2XoJguIyzM-3o/view?usp=drivesdk' // <-- Paste link Google Drive foto Chocolate Matcha di sini
         },
-        {
-          id: 'trio-bundle',
-          name: 'măcha go Trio Bundle',
-          price: 72000,
-          category: 'Bundle',
-          badge: 'Group Save',
-          isNew: false,
-          description: 'Paket 3 cup freshly whisked signature matcha untuk sharing bersama teman kantor atau keluarga.',
-          image: '' // <-- Paste link Google Drive foto Trio Bundle di sini
-        }
       ],
 
       // 10. OPSI POWDER, MILK & SUGAR UNTUK CUSTOMIZATION
@@ -173,13 +163,13 @@
         { id: 'japan', label: 'Ceremonial Grade Japan', addon: 20000, note: 'Deep rich umami & velvety finish' }
       ],
       milkOptions: [
-        'Oatmilk (Oatside)',
+        'Oatmilk',
         'Blend (Freshmilk + Oatmilk)'
       ],
       sugarOptions: [
-        'Normal Sugar (100%)',
-        'Less Sugar (50%)',
-        'No Sugar (0%)'
+        'Normal (2 tetes stevia)',
+        'Less sweet (1 tetes stevia)',
+        'Tanpa stevia'
       ],
 
       // 11. DOKUMENTASI PREVIOUS EVENTS & WORKSHOPS
@@ -187,7 +177,7 @@
       events: [
         {
           id: 'evt-inclusive-workshop',
-          title: 'Inclusive Matcha Experience Workshop',
+          title: 'Matcha Experience Workshop',
           category: 'Workshop',
           location: 'Surabaya',
           date: 'May 2026',
