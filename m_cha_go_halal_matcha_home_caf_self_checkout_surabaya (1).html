@@ -1,0 +1,2749 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>măcha go — Halal Certified Matcha &amp; Self-Checkout Surabaya</title>
+  <meta name="description" content="Daily matcha rituals, freshly whisked for your go. Halal-certified pure &amp; ceremonial grade matcha crafted in Surabaya with Oatmilk &amp; Blend options." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Fredoka (Rounded Organic Display) & Plus Jakarta Sans (Clean UI/Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Custom Palette & Font Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            macha: {
+              cream: '#F8F5EE',      // Primary Page Background (Warm Oat Cream)
+              parchment: '#EFE8D8',  // Secondary Band / Header / Ticker Background
+              forest: '#2D4C2B',     // Primary Brand Green (Headings, Prices, Primary Buttons)
+              leaf: '#5C8D3E',       // Secondary Accent Green (Badges, 'go', Highlights)
+              sage: '#E4ECD8',       // Soft Product Frame Tint (Sage Mist)
+              border: '#E5DEC9',     // Subtle Warm Card Border
+              pine: '#20381F',       // Footer Surface (Deep Pine Matcha)
+              ink: '#223321',        // Deep Warm Charcoal-Green Text
+            }
+          },
+          fontFamily: {
+            display: ['"Fredoka"', 'system-ui', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 8px 28px -6px rgba(45, 76, 43, 0.07)',
+            'float': '0 16px 38px -8px rgba(32, 56, 31, 0.28)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #F8F5EE;
+      color: #223321;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-display {
+      font-family: 'Fredoka', system-ui, sans-serif;
+    }
+
+    /* Hide scrollbar for horizontal category pills */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Continuous Infinite Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Subtle Washi Paper Grain & Sunlit Shadow Overlay */
+    .bg-sunlit-arch {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255, 253, 247, 0.92) 0%, rgba(239, 232, 216, 0.72) 52%, rgba(228, 236, 216, 0.92) 100%);
+    }
+
+    /* Smooth Modal / Sheet Entry */
+    @keyframes sheetUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-sheet-up {
+      animation: sheetUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-macha-cream text-macha-ink antialiased selection:bg-macha-forest selection:text-white pb-24">
+
+  <!-- ===================================================================== -->
+  <!-- 1. STICKY HEADER NAVBAR & SLIDE-DOWN NAVIGATION DRAWER                -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-macha-parchment/95 backdrop-blur-md border-b border-macha-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <!-- Brand Wordmark Logo -->
+      <a href="#" id="headerLogoContainer" class="flex items-center shrink-0" aria-label="măcha go Home">
+        <!-- Rendered via JS SVG helper -->
+      </a>
+
+      <!-- Right Controls: Store Status Pill, Cart Button & Hamburger -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Open / Closed Status Pill -->
+        <button
+          id="storeStatusPill"
+          type="button"
+          onclick="openAdminModal('settings')"
+          title="Klik untuk ubah status Open / Closed"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-emerald-100/95 text-macha-forest border border-emerald-300/80"
+        >
+          <span id="storeStatusDot" class="w-2 h-2 rounded-full bg-macha-leaf animate-pulse"></span>
+          <span id="storeStatusText">Open</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button
+          type="button"
+          onclick="openCheckoutDrawer()"
+          aria-label="Buka Keranjang Belanja"
+          class="relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-macha-sage text-macha-forest border border-macha-border text-xs font-bold transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span id="headerCartCount" class="font-display font-bold">0</span>
+        </button>
+
+        <!-- Hamburger Menu Toggle -->
+        <button
+          type="button"
+          onclick="toggleNavDrawer()"
+          aria-label="Menu Navigasi"
+          class="w-9 h-9 rounded-full bg-white hover:bg-macha-sage text-macha-forest border border-macha-border flex items-center justify-center transition-colors"
+        >
+          <svg id="hamburgerIconOpen" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="hamburgerIconClose" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Mobile/Desktop Navigation Drawer -->
+    <nav id="mobileNavDrawer" class="hidden bg-macha-cream border-t border-macha-border px-4 sm:px-6 py-4 space-y-1 shadow-lg">
+      <div class="max-w-4xl mx-auto divide-y divide-macha-border/70 text-sm font-bold text-macha-forest">
+        <a href="#menu" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Menu &amp; Self-Order</a>
+        <a href="#about" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">About Us</a>
+        <a href="#events" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Previous Events</a>
+        <a href="#services" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Private Events &amp; Workshops</a>
+        <a href="#find-us" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Find Us &amp; Hours</a>
+      </div>
+      <div class="max-w-4xl mx-auto pt-3">
+        <a
+          href="#menu"
+          onclick="closeNavDrawer()"
+          class="w-full inline-flex items-center justify-center gap-2 bg-macha-forest text-white font-bold text-sm py-3 rounded-full"
+        >
+          <span>Order Now</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 2. HERO SHOWCASE (WARM CEREMONIAL MATCHA BAR AMBIENCE - NO PRODUCT CUP)-->
+  <!-- ===================================================================== -->
+  <section class="relative overflow-hidden border-b border-macha-border min-h-[440px] sm:min-h-[500px] flex items-center">
+    <!-- Background Photo: Clean Warm Ceremonial Matcha Bar / Chasen Whisking Ambience -->
+    <img
+      src="https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=1600&q=85"
+      onerror="this.onerror=null;this.style.display='none';"
+      alt="Suasana ceremonial matcha whisking măcha go Surabaya"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-25 scale-105"
+    />
+    <!-- Warm Oat Cream & Sunlit Parchment Atmospheric Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#F8F5EE]/92 via-[#EFE8D8]/86 to-[#F8F5EE]/96"></div>
+    <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[520px] rounded-full bg-white/55 blur-3xl"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-14 sm:py-20 relative z-10 w-full text-center space-y-6">
+      <!-- Halal & Surabaya Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-macha-border shadow-2xs">
+        <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-macha-leaf/15 text-macha-leaf text-[10px] font-bold">✦</span>
+        <span class="text-xs font-semibold text-macha-forest tracking-wide">Halal Certified • Surabaya Home Café</span>
+      </div>
+
+      <!-- Editorial Headline in Fredoka -->
+      <h1 class="font-display text-[38px] sm:text-5xl lg:text-[58px] font-bold text-macha-forest leading-[1.12] tracking-tight max-w-2xl mx-auto">
+        matcha rituals,<br />
+        crafted in <span class="text-macha-leaf">Surabaya.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-sm sm:text-base lg:text-lg text-macha-ink/85 max-w-xl mx-auto leading-relaxed">
+        Hand-whisked Halal pure &amp; ceremonial grade matcha, freshly brewed to order with <strong class="font-semibold text-macha-forest">Oatmilk (Oatside)</strong> or <strong class="font-semibold text-macha-forest">50:50 Blend</strong>.
+      </p>
+
+      <!-- Dual Pill Buttons ('Order Now' + 'Plan your Event') -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a
+          href="#menu"
+          class="inline-flex items-center justify-center gap-2 bg-macha-forest hover:bg-macha-pine text-white font-bold text-sm px-7 py-3.5 rounded-full shadow-card transition-all active:scale-95"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+          <span>Order Now</span>
+        </a>
+
+        <a
+          href="#events"
+          class="inline-flex items-center justify-center gap-2 bg-white/75 hover:bg-white text-macha-forest border-2 border-macha-forest font-bold text-sm px-7 py-3 rounded-full transition-all active:scale-95"
+        >
+          <span>Plan your Event</span>
+        </a>
+      </div>
+
+      <!-- Subtle Mascot Ritual Note Pill -->
+      <div class="pt-3 flex justify-center">
+        <div class="inline-flex items-center gap-2.5 bg-white/85 backdrop-blur-xs rounded-full px-4 py-1.5 border border-macha-border shadow-2xs">
+          <div id="heroMascotContainer" class="w-7 h-7 shrink-0"></div>
+          <span class="text-xs font-medium text-macha-ink/80">
+            Freshly whisked with bamboo <em>chasen</em> • Pilih tanggal &amp; jam pengantaran sendiri
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. CONTINUOUS MARQUEE TICKER (SOFT MATCHA PARCHMENT #EFE8D8)          -->
+  <!-- ===================================================================== -->
+  <div class="bg-macha-parchment border-b border-macha-border py-2.5 overflow-hidden select-none">
+    <div class="animate-marquee flex items-center gap-8 text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-macha-forest">
+      <span>HALAL CERTIFIED</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>PURE &amp; CEREMONIAL GRADE</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>OATMILK &amp; BLEND</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>SURABAYA HOME CAFÉ</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>HAND-WHISKED TO ORDER</span>
+      <span class="text-macha-leaf">✦</span>
+      <!-- Duplicated seamlessly for continuous loop -->
+      <span>HALAL CERTIFIED</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>PURE &amp; CEREMONIAL GRADE</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>OATMILK &amp; BLEND</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>SURABAYA HOME CAFÉ</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>HAND-WHISKED TO ORDER</span>
+      <span class="text-macha-leaf">✦</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 4. MENU SECTION ('- OUR MENU -' & HORIZONTAL CARDS WITH '+ ORDER')    -->
+  <!-- ===================================================================== -->
+  <section id="menu" class="py-12 sm:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Centered Editorial Header (Inspired by IMG_0788.jpg) -->
+      <div class="text-center space-y-2 mb-7">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — OUR MENU —
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight">
+          Craving something<br class="sm:hidden" /> green today?
+        </h2>
+      </div>
+
+      <!-- Framed Category Filter Pill Bar ('All', 'Seasonal', 'Drinks', 'Bundles') -->
+      <div class="bg-white rounded-2xl border border-macha-border p-2 mb-7 shadow-2xs">
+        <div id="menuCategoryBar" class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+
+      <!-- Category Subheader Row -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2.5">
+          <span id="menuSectionLabel" class="text-xs font-bold uppercase tracking-[0.18em] text-macha-forest/80">
+            ALL HANDCRAFTED DRINKS
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full bg-macha-leaf text-white text-[10px] font-bold uppercase tracking-wider">
+            HALAL
+          </span>
+        </div>
+        <span class="text-[11px] text-macha-ink/65 hidden sm:inline">Klik <strong>+ Order</strong> untuk pilih Powder &amp; Milk</span>
+      </div>
+
+      <!-- Horizontal Menu Cards List (Single column on mobile like IMG_0788.jpg, 2-col on desktop) -->
+      <div id="menuCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Powder & Milk Quick Guide Note (Matching măcha go's menu card footnote) -->
+      <div class="mt-8 rounded-3xl bg-macha-parchment/75 border border-macha-border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div id="menuFooterMascot" class="w-11 h-11 shrink-0"></div>
+          <div class="text-xs text-macha-ink/85 space-y-1">
+            <p class="font-display text-sm font-bold text-macha-forest">Customisasi Setiap Cup Sesuai Seleramu:</p>
+            <p><strong>Milk:</strong> Oatmilk (Oatside) • Blend (Freshmilk + Oatmilk)</p>
+            <p><strong>Powder:</strong> Pure Grade (+0k) • Ceremonial China (+6k) • Ceremonial Japan (+20k)</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-[11px] font-bold text-macha-forest shrink-0">
+          <span class="px-3 py-1.5 rounded-full bg-white border border-macha-border">Bebas Pilih Tanggal &amp; Jam</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 5. ABOUT US SECTION ('- ABOUT US -' WITH EXPANDABLE STORY)            -->
+  <!-- ===================================================================== -->
+  <section id="about" class="py-12 sm:py-16 bg-macha-parchment/55 border-y border-macha-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="space-y-4">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — ABOUT US —
+        </p>
+
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight max-w-xl">
+          A home kitchen, a bamboo whisk, and a lot of heart.
+        </h2>
+
+        <div class="text-sm sm:text-base text-macha-ink/85 leading-relaxed space-y-3.5 max-w-2xl">
+          <p>
+            <strong>măcha go</strong> berawal dari ritual pagi sederhana di dapur rumah kami di Surabaya—mengayak bubuk teh hijau pilihan dan mengaduknya perlahan dengan <em>chasen</em> bambu sebelum memulai hari yang sibuk.
+          </p>
+          <p>
+            Dari sekadar berbagi botol matcha ke teman dekat, kecintaan pada tekstur <em>micro-foam</em> yang lembut serta racikan susu <strong>Oatside</strong> dan <strong>50:50 Blend</strong> tumbuh menjadi sebuah <em>Halal-certified home café</em> yang hangat di Surabaya.
+          </p>
+
+          <!-- Expandable Story Paragraph -->
+          <div id="aboutMoreContent" class="hidden space-y-3.5 pt-1">
+            <p>
+              Kami percaya setiap penikmat matcha punya karakter rasa favoritnya masing-masing—mulai dari <strong>Pure Grade</strong> yang ringan untuk teman kerja harian, hingga <strong>Ceremonial Grade China &amp; Japan</strong> dengan profil umami mendalam. Setiap cup selalu di-whisk segar saat pesanan masuk, tanpa stok lama.
+            </p>
+            <p>
+              Kini, garasi dan ruang seduh kecil kami juga terbuka untuk kolaborasi komunitas, kelas <em>matcha whisking workshop</em> inklusif, hingga <em>pop-up bar</em> di berbagai acara spesial di Surabaya.
+            </p>
+          </div>
+        </div>
+
+        <button
+          id="aboutReadMoreBtn"
+          type="button"
+          onclick="toggleAboutStory()"
+          class="inline-flex items-center gap-1.5 text-sm font-bold text-macha-forest hover:text-macha-leaf pt-1 transition-colors"
+        >
+          <span id="aboutReadMoreLabel">Read more ↓</span>
+        </button>
+      </div>
+
+      <!-- 2-Column Aesthetic Photo & Illustration Showcase Grid (Inspired by IMG_0789.jpg) -->
+      <div class="grid grid-cols-2 gap-3.5 sm:gap-5 mt-8">
+        <!-- Card 1: Hand-Whisking Matcha -->
+        <div class="rounded-3xl overflow-hidden bg-macha-sage border border-macha-border aspect-[4/4] sm:aspect-[4/3] relative group">
+          <img
+            src="https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=800&q=85"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x500/2D4C2B/F8F5EE?text=Bamboo+Whisk+Ritual';"
+            alt="Proses whisking matcha dengan chasen bambu di măcha go"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-xs rounded-xl px-3 py-1.5 border border-macha-border">
+            <p class="font-display text-xs font-bold text-macha-forest">Freshly Whisked</p>
+            <p class="text-[10px] text-macha-ink/70">Bamboo Chasen Craft</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Surabaya Home Café Aesthetic -->
+        <div class="rounded-3xl overflow-hidden bg-macha-sage border border-macha-border aspect-[4/4] sm:aspect-[4/3] relative group">
+          <img
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=85"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x500/5C8D3E/F8F5EE?text=Surabaya+Home+Cafe';"
+            alt="Suasana sudut home café măcha go di Surabaya"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-xs rounded-xl px-3 py-1.5 border border-macha-border">
+            <p class="font-display text-xs font-bold text-macha-forest">măcha go Corner</p>
+            <p class="text-[10px] text-macha-ink/70">Surabaya, Jawa Timur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 6. PREVIOUS EVENTS CAROUSEL ('- PREVIOUS EVENTS -')                   -->
+  <!-- ===================================================================== -->
+  <section id="events" class="py-12 sm:py-16 bg-macha-parchment border-b border-macha-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="space-y-2 mb-6">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — PREVIOUS EVENTS —
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight">
+          Memories, whisked<br class="sm:hidden" /> with intention.
+        </h2>
+        <p class="text-sm text-macha-ink/80 max-w-xl leading-relaxed">
+          From inclusive community workshops to lively weekend garage pop-ups, every măcha go gathering is poured with warmth.
+        </p>
+      </div>
+
+      <!-- Filter Pills ('All', 'Workshop', 'Pop-up', 'Private') -->
+      <div id="eventFilterBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-6">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Interactive Event Carousel Container (Inspired by IMG_0790.jpg) -->
+      <div class="relative">
+        <div id="eventCarouselCard" class="bg-white rounded-3xl overflow-hidden border border-macha-border shadow-card">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Prev / Next Carousel Controls & Dots -->
+        <div class="flex items-center justify-between mt-4">
+          <div id="eventCarouselDots" class="flex items-center gap-2">
+            <!-- Dots rendered by JS -->
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              onclick="stepEventCarousel(-1)"
+              aria-label="Event Sebelumnya"
+              class="w-10 h-10 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white border border-macha-border flex items-center justify-center shadow-2xs transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onclick="stepEventCarousel(1)"
+              aria-label="Event Berikutnya"
+              class="w-10 h-10 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white border border-macha-border flex items-center justify-center shadow-2xs transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 7. EVENT BOOKING BANNER & SERVICES ('- PRIVATE EVENTS & WORKSHOPS -') -->
+  <!-- ===================================================================== -->
+  <section id="services" class="py-12 sm:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
+      <!-- Warm Parchment Event CTA Banner (Inspired by IMG_0791.png) -->
+      <div class="rounded-3xl bg-macha-parchment border border-macha-border p-7 sm:p-10 text-center space-y-5 shadow-2xs">
+        <p class="font-display text-xl sm:text-2xl font-bold text-macha-forest max-w-md mx-auto leading-snug">
+          Want măcha go whisking at your next event?
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+          <a
+            href="#service-cards"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/70 text-macha-forest border-2 border-macha-forest font-bold text-sm px-6 py-3 rounded-full transition-colors"
+          >
+            <span>View Services →</span>
+          </a>
+
+          <button
+            type="button"
+            onclick="openEventWhatsApp('Private Event / Workshop Session')"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-macha-forest hover:bg-macha-pine text-white font-bold text-sm px-6 py-3.5 rounded-full shadow-card transition-all active:scale-95"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+            </svg>
+            <span>Book a Session</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Service Cards ('- PRIVATE EVENTS & WORKSHOPS -') -->
+      <div id="service-cards" class="space-y-6">
+        <div class="text-center space-y-2 max-w-xl mx-auto">
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+            — PRIVATE EVENTS &amp; WORKSHOPS —
+          </p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest">
+            măcha go comes to you.
+          </h2>
+          <p class="text-sm text-macha-ink/80 leading-relaxed">
+            Kami menghadirkan pengalaman seduh matcha Halal &amp; autentik langsung ke ruang acaramu di Surabaya—mulai dari gathering rumah hingga aktivasi brand.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <!-- Service 1: At Your Home -->
+          <div class="bg-white rounded-3xl p-6 border border-macha-border shadow-card flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="w-11 h-11 rounded-2xl bg-macha-sage text-macha-forest flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-macha-forest">At Your Home</h3>
+              <p class="text-xs sm:text-sm text-macha-ink/75 leading-relaxed">
+                Merayakan ulang tahun, <em>bridal shower</em>, atau arisan keluarga? Kami menyiapkan <em>cozy matcha bar</em> lengkap dengan pilihan Oatmilk &amp; Blend di rumahmu.
+              </p>
+            </div>
+            <button
+              type="button"
+              onclick="openEventWhatsApp('At Your Home (Private Gathering)')"
+              class="w-full py-2.5 px-4 rounded-full border border-macha-forest text-macha-forest hover:bg-macha-forest hover:text-white text-xs font-bold transition-colors"
+            >
+              Tanya Paket Home Bar →
+            </button>
+          </div>
+
+          <!-- Service 2: Matcha Workshop -->
+          <div class="bg-white rounded-3xl p-6 border border-macha-border shadow-card flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="w-11 h-11 rounded-2xl bg-macha-sage text-macha-forest flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-macha-forest">Matcha Workshop</h3>
+              <p class="text-xs sm:text-sm text-macha-ink/75 leading-relaxed">
+                Kelas interaktif pengenalan <em>Pure vs Ceremonial Grade</em>, teknik mengaduk dengan <em>chasen</em>, dan meracik layered latte untuk komunitas, sekolah, maupun kantor.
+              </p>
+            </div>
+            <button
+              type="button"
+              onclick="openEventWhatsApp('Matcha Workshop Class')"
+              class="w-full py-2.5 px-4 rounded-full border border-macha-forest text-macha-forest hover:bg-macha-forest hover:text-white text-xs font-bold transition-colors"
+            >
+              Booking Kelas Workshop →
+            </button>
+          </div>
+
+          <!-- Service 3: Pop-Up & Brand Activation -->
+          <div class="bg-white rounded-3xl p-6 border border-macha-border shadow-card flex flex-col justify-between space-y-5">
+            <div class="space-y-3">
+              <div class="w-11 h-11 rounded-2xl bg-macha-sage text-macha-forest flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-macha-forest">Pop-Up &amp; Brand Activation</h3>
+              <p class="text-xs sm:text-sm text-macha-ink/75 leading-relaxed">
+                <em>Live matcha bar</em> dengan <em>custom cup sleeves</em> untuk peluncuran produk, acara kampus, <em>sport club</em>, maupun hampers korporat di Surabaya.
+              </p>
+            </div>
+            <button
+              type="button"
+              onclick="openEventWhatsApp('Pop-Up & Brand Activation')"
+              class="w-full py-2.5 px-4 rounded-full border border-macha-forest text-macha-forest hover:bg-macha-forest hover:text-white text-xs font-bold transition-colors"
+            >
+              Diskusi Kolaborasi Brand →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 8. FIND US SECTION & OPENING HOURS ACCORDION (INSPIRED BY IMG_0792)   -->
+  <!-- ===================================================================== -->
+  <section id="find-us" class="py-12 sm:py-16 bg-macha-parchment/55 border-t border-macha-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+      <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+        — FIND US —
+      </p>
+
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight">
+        Surabaya, Jawa Timur,<br class="sm:hidden" /> Indonesia
+      </h2>
+
+      <!-- Get Directions + Delivery Platform Pills (ShopeeFood & GoFood from flyer) -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <a
+          href="https://maps.google.com/?q=Surabaya,Jawa+Timur,Indonesia"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-transparent hover:bg-white text-macha-forest border-2 border-macha-forest font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+          </svg>
+          <span>Get Directions</span>
+        </a>
+
+        <span class="inline-flex items-center gap-1.5 bg-white px-4 py-2.5 rounded-full border border-macha-border text-xs font-semibold text-macha-ink/85">
+          <span>Also available on:</span>
+          <strong class="text-[#EE4D2D]">ShopeeFood</strong>
+          <span>•</span>
+          <strong class="text-[#00AA13]">GoFood</strong>
+        </span>
+      </div>
+
+      <!-- Interactive OPENING HOURS Expandable Accordion -->
+      <div class="pt-2 max-w-md">
+        <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-macha-forest/70 mb-2">
+          OPENING HOURS
+        </p>
+
+        <div class="bg-white rounded-2xl border border-macha-border shadow-2xs overflow-hidden">
+          <button
+            type="button"
+            onclick="toggleOpeningHours()"
+            class="w-full px-4 py-3.5 flex items-center justify-between text-xs sm:text-sm font-semibold text-macha-forest hover:bg-macha-cream/60 transition-colors"
+          >
+            <span>Today · <strong class="font-bold">09:00 – 18:00 WIB</strong></span>
+            <svg id="hoursChevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="openingHoursDetails" class="hidden px-4 pb-4 pt-1 border-t border-macha-border/60 text-xs text-macha-ink/80 space-y-1.5">
+            <div class="flex justify-between"><span>Senin – Jumat</span><span class="font-semibold text-macha-forest">09:00 – 18:00 WIB</span></div>
+            <div class="flex justify-between"><span>Sabtu – Minggu</span><span class="font-semibold text-macha-forest">09:00 – 19:00 WIB</span></div>
+            <div class="pt-1.5 text-[11px] text-macha-leaf font-semibold">
+              • Pengantaran / Pickup: Fleksibel sesuai tanggal &amp; jam pilihanmu saat checkout
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 9. DEEP PINE FOOTER (#20381F) + DISCREET ADMIN & REKAP HARIAN BUTTON  -->
+  <!-- ===================================================================== -->
+  <footer class="bg-macha-pine text-macha-cream pt-12 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      <!-- Centered White/Mint 'măcha go' SVG Wordmark -->
+      <div id="footerLogoContainer" class="flex justify-center">
+        <!-- Rendered via JS SVG helper -->
+      </div>
+
+      <p class="text-xs text-macha-cream/75">
+        &copy; 2026 măcha go &middot; Halal Certified Home Café &middot; Surabaya
+      </p>
+
+      <!-- Social Icon Buttons (WhatsApp, Instagram, TikTok, Maps) -->
+      <div class="flex items-center justify-center gap-4 text-macha-cream/80">
+        <!-- WhatsApp -->
+        <button
+          type="button"
+          onclick="openDirectWhatsAppChat()"
+          aria-label="WhatsApp măcha go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+        </button>
+
+        <!-- Instagram -->
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram măcha go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
+
+        <!-- TikTok -->
+        <a
+          href="https://tiktok.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok măcha go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+          </svg>
+        </a>
+
+        <!-- Maps -->
+        <a
+          href="https://maps.google.com/?q=Surabaya,Jawa+Timur,Indonesia"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lokasi Google Maps măcha go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Discreet Admin & Rekap Harian Button -->
+      <div class="pt-4 border-t border-white/10">
+        <button
+          type="button"
+          onclick="openAdminModal('recap')"
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-macha-cream/85 text-xs font-semibold transition-colors"
+        >
+          <span>⚙️ Admin &amp; Rekap Harian</span>
+          <span id="footerAdminOrderBadge" class="px-1.5 py-0.2 rounded-full bg-macha-leaf text-white text-[10px] font-bold">0</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- 10. FLOATING BOTTOM CART BAR (VISIBLE WHEN CART >= 1 ITEM)            -->
+  <!-- ===================================================================== -->
+  <div id="floatingCartBar" class="hidden fixed bottom-4 inset-x-4 z-40 max-w-xl mx-auto animate-sheet-up">
+    <button
+      type="button"
+      onclick="openCheckoutDrawer()"
+      class="w-full bg-macha-forest hover:bg-macha-pine text-white rounded-full p-2.5 pl-4 pr-3 shadow-float flex items-center justify-between gap-3 border border-white/15 transition-all active:scale-[0.99]"
+    >
+      <div class="flex items-center gap-3 text-left">
+        <span id="floatingCartCups" class="w-9 h-9 rounded-full bg-macha-leaf text-white font-display font-bold text-sm flex items-center justify-center shrink-0">
+          0
+        </span>
+        <div>
+          <p class="text-[11px] text-macha-cream/80 font-medium leading-tight">Keranjang măcha go</p>
+          <p id="floatingCartSubtotal" class="font-display font-bold text-base text-white leading-tight">Rp 0</p>
+        </div>
+      </div>
+
+      <span class="inline-flex items-center gap-1.5 bg-macha-cream text-macha-forest font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shrink-0">
+        <span>Checkout</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 11. ITEM CUSTOMIZER MODAL (BOTTOM SHEET ON MOBILE / MODAL ON DESKTOP) -->
+  <!-- ===================================================================== -->
+  <div id="customizerModal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-macha-pine/65 backdrop-blur-xs p-0 sm:p-4">
+    <div class="bg-macha-cream w-full sm:max-w-lg rounded-t-[32px] sm:rounded-[32px] shadow-2xl max-h-[92vh] flex flex-col overflow-hidden border border-macha-border animate-sheet-up">
+      <!-- Top Visual Header -->
+      <div class="relative bg-macha-sage px-5 pt-5 pb-4 border-b border-macha-border flex items-center gap-4 shrink-0">
+        <div id="custPreviewVisual" class="w-20 h-24 rounded-2xl bg-white/80 border border-macha-border flex items-center justify-center p-1.5 shrink-0">
+          <!-- Drink SVG or Photo -->
+        </div>
+
+        <div class="flex-1 pr-7">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span id="custBadgeTag" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-macha-forest text-white">Drinks</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-macha-forest border border-macha-border">Halal</span>
+          </div>
+          <h3 id="custDrinkTitle" class="font-display text-xl sm:text-2xl font-bold text-macha-forest leading-tight">Matcha Latte</h3>
+          <p id="custBasePrice" class="text-xs font-bold text-macha-leaf mt-0.5">Base: Rp 22.000</p>
+        </div>
+
+        <button
+          type="button"
+          onclick="closeCustomizerModal()"
+          aria-label="Tutup Modal Kustomisasi"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center shadow-2xs transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Customization Options -->
+      <div class="p-5 overflow-y-auto space-y-5 flex-1">
+        <p id="custDrinkDesc" class="text-xs text-macha-ink/80 leading-relaxed -mt-1"></p>
+
+        <!-- 1. Powder Grade (Required Radio Cards with Auto Price Update) -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">1. Powder Grade</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="powderOptionsGrid" class="space-y-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- 2. Milk Option (Required Pills) -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">2. Milk Option</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="milkPillsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- 3. Sugar Level (Required Pills) -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">3. Sugar Level</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="sugarPillsGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- 4. Optional Cup Note -->
+        <div>
+          <label for="custCupNoteInput" class="block text-xs font-bold uppercase tracking-wider text-macha-forest mb-1.5">
+            4. Catatan / Nama di Cup <span class="font-normal normal-case text-macha-ink/60">(Opsional)</span>
+          </label>
+          <input
+            id="custCupNoteInput"
+            type="text"
+            placeholder="Contoh: Tulis nama di cup: Acha"
+            class="w-full px-3.5 py-2.5 rounded-2xl bg-white border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest"
+          />
+        </div>
+      </div>
+
+      <!-- Sticky Bottom Action Bar: Quantity Stepper & Dynamic Add to Cart Button -->
+      <div class="p-4 sm:px-5 bg-white border-t border-macha-border flex items-center gap-3 shrink-0">
+        <div class="inline-flex items-center bg-macha-cream border border-macha-border rounded-full p-1">
+          <button
+            type="button"
+            onclick="stepCustomQty(-1)"
+            aria-label="Kurangi jumlah"
+            class="w-8 h-8 rounded-full hover:bg-white text-macha-forest font-bold text-base flex items-center justify-center"
+          >
+            −
+          </button>
+          <span id="custQtyDisplay" class="w-8 text-center font-display font-bold text-sm text-macha-forest">1</span>
+          <button
+            type="button"
+            onclick="stepCustomQty(1)"
+            aria-label="Tambah jumlah"
+            class="w-8 h-8 rounded-full hover:bg-white text-macha-forest font-bold text-base flex items-center justify-center"
+          >
+            +
+          </button>
+        </div>
+
+        <button
+          id="custAddToCartBtn"
+          type="button"
+          onclick="addCustomizedItemToCart()"
+          class="flex-1 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-full shadow-sm transition-all active:scale-[0.99]"
+        >
+          Add to Cart — Rp 22.000
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 12. SLIDE-OVER SELF-CHECKOUT DRAWER (CALENDAR + TIME -> DIRECT WA)    -->
+  <!-- ===================================================================== -->
+  <div id="checkoutDrawer" class="hidden fixed inset-0 z-50 flex justify-end bg-macha-pine/65 backdrop-blur-xs">
+    <div class="bg-macha-cream w-full max-w-lg h-full flex flex-col shadow-2xl overflow-hidden animate-sheet-up">
+      <!-- Header -->
+      <div class="px-5 py-4 bg-macha-parchment border-b border-macha-border flex items-center justify-between shrink-0">
+        <div>
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-macha-forest">Self-Checkout</h3>
+          <p class="text-[11px] text-macha-ink/75">Atur jadwal kirim &amp; kirim rekap pesanan langsung ke WhatsApp</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeCheckoutDrawer()"
+          aria-label="Tutup Checkout"
+          class="w-9 h-9 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
+        <!-- Empty Cart State -->
+        <div id="checkoutEmptyState" class="hidden bg-white rounded-3xl p-8 text-center border border-macha-border space-y-4">
+          <div id="emptyCartMascot" class="w-16 h-16 mx-auto"></div>
+          <div>
+            <h4 class="font-display text-xl font-bold text-macha-forest">Keranjang Masih Kosong</h4>
+            <p class="text-xs text-macha-ink/70 mt-1">Pilih varian matcha favoritmu dan atur Powder Grade serta Milk Option.</p>
+          </div>
+          <button
+            type="button"
+            onclick="closeCheckoutDrawer()"
+            class="bg-macha-forest text-white font-bold text-xs px-5 py-3 rounded-full"
+          >
+            Pilih Menu Matcha
+          </button>
+        </div>
+
+        <!-- Active Checkout Flow -->
+        <div id="checkoutFilledState" class="space-y-5">
+          <!-- STEP 1: ORDER SUMMARY -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border border-macha-border shadow-2xs space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">1. Ringkasan Pesanan</span>
+              <button type="button" onclick="closeCheckoutDrawer()" class="text-xs font-bold text-macha-leaf hover:underline">
+                + Tambah Menu
+              </button>
+            </div>
+
+            <div id="checkoutItemsContainer" class="divide-y divide-macha-border/70">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="pt-3 border-t border-macha-border flex items-center justify-between">
+              <span class="text-xs font-bold text-macha-ink/75">Estimasi Total Pesanan</span>
+              <span id="checkoutTotalDisplay" class="font-display text-2xl font-bold text-macha-forest">Rp 0</span>
+            </div>
+          </div>
+
+          <!-- STEP 2: CUSTOMER DETAILS & FLEXIBLE DATE/TIME CALENDAR -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border border-macha-border shadow-2xs space-y-3.5">
+            <span class="block text-xs font-bold uppercase tracking-wider text-macha-forest">2. Data Pemesan &amp; Jadwal Pengantaran</span>
+
+            <!-- Validation Error Alert -->
+            <div id="checkoutErrorBox" class="hidden rounded-2xl bg-rose-50 border border-rose-200 p-3 text-xs text-rose-700 font-medium"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputCustName" class="block text-xs font-bold text-macha-forest mb-1">
+                  Nama Pemesan <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  id="inputCustName"
+                  type="text"
+                  placeholder="Contoh: Acha"
+                  class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+                />
+              </div>
+              <div>
+                <label for="inputCustWa" class="block text-xs font-bold text-macha-forest mb-1">
+                  Nomor WhatsApp Aktif <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  id="inputCustWa"
+                  type="tel"
+                  placeholder="Contoh: 08123456789"
+                  class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+                />
+              </div>
+            </div>
+
+            <!-- Metode Pengambilan -->
+            <div>
+              <label class="block text-xs font-bold text-macha-forest mb-1.5">
+                Metode Pengambilan <span class="text-rose-600">*</span>
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <button
+                  id="btnMethodDelivery"
+                  type="button"
+                  onclick="selectPickupMethod('Delivery / Kirim Kurir')"
+                  class="p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all"
+                >
+                  <p class="text-xs font-bold text-macha-forest">🛵 Delivery / Kirim Kurir</p>
+                  <p class="text-[10px] text-macha-ink/70 mt-0.5">Area Surabaya</p>
+                </button>
+                <button
+                  id="btnMethodPickup"
+                  type="button"
+                  onclick="selectPickupMethod('Self-Pickup (Home Café Surabaya)')"
+                  class="p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all"
+                >
+                  <p class="text-xs font-bold text-macha-forest">🏡 Self-Pickup</p>
+                  <p class="text-[10px] text-macha-ink/70 mt-0.5">Ambil di Home Café</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Alamat Lengkap (Shown when Delivery selected) -->
+            <div id="deliveryAddressBlock">
+              <label for="inputCustAddress" class="block text-xs font-bold text-macha-forest mb-1">
+                Alamat Lengkap &amp; Patokan <span class="text-rose-600">*</span>
+              </label>
+              <textarea
+                id="inputCustAddress"
+                rows="2"
+                placeholder="Nama jalan, nomor rumah/gedung, kecamatan Surabaya, dan patokan jelas..."
+                class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+              ></textarea>
+            </div>
+
+            <!-- Kalender Tanggal & Jam Bebas Pilihan Customer -->
+            <div class="rounded-2xl bg-macha-cream/70 border border-macha-border p-3.5 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-macha-forest">📅 Pilih Tanggal &amp; Jam Sendiri <span class="text-rose-600">*</span></span>
+                <span class="text-[10px] font-semibold text-macha-leaf">WIB (Surabaya)</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label for="inputDeliveryDate" class="block text-[11px] font-bold text-macha-forest mb-1">
+                    Tanggal Pengantaran / Pickup
+                  </label>
+                  <input
+                    id="inputDeliveryDate"
+                    type="date"
+                    class="w-full px-3 py-2.5 rounded-xl bg-white border border-macha-border text-xs sm:text-sm font-semibold text-macha-forest focus:outline-none focus:border-macha-forest"
+                  />
+                </div>
+                <div>
+                  <label for="inputDeliveryTime" class="block text-[11px] font-bold text-macha-forest mb-1">
+                    Jam Pengantaran / Pickup
+                  </label>
+                  <input
+                    id="inputDeliveryTime"
+                    type="time"
+                    value="13:00"
+                    class="w-full px-3 py-2.5 rounded-xl bg-white border border-macha-border text-xs sm:text-sm font-semibold text-macha-forest focus:outline-none focus:border-macha-forest"
+                  />
+                </div>
+              </div>
+              <p class="text-[10px] text-macha-ink/70">
+                Bebas tentukan tanggal (hari ini atau pre-order) dan jam yang kamu inginkan.
+              </p>
+            </div>
+
+            <!-- Catatan Tambahan -->
+            <div>
+              <label for="inputOrderNote" class="block text-xs font-bold text-macha-forest mb-1">
+                Catatan Tambahan <span class="font-normal text-macha-ink/60">(Opsional)</span>
+              </label>
+              <input
+                id="inputOrderNote"
+                type="text"
+                placeholder="Misal: titip ke satpam/resepsionis, kabari jika kurir sudah jalan..."
+                class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+              />
+            </div>
+          </div>
+
+          <!-- INFO PEMBAYARAN QRIS VIA WHATSAPP -->
+          <div class="rounded-3xl bg-macha-parchment/85 border border-macha-border p-4 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-macha-forest text-white flex items-center justify-center text-sm shrink-0 mt-0.5">💬</span>
+            <div class="text-xs text-macha-ink/85 space-y-1 leading-relaxed">
+              <p class="font-display text-sm font-bold text-macha-forest">Pembayaran QRIS Dikirim via WhatsApp</p>
+              <p>
+                Setelah klik tombol di bawah, rekap pesananmu otomatis masuk ke WhatsApp Business <strong>măcha go</strong> dan kode pembayaran <strong>QRIS</strong> akan langsung kami kirimkan melalui chat WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <!-- Post-Submit Confirmation & Direct Fallback Link -->
+          <div id="waSuccessBox" class="hidden rounded-2xl bg-emerald-50 border border-emerald-200 p-3.5 text-xs text-emerald-950 space-y-2">
+            <p class="font-bold">✅ Rekap Order #<span id="waCreatedOrderId"></span> Tersimpan!</p>
+            <p>Jika WhatsApp tidak terbuka otomatis, klik tombol di bawah untuk langsung mengirim rekap:</p>
+            <a
+              id="waFallbackAnchor"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full text-center bg-macha-forest text-white font-bold py-2.5 rounded-full"
+            >
+              Lanjut ke WhatsApp Sekarang →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Checkout Footer Single Primary WhatsApp CTA -->
+      <div id="checkoutDrawerFooter" class="p-4 bg-white border-t border-macha-border shrink-0">
+        <button
+          type="button"
+          onclick="processOrderAndOpenWhatsApp()"
+          class="w-full bg-macha-forest hover:bg-macha-pine text-white font-bold text-sm py-3.5 px-5 rounded-full shadow-card flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+          <span>Kirim Order ke WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 13. OWNER DASHBOARD MODAL ('ADMIN & REKAP HARIAN')                    -->
+  <!-- ===================================================================== -->
+  <div id="adminDashboardModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-macha-pine/70 backdrop-blur-xs p-3 sm:p-4">
+    <div class="bg-macha-cream w-full max-w-2xl rounded-[32px] shadow-2xl max-h-[90vh] flex flex-col overflow-hidden border border-macha-border animate-sheet-up">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 bg-macha-pine text-white flex items-center justify-between shrink-0">
+        <div>
+          <h3 class="font-display text-xl font-bold">Owner Dashboard — măcha go</h3>
+          <p class="text-[11px] text-macha-cream/75">Kelola status toko, nomor WA, foto menu, &amp; rekap pengantaran hari ini</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeAdminModal()"
+          class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-2 px-5 pt-3 bg-macha-parchment border-b border-macha-border shrink-0">
+        <button
+          id="tabRecapBtn"
+          type="button"
+          onclick="switchAdminTab('recap')"
+          class="px-4 py-2 text-xs font-bold rounded-t-2xl bg-macha-cream text-macha-forest border-t border-x border-macha-border"
+        >
+          📦 Rekap Pengantaran Hari Ini
+        </button>
+        <button
+          id="tabSettingsBtn"
+          type="button"
+          onclick="switchAdminTab('settings')"
+          class="px-4 py-2 text-xs font-semibold rounded-t-2xl text-macha-ink/70 hover:text-macha-forest"
+        >
+          ⚙️ Status Toko, WA &amp; Foto
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-5 overflow-y-auto flex-1 space-y-5">
+        <!-- TAB 1: REKAP PENGANTARAN HARI INI -->
+        <div id="adminTabRecapContent" class="space-y-4">
+          <div class="grid grid-cols-3 gap-2.5">
+            <div class="bg-white rounded-2xl p-3 border border-macha-border">
+              <span class="text-[10px] text-macha-ink/65 block">Order Masuk</span>
+              <span id="adminStatOrders" class="font-display text-2xl font-bold text-macha-forest">0</span>
+            </div>
+            <div class="bg-white rounded-2xl p-3 border border-macha-border">
+              <span class="text-[10px] text-macha-ink/65 block">Total Cup</span>
+              <span id="adminStatCups" class="font-display text-2xl font-bold text-macha-forest">0</span>
+            </div>
+            <div class="bg-white rounded-2xl p-3 border border-macha-border">
+              <span class="text-[10px] text-macha-ink/65 block">Total Omzet</span>
+              <span id="adminStatOmzet" class="font-display text-lg sm:text-xl font-bold text-macha-leaf">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2.5">
+            <button
+              type="button"
+              onclick="copyDailyDeliveryRecapText()"
+              class="flex-1 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs py-3 px-4 rounded-full shadow-2xs transition-colors"
+            >
+              📋 Copy Rekap Pengantaran Hari Ini
+            </button>
+            <button
+              type="button"
+              onclick="resetDailyOrders()"
+              class="bg-white hover:bg-rose-50 text-rose-700 border border-rose-200 font-bold text-xs py-2.5 px-4 rounded-full transition-colors"
+            >
+              🗑️ Reset Order
+            </button>
+          </div>
+
+          <div id="adminOrdersFeed" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TAB 2: SETTINGS (OPEN/CLOSED, WA NUMBERS, QRIS & MENU PHOTO OVERRIDES) -->
+        <div id="adminTabSettingsContent" class="hidden space-y-4">
+          <!-- Store Open / Closed Toggle -->
+          <div class="bg-white rounded-2xl p-4 border border-macha-border flex items-center justify-between gap-3">
+            <div>
+              <p class="font-display text-sm font-bold text-macha-forest">Status Operasional Toko (Navbar Pill)</p>
+              <p class="text-[11px] text-macha-ink/70">Ubah tampilan badge <strong>Open</strong> (hijau) atau <strong>Closed</strong> (rose) di header atas.</p>
+            </div>
+            <button
+              id="adminToggleStoreOpenBtn"
+              type="button"
+              onclick="toggleStoreOpenStatus()"
+              class="px-4 py-2 rounded-full text-xs font-bold bg-emerald-100 text-macha-forest border border-emerald-300 shrink-0"
+            >
+              • Open
+            </button>
+          </div>
+
+          <!-- WhatsApp & QRIS URL -->
+          <div class="bg-white rounded-2xl p-4 border border-macha-border space-y-3">
+            <p class="font-display text-sm font-bold text-macha-forest">Nomor WhatsApp &amp; Gambar QRIS</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="cfgWaOrderInput" class="block text-[11px] font-bold text-macha-forest mb-1">WA Self-Checkout Order (628...)</label>
+          <!-- WhatsApp Numbers -->
+          <div class="bg-white rounded-2xl p-4 border border-macha-border space-y-3">
+            <p class="font-display text-sm font-bold text-macha-forest">Nomor WhatsApp Business</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="cfgWaOrderInput" class="block text-[11px] font-bold text-macha-forest mb-1">WA Self-Checkout Order (628...)</label>
+                <input id="cfgWaOrderInput" type="text" class="w-full px-3 py-2 rounded-xl bg-macha-cream border border-macha-border text-xs font-mono" />
+              </div>
+              <div>
+                <label for="cfgWaEventInput" class="block text-[11px] font-bold text-macha-forest mb-1">WA Event &amp; Workshop (628...)</label>
+                <input id="cfgWaEventInput" type="text" class="w-full px-3 py-2 rounded-xl bg-macha-cream border border-macha-border text-xs font-mono" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional Custom Product Photo URLs Override -->
+          <div class="bg-white rounded-2xl p-4 border border-macha-border space-y-2.5">
+            <p class="font-display text-sm font-bold text-macha-forest">Custom Foto Produk (Opsional)</p>
+            <p class="text-[11px] text-macha-ink/70">Biarkan kosong untuk menggunakan ilustrasi cup berlapis <strong>măcha go</strong> bawaan, atau tempel URL foto asli produk Anda:</p>
+            <div id="customPhotoOverridesList" class="space-y-2 pt-1">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <button
+              type="button"
+              onclick="saveOwnerSettings()"
+              class="bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs px-5 py-3 rounded-full transition-colors"
+            >
+              Simpan Perubahan
+            </button>
+            <button
+              type="button"
+              onclick="resetOwnerSettings()"
+              class="bg-white hover:bg-macha-sage text-macha-forest border border-macha-border font-bold text-xs px-4 py-3 rounded-full transition-colors"
+            >
+              Reset Default
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 14. NON-BLOCKING TOAST NOTIFICATION                                   -->
+  <!-- ===================================================================== -->
+  <div id="toastBanner" class="hidden fixed top-20 right-4 z-[60] max-w-xs sm:max-w-sm bg-macha-pine text-white px-4 py-3 rounded-2xl shadow-float border border-white/15 text-xs font-semibold flex items-center gap-2 animate-sheet-up">
+    <span id="toastEmoji">🍵</span>
+    <span id="toastText">Notifikasi</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT APPLICATION LOGIC                                          -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * =========================================================================
+     * 1. KONFIGURASI DEFAULT & STORAGE KEYS
+     * =========================================================================
+     */
+    const STORAGE_KEYS = {
+      CONFIG: 'machago_surabaya_config_v1',
+      CART: 'machago_surabaya_cart_v1',
+      ORDERS: 'machago_surabaya_orders_v1'
+    };
+
+    const DEFAULT_SETTINGS = {
+      waOrderNumber: '62882022714701',
+      waEventNumber: '62882022714701',
+      isOpen: true,
+      customDrinkPhotos: {}
+    };
+
+    let settings = loadSettings();
+    let cart = loadCart();
+    let activeMenuCategory = 'All';
+    let selectedPickupMethod = 'Delivery / Kirim Kurir';
+    let activeEventFilter = 'All';
+    let currentEventSlideIndex = 0;
+
+    let customizerState = {
+      drink: null,
+      powderId: 'pure',
+      milk: 'Oatmilk (Oatside)',
+      sugar: 'Less Sugar (50%)',
+      note: '',
+      qty: 1
+    };
+
+    /**
+     * =========================================================================
+     * 2. DATA KATALOG MENU RESMI MĂCHA GO SURABAYA
+     * =========================================================================
+     */
+    const MENU_DATA = [
+      {
+        id: 'matcha-latte',
+        name: 'Matcha Latte',
+        price: 22000,
+        category: 'Drinks',
+        tag: 'Best Seller',
+        isNew: false,
+        description: 'Classic whisked matcha poured smoothly over chilled creamy milk.'
+      },
+      {
+        id: 'ube-matcha',
+        name: 'Ube Matcha',
+        price: 29000,
+        category: 'Seasonal',
+        tag: 'New',
+        isNew: true,
+        description: 'Velvety purple ube paste layered with creamy milk and ceremonial-grade matcha cloud.'
+      },
+      {
+        id: 'coconut-matcha',
+        name: 'Coconut Matcha',
+        price: 25000,
+        category: 'Drinks',
+        tag: 'Refreshing',
+        isNew: false,
+        description: 'Refreshing tropical coconut water and light cream topped with frothy green matcha.'
+      },
+      {
+        id: 'ichigo-matcha',
+        name: 'Ichigo Matcha',
+        price: 28000,
+        category: 'Seasonal',
+        tag: 'New',
+        isNew: true,
+        description: 'Housemade chunky strawberry compote, silky milk, and vibrant whisked matcha.'
+      },
+      {
+        id: 'chocolate-matcha',
+        name: 'Chocolate Matcha',
+        price: 27000,
+        category: 'Drinks',
+        tag: 'Rich Cocoa',
+        isNew: false,
+        description: 'Rich dark chocolate ganache base layered beneath chilled milk and earthy matcha.'
+      },
+      {
+        id: 'trio-bundle',
+        name: 'Trio Bundle (3 Cups)',
+        price: 72000,
+        category: 'Bundles',
+        tag: 'Group Save',
+        isNew: false,
+        description: 'Paket 3 cup freshly whisked signature matcha untuk sharing bersama teman kantor atau keluarga.'
+      }
+    ];
+
+    /**
+     * =========================================================================
+     * 3. OPSI KUSTOMISASI MINUMAN MĂCHA GO (TANPA OPSI ES BATU)
+     * =========================================================================
+     */
+    const POWDER_GRADES = [
+      { id: 'pure', label: 'Pure Grade', addon: 0, note: 'Smooth & balanced daily matcha' },
+      { id: 'china', label: 'Ceremonial Grade China', addon: 6000, note: 'Aromatic, floral & vibrant green' },
+      { id: 'japan', label: 'Ceremonial Grade Japan', addon: 20000, note: 'Deep rich umami & velvety finish' }
+    ];
+
+    const MILK_CHOICES = [
+      'Oatmilk (Oatside)',
+      'Blend (Freshmilk + Oatmilk)'
+    ];
+
+    const SUGAR_CHOICES = [
+      'Normal Sugar (100%)',
+      'Less Sugar (50%)',
+      'No Sugar (0%)'
+    ];
+
+    /**
+     * =========================================================================
+     * 4. DATA PREVIOUS EVENTS & WORKSHOPS
+     * =========================================================================
+     */
+    const PREVIOUS_EVENTS = [
+      {
+        id: 'evt-inclusive-workshop',
+        title: 'Inclusive Matcha Experience Workshop',
+        category: 'Workshop',
+        location: 'Surabaya',
+        dateBadge: 'May 2026',
+        image: 'https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=900&q=85',
+        fallbackText: 'Inclusive+Matcha+Workshop',
+        description: 'Hands-on chasen whisking & latte art session for friends with disabilities—sharing joy, warmth, and mindful tea rituals together in Surabaya.'
+      },
+      {
+        id: 'evt-garage-popup',
+        title: 'Weekend Garage & Community Pop-Up',
+        category: 'Pop-up',
+        location: 'Surabaya',
+        dateBadge: 'Aug 2026',
+        image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85',
+        fallbackText: 'Weekend+Garage+Pop-Up',
+        description: 'Serving 120+ cups of Ube & Ichigo Matcha fresh on the bar during our cozy weekend home garage gathering with local Surabaya creatives.'
+      },
+      {
+        id: 'evt-bridal-private',
+        title: 'Intimate Bridal & Birthday Matcha Bar',
+        category: 'Private',
+        location: 'Surabaya',
+        dateBadge: 'Oct 2026',
+        image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=85',
+        fallbackText: 'Private+Bridal+Matcha+Bar',
+        description: 'Custom menu cards & ceremonial matcha station at a private home gathering, tailored with Oatside & 50:50 Blend options for every guest.'
+      }
+    ];
+
+    /**
+     * =========================================================================
+     * 5. CUSTOM INLINE SVG BRAND ASSETS (WORDMARK, MASCOT & LAYERED CUPS)
+     * =========================================================================
+     */
+    function getBrandWordmarkSvg(variant = 'header') {
+      const primaryFill = variant === 'footer' ? '#F8F5EE' : '#2D4C2B';
+      const secondaryFill = variant === 'footer' ? '#A4D187' : '#5C8D3E';
+      const widthClass = variant === 'footer' ? 'h-9 sm:h-10' : 'h-7 sm:h-8';
+
+      return `
+        <svg class="${widthClass} w-auto" viewBox="0 0 218 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="măcha go">
+          <!-- Curved smile/macron accent above the first 'a' -->
+          <path d="M52 10.5C56.5 15.2 64.5 15.2 69 10.5" stroke="${primaryFill}" stroke-width="3.6" stroke-linecap="round"/>
+          <!-- 'măcha' in rounded organic Fredoka typography -->
+          <text x="2" y="42" fill="${primaryFill}" font-family="'Fredoka', sans-serif" font-weight="700" font-size="37" letter-spacing="-0.8">macha</text>
+          <!-- Tiny playful sparkle dot between wordmark parts -->
+          <circle cx="131" cy="30" r="2.6" fill="${secondaryFill}" opacity="0.7"/>
+          <!-- 'go' in Vibrant Leaf Green -->
+          <text x="141" y="42" fill="${secondaryFill}" font-family="'Fredoka', sans-serif" font-weight="700" font-size="37" letter-spacing="-0.5">go</text>
+          <!-- Signature curved underline & dot beneath 'go' -->
+          <path d="M167 48.5C175 53 187 53 195 48.5" stroke="${secondaryFill}" stroke-width="3.4" stroke-linecap="round"/>
+          <circle cx="201.5" cy="46.5" r="2.2" fill="${secondaryFill}"/>
+        </svg>
+      `;
+    }
+
+    function getMascotSvg() {
+      return `
+        <svg viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <!-- Cute Bamboo Whisk (Chasen) Crown Hat -->
+          <path d="M25 7H39V13C39 14.1 38.1 15 37 15H27C25.9 15 25 14.1 25 13V7Z" fill="#EFE8D8" stroke="#2D4C2B" stroke-width="2.2"/>
+          <path d="M27 15C21 20 19 28 21 34H43C45 28 43 20 37 15" fill="#F8F5EE" stroke="#2D4C2B" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M29 15V33M32 15V33M35 15V33" stroke="#2D4C2B" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- Happy Matcha Body -->
+          <rect x="20" y="32" width="24" height="24" rx="11" fill="#7AB356" stroke="#2D4C2B" stroke-width="2.2"/>
+          <!-- Cute Wink Eyes & Smile -->
+          <path d="M26 42L28.5 43.5L26 45" stroke="#2D4C2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="36.5" cy="43.5" r="1.6" fill="#2D4C2B"/>
+          <path d="M30 46.5C31.2 48 33.2 48 34.4 46.5" stroke="#2D4C2B" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Tiny Arms & Feet -->
+          <path d="M20 42C16 42 15 45 17 47" stroke="#2D4C2B" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M44 42C48 42 49 45 47 47" stroke="#2D4C2B" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M27 56V62M37 56V62" stroke="#2D4C2B" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    /**
+     * Generates a realistic U-bottom clear plastic cup SVG for each măcha go drink
+     */
+    function getLayeredDrinkSvg(drinkId) {
+      if (drinkId === 'trio-bundle') {
+        return `
+          <svg viewBox="0 0 180 150" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-xs">
+            <!-- Left Mini Cup: Ube Matcha -->
+            <g transform="translate(10, 24) scale(0.56)">
+              ${buildSingleCupInnerSvg('ube-matcha', 'ub')}
+            </g>
+            <!-- Right Mini Cup: Ichigo Matcha -->
+            <g transform="translate(96, 24) scale(0.56)">
+              ${buildSingleCupInnerSvg('ichigo-matcha', 'ic')}
+            </g>
+            <!-- Center Front Hero Cup: Matcha Latte -->
+            <g transform="translate(48, 12) scale(0.68)">
+              ${buildSingleCupInnerSvg('matcha-latte', 'ml')}
+            </g>
+          </svg>
+        `;
+      }
+
+      return `
+        <svg viewBox="0 0 130 155" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-xs">
+          ${buildSingleCupInnerSvg(drinkId, drinkId)}
+        </svg>
+      `;
+    }
+
+    function buildSingleCupInnerSvg(drinkId, uid) {
+      let bottomFill = '#F7F4EC';
+      let midFill = '#F7F4EC';
+      let topMatcha = '#4E7E35';
+      let foamHighlight = '#72A852';
+      let extraDetails = '';
+
+      if (drinkId === 'matcha-latte') {
+        bottomFill = '#F7F4EC';
+        midFill = '#EFF2E6';
+        topMatcha = '#477630';
+        foamHighlight = '#6B9F4C';
+      } else if (drinkId === 'ube-matcha') {
+        bottomFill = '#6F42A6';
+        midFill = '#F7F4EC';
+        topMatcha = '#4D7E34';
+        foamHighlight = '#74AA54';
+        extraDetails = `
+          <path d="M30 112C45 106 60 118 75 110C86 105 94 111 100 113V122C100 134 85 142 65 142C45 142 30 134 30 122V112Z" fill="#5D3291"/>
+          <ellipse cx="65" cy="31" rx="22" ry="4" fill="#8C5AC4" opacity="0.7"/>
+        `;
+      } else if (drinkId === 'coconut-matcha') {
+        bottomFill = '#E2F1F4';
+        midFill = '#EEF7F8';
+        topMatcha = '#45742E';
+        foamHighlight = '#699E4B';
+        extraDetails = `
+          <ellipse cx="48" cy="118" rx="6" ry="2.5" fill="#FFFFFF" opacity="0.7"/>
+          <ellipse cx="80" cy="124" rx="7" ry="2.5" fill="#FFFFFF" opacity="0.65"/>
+        `;
+      } else if (drinkId === 'ichigo-matcha') {
+        bottomFill = '#C93847';
+        midFill = '#F7F4EC';
+        topMatcha = '#4D7E34';
+        foamHighlight = '#72A852';
+        extraDetails = `
+          <path d="M30 113C44 107 58 117 72 110C84 105 93 111 100 113V122C100 134 85 142 65 142C45 142 30 134 30 122V113Z" fill="#A92533"/>
+          <circle cx="46" cy="124" r="3.5" fill="#871A26"/>
+          <circle cx="67" cy="128" r="4" fill="#871A26"/>
+          <circle cx="83" cy="121" r="3" fill="#871A26"/>
+        `;
+      } else if (drinkId === 'chocolate-matcha') {
+        bottomFill = '#4E2D20';
+        midFill = '#F7F4EC';
+        topMatcha = '#477630';
+        foamHighlight = '#6B9F4C';
+        extraDetails = `
+          <path d="M30 115C46 110 62 119 78 112C88 108 95 112 100 115V122C100 134 85 142 65 142C45 142 30 134 30 122V115Z" fill="#3B2016"/>
+        `;
+      }
+
+      return `
+        <defs>
+          <clipPath id="cupClip-${uid}">
+            <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z"/>
+          </clipPath>
+        </defs>
+
+        <ellipse cx="65" cy="146" rx="34" ry="5" fill="#2D4C2B" opacity="0.16"/>
+
+        <g clip-path="url(#cupClip-${uid})">
+          <rect x="24" y="54" width="82" height="92" fill="${midFill}"/>
+          <rect x="24" y="106" width="82" height="40" fill="${bottomFill}"/>
+          ${extraDetails}
+
+          <path d="M24 26H106V58C94 64 82 54 68 61C54 68 40 55 24 61V26Z" fill="${topMatcha}"/>
+          <path d="M24 26H106V42C90 46 75 40 62 44C48 48 34 41 24 44V26Z" fill="${foamHighlight}" opacity="0.55"/>
+
+          <!-- Miniature Cream 'măcha go' Cup Sticker -->
+          <rect x="51" y="66" width="28" height="34" rx="3" fill="#F8F5EE" stroke="#DCD3BE" stroke-width="0.9"/>
+          <text x="65" y="75" text-anchor="middle" fill="#2D4C2B" font-family="'Fredoka', sans-serif" font-weight="700" font-size="5.6">măcha</text>
+          <text x="72" y="80" text-anchor="middle" fill="#5C8D3E" font-family="'Fredoka', sans-serif" font-weight="700" font-size="5.4">go</text>
+          <line x1="55" y1="85" x2="75" y2="85" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+          <line x1="55" y1="89" x2="72" y2="89" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+          <line x1="55" y1="93" x2="74" y2="93" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+        </g>
+
+        <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.85"/>
+        <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z" stroke="#2D4C2B" stroke-width="1.1" stroke-opacity="0.22"/>
+        <rect x="23" y="24" width="84" height="5" rx="2.5" fill="#FFFFFF" fill-opacity="0.9" stroke="#2D4C2B" stroke-opacity="0.25" stroke-width="1"/>
+        <path d="M33 36L36 112" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.55"/>
+      `;
+    }
+
+    function renderDrinkVisualHtml(drinkId) {
+      const customUrl = settings.customDrinkPhotos && settings.customDrinkPhotos[drinkId];
+      if (customUrl && customUrl.trim() !== '') {
+        return `
+          <img
+            src="${customUrl}"
+            alt="${drinkId}"
+            class="w-full h-full object-cover rounded-2xl"
+            onerror="this.onerror=null;this.parentElement.innerHTML=getLayeredDrinkSvg('${drinkId}');"
+          />
+        `;
+      }
+      return getLayeredDrinkSvg(drinkId);
+    }
+
+    /**
+     * =========================================================================
+     * 6. INITIALIZATION & STATE HELPERS
+     * =========================================================================
+     */
+    function getTodayIsoLocal() {
+      const now = new Date();
+      const offsetMs = now.getTimezoneOffset() * 60000;
+      return new Date(now.getTime() - offsetMs).toISOString().split('T')[0];
+    }
+
+    function formatReadableDateIndo(isoDateStr) {
+      if (!isoDateStr) return '-';
+      const parts = isoDateStr.split('-');
+      if (parts.length !== 3) return isoDateStr;
+      const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      return d.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inject Custom SVGs safely
+      const headerLogoEl = document.getElementById('headerLogoContainer');
+      if (headerLogoEl) headerLogoEl.innerHTML = getBrandWordmarkSvg('header');
+
+      const footerLogoEl = document.getElementById('footerLogoContainer');
+      if (footerLogoEl) footerLogoEl.innerHTML = getBrandWordmarkSvg('footer');
+
+      const heroMascotEl = document.getElementById('heroMascotContainer');
+      if (heroMascotEl) heroMascotEl.innerHTML = getMascotSvg();
+
+      const menuMascotEl = document.getElementById('menuFooterMascot');
+      if (menuMascotEl) menuMascotEl.innerHTML = getMascotSvg();
+
+      const emptyCartMascotEl = document.getElementById('emptyCartMascot');
+      if (emptyCartMascotEl) emptyCartMascotEl.innerHTML = getMascotSvg();
+
+      // Set default calendar date to today & min date to today
+      const dateInput = document.getElementById('inputDeliveryDate');
+      if (dateInput) {
+        const todayStr = getTodayIsoLocal();
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+      }
+
+      renderStoreStatusPill();
+      renderMenuCategoryBar();
+      renderMenuCards();
+      renderEventFilterBar();
+      renderEventCarousel();
+      updateCartAndBadges();
+    });
+
+    function formatRupiah(num) {
+      return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+    }
+
+    function loadSettings() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.CONFIG);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            ...DEFAULT_SETTINGS,
+            ...parsed,
+            customDrinkPhotos: { ...(parsed.customDrinkPhotos || {}) }
+          };
+        }
+      } catch (e) {}
+      return { ...DEFAULT_SETTINGS, customDrinkPhotos: {} };
+    }
+
+    function saveSettingsToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(settings));
+      } catch (e) {}
+    }
+
+    function loadCart() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.CART);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
+      } catch (e) {}
+    }
+
+    function loadOrders() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.ORDERS);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveOrdersToStorage(list) {
+      try {
+        localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    /**
+     * =========================================================================
+     * 7. TOAST & RELIABLE CLIPBOARD COPY (FOR ADMIN DAILY RECAP)
+     * =========================================================================
+     */
+    let toastTimeout = null;
+    function showToast(msg, emoji = '🍵') {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastText').textContent = msg;
+      document.getElementById('toastEmoji').textContent = emoji;
+      banner.classList.remove('hidden');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3000);
+    }
+
+    function copyTextSafe(text, successMessage = 'Berhasil disalin!') {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch (e) {
+        ok = false;
+      }
+      document.body.removeChild(ta);
+
+      if (ok) {
+        showToast(successMessage, '📋');
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => showToast(successMessage, '📋'))
+          .catch(() => showToast('Salin teks secara manual.', 'ℹ️'));
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 8. HEADER STORE STATUS PILL & HAMBURGER DRAWER
+     * =========================================================================
+     */
+    function renderStoreStatusPill() {
+      const pill = document.getElementById('storeStatusPill');
+      const dot = document.getElementById('storeStatusDot');
+      const text = document.getElementById('storeStatusText');
+      const adminBtn = document.getElementById('adminToggleStoreOpenBtn');
+
+      if (settings.isOpen) {
+        pill.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-emerald-100/95 text-macha-forest border border-emerald-300/80';
+        dot.className = 'w-2 h-2 rounded-full bg-macha-leaf animate-pulse';
+        text.textContent = 'Open';
+        if (adminBtn) {
+          adminBtn.className = 'px-4 py-2 rounded-full text-xs font-bold bg-emerald-100 text-macha-forest border border-emerald-300 shrink-0';
+          adminBtn.textContent = '• Open (Klik untuk Closed)';
+        }
+      } else {
+        pill.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-rose-100/95 text-rose-700 border border-rose-200';
+        dot.className = 'w-2 h-2 rounded-full bg-rose-500';
+        text.textContent = 'Closed';
+        if (adminBtn) {
+          adminBtn.className = 'px-4 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700 border border-rose-200 shrink-0';
+          adminBtn.textContent = '• Closed (Klik untuk Open)';
+        }
+      }
+    }
+
+    function toggleNavDrawer() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const openIcon = document.getElementById('hamburgerIconOpen');
+      const closeIcon = document.getElementById('hamburgerIconClose');
+      const isHidden = drawer.classList.contains('hidden');
+
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        openIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        closeNavDrawer();
+      }
+    }
+
+    function closeNavDrawer() {
+      document.getElementById('mobileNavDrawer').classList.add('hidden');
+      document.getElementById('hamburgerIconOpen').classList.remove('hidden');
+      document.getElementById('hamburgerIconClose').classList.add('hidden');
+    }
+
+    /**
+     * =========================================================================
+     * 9. MENU SECTION RENDERING & CATEGORY FILTERING
+     * =========================================================================
+     */
+    function renderMenuCategoryBar() {
+      const categories = ['All', 'Seasonal', 'Drinks', 'Bundles'];
+      const bar = document.getElementById('menuCategoryBar');
+      bar.innerHTML = categories.map((cat) => {
+        const active = cat === activeMenuCategory;
+        return `
+          <button
+            type="button"
+            onclick="selectMenuCategory('${cat}')"
+            class="shrink-0 px-5 py-2 rounded-full text-xs font-bold transition-all ${
+              active
+                ? 'bg-macha-forest text-white shadow-2xs'
+                : 'bg-white text-macha-forest/80 hover:bg-macha-sage/60 border border-macha-border'
+            }"
+          >
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectMenuCategory(category) {
+      activeMenuCategory = category;
+      const labelMap = {
+        All: 'ALL HANDCRAFTED DRINKS',
+        Seasonal: 'SEASONAL LIMITED DRINKS',
+        Drinks: 'SIGNATURE MATCHA DRINKS',
+        Bundles: 'SHARING & GROUP BUNDLES'
+      };
+      document.getElementById('menuSectionLabel').textContent = labelMap[category] || category.toUpperCase();
+      renderMenuCategoryBar();
+      renderMenuCards();
+    }
+
+    function renderMenuCards() {
+      const grid = document.getElementById('menuCardsGrid');
+      const items = activeMenuCategory === 'All'
+        ? MENU_DATA
+        : MENU_DATA.filter((item) => item.category === activeMenuCategory);
+
+      grid.innerHTML = items.map((item) => {
+        const inCartQty = cart
+          .filter((c) => c.drinkId === item.id)
+          .reduce((sum, c) => sum + c.qty, 0);
+
+        const heartNewBadge = item.isNew
+          ? `
+            <span class="absolute -top-2 -right-2 z-20 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-macha-border shadow-xs text-[10px] font-display font-bold text-macha-leaf rotate-6">
+              ♥ New
+            </span>
+          `
+          : '';
+
+        return `
+          <article class="bg-white rounded-[26px] border border-macha-border p-4 sm:p-5 shadow-card hover:border-macha-forest/35 transition-all flex items-stretch justify-between gap-3.5">
+            <!-- Left Info Column -->
+            <div class="flex-1 flex flex-col justify-between py-0.5">
+              <div>
+                <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                  <h3 class="font-display text-lg sm:text-xl font-bold text-macha-forest leading-snug">
+                    ${item.name}
+                  </h3>
+                  ${
+                    inCartQty > 0
+                      ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">${inCartQty}x</span>`
+                      : ''
+                  }
+                </div>
+                <p class="text-xs text-macha-ink/75 leading-relaxed line-clamp-3">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="pt-3 flex items-center gap-2">
+                <span class="font-display text-base sm:text-lg font-bold text-macha-forest">
+                  ${formatRupiah(item.price)}
+                </span>
+                ${
+                  !item.isNew
+                    ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream text-macha-leaf border border-macha-border">${item.tag}</span>`
+                    : ''
+                }
+              </div>
+            </div>
+
+            <!-- Right Organic Arched Sage Frame + Layered Drink Visual + '+ Order' Pill -->
+            <div class="relative w-28 sm:w-32 shrink-0 flex flex-col items-center">
+              ${heartNewBadge}
+              <div
+                onclick="openCustomizeModal('${item.id}')"
+                class="w-full h-32 rounded-t-[48px] rounded-b-[22px] bg-macha-sage border border-macha-border/80 p-2 pb-4 flex items-center justify-center cursor-pointer overflow-hidden group"
+              >
+                <div class="w-full h-full group-hover:scale-105 transition-transform duration-300">
+                  ${renderDrinkVisualHtml(item.id)}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onclick="openCustomizeModal('${item.id}')"
+                class="-mt-4 relative z-10 inline-flex items-center justify-center gap-1 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs px-4 py-2 rounded-full shadow-sm transition-all active:scale-95"
+              >
+                <span>+ Order</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * =========================================================================
+     * 10. ITEM CUSTOMIZER MODAL LOGIC (NO ICE OPTION)
+     * =========================================================================
+     */
+    function openCustomizeModal(drinkId) {
+      const drink = MENU_DATA.find((d) => d.id === drinkId);
+      if (!drink) return;
+
+      customizerState = {
+        drink,
+        powderId: 'pure',
+        milk: 'Oatmilk (Oatside)',
+        sugar: 'Less Sugar (50%)',
+        note: '',
+        qty: 1
+      };
+
+      document.getElementById('custPreviewVisual').innerHTML = renderDrinkVisualHtml(drink.id);
+      document.getElementById('custBadgeTag').textContent = drink.category;
+      document.getElementById('custDrinkTitle').textContent = drink.name;
+      document.getElementById('custBasePrice').textContent = `Harga Dasar: ${formatRupiah(drink.price)}`;
+      document.getElementById('custDrinkDesc').textContent = drink.description;
+      document.getElementById('custCupNoteInput').value = '';
+      document.getElementById('custQtyDisplay').textContent = '1';
+
+      renderCustomizerChoices();
+      updateCustomizerButtonPrice();
+
+      document.getElementById('customizerModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCustomizerModal() {
+      document.getElementById('customizerModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function renderCustomizerChoices() {
+      // 1. Powder Grade Radio Cards
+      document.getElementById('powderOptionsGrid').innerHTML = POWDER_GRADES.map((p) => {
+        const selected = customizerState.powderId === p.id;
+        const addonLabel = p.addon === 0 ? '+Rp 0' : `+${formatRupiah(p.addon)}`;
+        return `
+          <button
+            type="button"
+            onclick="selectPowderGrade('${p.id}')"
+            class="w-full p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-sage/75'
+                : 'border-macha-border bg-white hover:bg-macha-parchment/40'
+            }"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                selected ? 'border-macha-forest bg-macha-forest' : 'border-macha-ink/35'
+              }">
+                ${selected ? '<span class="w-1.5 h-1.5 rounded-full bg-white"></span>' : ''}
+              </span>
+              <div>
+                <p class="text-xs font-bold text-macha-forest">${p.label}</p>
+                <p class="text-[10px] text-macha-ink/65">${p.note}</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold shrink-0 ${p.addon > 0 ? 'text-macha-leaf' : 'text-macha-ink/65'}">
+              ${addonLabel}
+            </span>
+          </button>
+        `;
+      }).join('');
+
+      // 2. Milk Option Pills
+      document.getElementById('milkPillsGrid').innerHTML = MILK_CHOICES.map((milk) => {
+        const selected = customizerState.milk === milk;
+        return `
+          <button
+            type="button"
+            onclick="selectMilkChoice('${milk}')"
+            class="py-2.5 px-3 rounded-2xl text-xs font-bold border text-center transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-forest text-white'
+                : 'border-macha-border bg-white text-macha-forest hover:bg-macha-sage/50'
+            }"
+          >
+            ${milk}
+          </button>
+        `;
+      }).join('');
+
+      // 3. Sugar Level Pills
+      document.getElementById('sugarPillsGrid').innerHTML = SUGAR_CHOICES.map((sugar) => {
+        const selected = customizerState.sugar === sugar;
+        return `
+          <button
+            type="button"
+            onclick="selectSugarChoice('${sugar}')"
+            class="py-2.5 px-2 rounded-2xl text-xs font-bold border text-center transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-forest text-white'
+                : 'border-macha-border bg-white text-macha-forest hover:bg-macha-sage/50'
+            }"
+          >
+            ${sugar}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectPowderGrade(id) {
+      customizerState.powderId = id;
+      renderCustomizerChoices();
+      updateCustomizerButtonPrice();
+    }
+
+    function selectMilkChoice(milk) {
+      customizerState.milk = milk;
+      renderCustomizerChoices();
+    }
+
+    function selectSugarChoice(sugar) {
+      customizerState.sugar = sugar;
+      renderCustomizerChoices();
+    }
+
+    function stepCustomQty(delta) {
+      const next = customizerState.qty + delta;
+      if (next < 1 || next > 50) return;
+      customizerState.qty = next;
+      document.getElementById('custQtyDisplay').textContent = String(next);
+      updateCustomizerButtonPrice();
+    }
+
+    function updateCustomizerButtonPrice() {
+      const { drink, powderId, qty } = customizerState;
+      if (!drink) return;
+      const powderObj = POWDER_GRADES.find((p) => p.id === powderId) || POWDER_GRADES[0];
+      const unitPrice = drink.price + powderObj.addon;
+      const total = unitPrice * qty;
+      document.getElementById('custAddToCartBtn').textContent = `Add to Cart — ${formatRupiah(total)}`;
+    }
+
+    function addCustomizedItemToCart() {
+      const { drink, powderId, milk, sugar, qty } = customizerState;
+      if (!drink) return;
+
+      const powderObj = POWDER_GRADES.find((p) => p.id === powderId) || POWDER_GRADES[0];
+      const note = document.getElementById('custCupNoteInput').value.trim();
+      const unitPrice = drink.price + powderObj.addon;
+      const signature = `${drink.id}|${powderObj.id}|${milk}|${sugar}|${note.toLowerCase()}`;
+
+      const existing = cart.find((c) => c.signature === signature);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          uid: 'ITEM-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+          signature,
+          drinkId: drink.id,
+          name: drink.name,
+          powderLabel: powderObj.label,
+          powderAddon: powderObj.addon,
+          milk,
+          sugar,
+          note,
+          unitPrice,
+          qty
+        });
+      }
+
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+      closeCustomizerModal();
+      showToast(`${drink.name} (${qty}x) masuk keranjang!`, '🍵');
+    }
+
+    /**
+     * =========================================================================
+     * 11. CART & CHECKOUT DRAWER LOGIC
+     * =========================================================================
+     */
+    function getCartSummary() {
+      const totalCups = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = cart.reduce((sum, item) => sum + item.unitPrice * item.qty, 0);
+      return { totalCups, subtotal };
+    }
+
+    function updateCartAndBadges() {
+      const { totalCups, subtotal } = getCartSummary();
+
+      document.getElementById('headerCartCount').textContent = String(totalCups);
+
+      const floatingBar = document.getElementById('floatingCartBar');
+      if (totalCups > 0) {
+        floatingBar.classList.remove('hidden');
+        document.getElementById('floatingCartCups').textContent = `${totalCups}x`;
+        document.getElementById('floatingCartSubtotal').textContent = formatRupiah(subtotal);
+      } else {
+        floatingBar.classList.add('hidden');
+      }
+
+      const emptyState = document.getElementById('checkoutEmptyState');
+      const filledState = document.getElementById('checkoutFilledState');
+      const drawerFooter = document.getElementById('checkoutDrawerFooter');
+
+      if (totalCups === 0) {
+        emptyState.classList.remove('hidden');
+        filledState.classList.add('hidden');
+        drawerFooter.classList.add('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        filledState.classList.remove('hidden');
+        drawerFooter.classList.remove('hidden');
+        renderCheckoutItems();
+        document.getElementById('checkoutTotalDisplay').textContent = formatRupiah(subtotal);
+      }
+
+      // Sync Admin Order Badge
+      const ordersCount = loadOrders().length;
+      const footerBadge = document.getElementById('footerAdminOrderBadge');
+      if (footerBadge) footerBadge.textContent = String(ordersCount);
+    }
+
+    function renderCheckoutItems() {
+      const container = document.getElementById('checkoutItemsContainer');
+      container.innerHTML = cart.map((item, idx) => {
+        const lineTotal = item.unitPrice * item.qty;
+        return `
+          <div class="py-3 first:pt-0 last:pb-0 flex items-start justify-between gap-3">
+            <div class="space-y-1 flex-1">
+              <p class="font-display text-sm font-bold text-macha-forest">${idx + 1}. ${item.name}</p>
+              <div class="flex flex-wrap gap-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">${item.powderLabel}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream border border-macha-border text-macha-ink">${item.milk}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream border border-macha-border text-macha-ink">${item.sugar}</span>
+              </div>
+              ${item.note ? `<p class="text-[11px] text-macha-leaf italic">Catatan Cup: "${item.note}"</p>` : ''}
+              <p class="text-xs font-bold text-macha-forest pt-0.5">${formatRupiah(lineTotal)}</p>
+            </div>
+
+            <div class="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onclick="changeCartItemQty('${item.uid}', -1)"
+                class="w-7 h-7 rounded-full border border-macha-border text-macha-forest hover:bg-macha-sage font-bold text-xs flex items-center justify-center"
+              >
+                −
+              </button>
+              <span class="w-5 text-center text-xs font-bold text-macha-forest">${item.qty}</span>
+              <button
+                type="button"
+                onclick="changeCartItemQty('${item.uid}', 1)"
+                class="w-7 h-7 rounded-full border border-macha-border text-macha-forest hover:bg-macha-sage font-bold text-xs flex items-center justify-center"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onclick="deleteCartItem('${item.uid}')"
+                aria-label="Hapus item"
+                class="ml-1 p-1 text-macha-ink/40 hover:text-rose-600"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function changeCartItemQty(uid, delta) {
+      const idx = cart.findIndex((c) => c.uid === uid);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+    }
+
+    function deleteCartItem(uid) {
+      cart = cart.filter((c) => c.uid !== uid);
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+      showToast('Item dihapus dari keranjang', '🗑️');
+    }
+
+    function openCheckoutDrawer() {
+      document.getElementById('checkoutErrorBox').classList.add('hidden');
+      document.getElementById('waSuccessBox').classList.add('hidden');
+
+      const dateInput = document.getElementById('inputDeliveryDate');
+      if (dateInput && !dateInput.value) {
+        dateInput.value = getTodayIsoLocal();
+      }
+
+      updateCartAndBadges();
+      document.getElementById('checkoutDrawer').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutDrawer() {
+      document.getElementById('checkoutDrawer').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function selectPickupMethod(method) {
+      selectedPickupMethod = method;
+      const btnDel = document.getElementById('btnMethodDelivery');
+      const btnPick = document.getElementById('btnMethodPickup');
+      const addrBlock = document.getElementById('deliveryAddressBlock');
+
+      if (method.startsWith('Delivery')) {
+        btnDel.className = 'p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all';
+        btnPick.className = 'p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all';
+        addrBlock.classList.remove('hidden');
+      } else {
+        btnPick.className = 'p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all';
+        btnDel.className = 'p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all';
+        addrBlock.classList.add('hidden');
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 12. WHATSAPP STRUCTURED RECEIPT & ORDER PROCESSING (DIRECT TO WA)
+     * =========================================================================
+     */
+    function buildWhatsAppReceiptText(orderId, customer) {
+      const { subtotal } = getCartSummary();
+
+      const itemLines = cart.map((item, index) => {
+        const lineTotal = item.unitPrice * item.qty;
+        const notePart = item.note ? `\n   • Catatan Cup: ${item.note}` : '';
+        return [
+          `${index + 1}. *${item.name}* (x${item.qty})`,
+          `   • Powder: ${item.powderLabel}`,
+          `   • Milk: ${item.milk}`,
+          `   • Sugar: ${item.sugar}${notePart}`,
+          `   • Subtotal: ${formatRupiah(lineTotal)}`
+        ].join('\n');
+      }).join('\n');
+
+      const extraOrderNote = customer.extraNote
+        ? `\n• Catatan Tambahan: ${customer.extraNote}`
+        : '';
+
+      return [
+        `*ORDER BARU — MĂCHA GO SURABAYA* 🍵✨`,
+        `Order ID: *#${orderId}*`,
+        `────────────────────────`,
+        `*Data Pemesan:*`,
+        `• Nama: ${customer.name}`,
+        `• No. WA: ${customer.wa}`,
+        `• Metode: ${customer.method}`,
+        `• Alamat: ${customer.address}`,
+        `• Tanggal & Jam Kirim/Ambil: *${customer.scheduleLabel}*${extraOrderNote}`,
+        `────────────────────────`,
+        `*Detail Pesanan:*`,
+        itemLines,
+        `────────────────────────`,
+        `*Estimasi Total:* *${formatRupiah(subtotal)}*`,
+        `_(Mohon info total akhir beserta ongkir & kirimkan QRIS pembayarannya ya kak)_ 🙏`
+      ].join('\n');
+    }
+
+    function processOrderAndOpenWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Keranjang masih kosong!', '⚠️');
+        return;
+      }
+
+      const errorBox = document.getElementById('checkoutErrorBox');
+      errorBox.classList.add('hidden');
+
+      const name = document.getElementById('inputCustName').value.trim();
+      const wa = document.getElementById('inputCustWa').value.trim();
+      const addressRaw = document.getElementById('inputCustAddress').value.trim();
+      const deliveryDate = document.getElementById('inputDeliveryDate').value;
+      const deliveryTime = document.getElementById('inputDeliveryTime').value;
+      const extraNote = document.getElementById('inputOrderNote').value.trim();
+
+      const errs = [];
+      if (!name) errs.push('Nama Pemesan wajib diisi.');
+      if (!wa) errs.push('Nomor WhatsApp Aktif wajib diisi.');
+      if (selectedPickupMethod.startsWith('Delivery') && !addressRaw) {
+        errs.push('Alamat Lengkap & Patokan wajib diisi untuk pengiriman Delivery.');
+      }
+      if (!deliveryDate) errs.push('Tanggal pengantaran / pickup wajib dipilih.');
+      if (!deliveryTime) errs.push('Jam pengantaran / pickup wajib dipilih.');
+
+      if (errs.length > 0) {
+        errorBox.innerHTML = '⚠️ <strong>Mohon lengkapi data berikut:</strong><br/>• ' + errs.join('<br/>• ');
+        errorBox.classList.remove('hidden');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const addressFinal = selectedPickupMethod.startsWith('Delivery')
+        ? addressRaw
+        : 'Self-Pickup (Home Café Surabaya)';
+
+      const readableDate = formatReadableDateIndo(deliveryDate);
+      const scheduleLabel = `${readableDate}, Pukul ${deliveryTime} WIB`;
+
+      const customer = {
+        name,
+        wa,
+        method: selectedPickupMethod,
+        address: addressFinal,
+        deliveryDate,
+        deliveryTime,
+        scheduleLabel,
+        extraNote
+      };
+
+      const { totalCups, subtotal } = getCartSummary();
+      const orderId = 'MG' + Math.floor(1000 + Math.random() * 9000);
+      const waMessage = buildWhatsAppReceiptText(orderId, customer);
+
+      // Save to localStorage for Owner Daily Delivery Recap
+      const orders = loadOrders();
+      orders.unshift({
+        orderId,
+        timestamp: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        customer,
+        items: JSON.parse(JSON.stringify(cart)),
+        totalCups,
+        subtotal
+      });
+      saveOrdersToStorage(orders);
+      updateCartAndBadges();
+
+      const cleanTargetWa = String(settings.waOrderNumber || DEFAULT_SETTINGS.waOrderNumber).replace(/[^0-9]/g, '');
+      const waLink = `https://wa.me/${cleanTargetWa}?text=${encodeURIComponent(waMessage)}`;
+
+      // Show fallback confirmation inside drawer
+      document.getElementById('waCreatedOrderId').textContent = orderId;
+      document.getElementById('waFallbackAnchor').href = waLink;
+      document.getElementById('waSuccessBox').classList.remove('hidden');
+
+      window.open(waLink, '_blank', 'noopener,noreferrer');
+      showToast(`Order #${orderId} diarahkan ke WhatsApp!`, '🍵');
+    }
+
+    /**
+     * =========================================================================
+     * 13. ABOUT US TOGGLE, PREVIOUS EVENTS CAROUSEL & EVENT BOOKING WA
+     * =========================================================================
+     */
+    function toggleAboutStory() {
+      const more = document.getElementById('aboutMoreContent');
+      const label = document.getElementById('aboutReadMoreLabel');
+      const isHidden = more.classList.contains('hidden');
+      if (isHidden) {
+        more.classList.remove('hidden');
+        label.textContent = 'Read less ↑';
+      } else {
+        more.classList.add('hidden');
+        label.textContent = 'Read more ↓';
+      }
+    }
+
+    function renderEventFilterBar() {
+      const filters = ['All', 'Workshop', 'Pop-up', 'Private'];
+      const bar = document.getElementById('eventFilterBar');
+      bar.innerHTML = filters.map((f) => {
+        const active = f === activeEventFilter;
+        return `
+          <button
+            type="button"
+            onclick="selectEventFilter('${f}')"
+            class="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all ${
+              active
+                ? 'bg-macha-forest text-white'
+                : 'bg-transparent text-macha-forest border border-macha-border hover:bg-white/70'
+            }"
+          >
+            ${f}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectEventFilter(filter) {
+      activeEventFilter = filter;
+      currentEventSlideIndex = 0;
+      renderEventFilterBar();
+      renderEventCarousel();
+    }
+
+    function getFilteredEvents() {
+      return activeEventFilter === 'All'
+        ? PREVIOUS_EVENTS
+        : PREVIOUS_EVENTS.filter((e) => e.category === activeEventFilter);
+    }
+
+    function renderEventCarousel() {
+      const list = getFilteredEvents();
+      if (list.length === 0) return;
+      if (currentEventSlideIndex >= list.length) currentEventSlideIndex = 0;
+
+      const ev = list[currentEventSlideIndex];
+      const card = document.getElementById('eventCarouselCard');
+
+      card.innerHTML = `
+        <div class="relative aspect-[16/10] sm:aspect-[16/8] bg-macha-sage overflow-hidden">
+          <img
+            src="${ev.image}"
+            onerror="this.onerror=null;this.src='https://placehold.co/900x520/2D4C2B/F8F5EE?text=${ev.fallbackText}';"
+            alt="${ev.title}"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"></div>
+
+          <!-- Top Right Date Badge -->
+          <span class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-xs text-macha-forest text-xs font-bold px-3.5 py-1.5 rounded-full shadow-2xs">
+            ${ev.dateBadge}
+          </span>
+
+          <!-- Bottom Left Category Pill & Event Title -->
+          <div class="absolute bottom-4 left-4 right-4 text-white space-y-1.5">
+            <span class="inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
+              ${ev.category}
+            </span>
+            <h3 class="font-display text-2xl sm:text-3xl font-bold leading-tight">
+              ${ev.title}
+            </h3>
+          </div>
+        </div>
+
+        <div class="p-5 sm:p-6 space-y-2">
+          <div class="flex items-center gap-1.5 text-xs font-bold text-macha-forest">
+            <svg class="w-3.5 h-3.5 text-macha-leaf" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
+            </svg>
+            <span>${ev.location}</span>
+          </div>
+          <p class="text-xs sm:text-sm text-macha-ink/80 leading-relaxed">
+            ${ev.description}
+          </p>
+        </div>
+      `;
+
+      // Render Pagination Dots
+      const dotsContainer = document.getElementById('eventCarouselDots');
+      dotsContainer.innerHTML = list.map((_, i) => {
+        const active = i === currentEventSlideIndex;
+        return `
+          <button
+            type="button"
+            onclick="goToEventSlide(${i})"
+            aria-label="Slide ${i + 1}"
+            class="h-2 rounded-full transition-all ${
+              active ? 'w-7 bg-macha-forest' : 'w-2 bg-macha-forest/25 hover:bg-macha-forest/50'
+            }"
+          ></button>
+        `;
+      }).join('');
+    }
+
+    function stepEventCarousel(delta) {
+      const list = getFilteredEvents();
+      if (list.length <= 1) return;
+      currentEventSlideIndex = (currentEventSlideIndex + delta + list.length) % list.length;
+      renderEventCarousel();
+    }
+
+    function goToEventSlide(index) {
+      currentEventSlideIndex = index;
+      renderEventCarousel();
+    }
+
+    function openEventWhatsApp(serviceTopic) {
+      const cleanWa = String(settings.waEventNumber || DEFAULT_SETTINGS.waEventNumber).replace(/[^0-9]/g, '');
+      const text = [
+        `Halo Tim *măcha go Surabaya*! 🍵`,
+        ``,
+        `Saya tertarik untuk booking & diskusi paket:`,
+        `• *Layanan:* ${serviceTopic}`,
+        `• *Tanggal Acara:* [Isi tanggal]`,
+        `• *Estimasi Tamu / Cup:* [Isi jumlah]`,
+        `• *Lokasi Acara (Surabaya):* [Isi lokasi]`,
+        ``,
+        `Boleh dibantu share pricelist & detail paketnya? Terima kasih! 🙏`
+      ].join('\n');
+
+      window.open(`https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function openDirectWhatsAppChat() {
+      const cleanWa = String(settings.waOrderNumber || DEFAULT_SETTINGS.waOrderNumber).replace(/[^0-9]/g, '');
+      const text = 'Halo măcha go Surabaya! 🍵 Saya mau tanya seputar menu matcha hari ini.';
+      window.open(`https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function toggleOpeningHours() {
+      const details = document.getElementById('openingHoursDetails');
+      const chevron = document.getElementById('hoursChevron');
+      const isHidden = details.classList.contains('hidden');
+      if (isHidden) {
+        details.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        details.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 14. OWNER DASHBOARD MODAL ('ADMIN & REKAP HARIAN')
+     * =========================================================================
+     */
+    function openAdminModal(initialTab = 'recap') {
+      renderAdminRecapList();
+      populateAdminSettingsFields();
+      switchAdminTab(initialTab);
+      document.getElementById('adminDashboardModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminDashboardModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function switchAdminTab(tab) {
+      const recapTab = document.getElementById('adminTabRecapContent');
+      const settingsTab = document.getElementById('adminTabSettingsContent');
+      const recapBtn = document.getElementById('tabRecapBtn');
+      const settingsBtn = document.getElementById('tabSettingsBtn');
+
+      if (tab === 'recap') {
+        recapTab.classList.remove('hidden');
+        settingsTab.classList.add('hidden');
+        recapBtn.className = 'px-4 py-2 text-xs font-bold rounded-t-2xl bg-macha-cream text-macha-forest border-t border-x border-macha-border';
+        settingsBtn.className = 'px-4 py-2 text-xs font-semibold rounded-t-2xl text-macha-ink/70 hover:text-macha-forest';
+      } else {
+        recapTab.classList.add('hidden');
+        settingsTab.classList.remove('hidden');
+        settingsBtn.className = 'px-4 py-2 text-xs font-bold rounded-t-2xl bg-macha-cream text-macha-forest border-t border-x border-macha-border';
+        recapBtn.className = 'px-4 py-2 text-xs font-semibold rounded-t-2xl text-macha-ink/70 hover:text-macha-forest';
+      }
+    }
+
+    function toggleStoreOpenStatus() {
+      settings.isOpen = !settings.isOpen;
+      saveSettingsToStorage();
+      renderStoreStatusPill();
+      showToast(`Status toko diubah menjadi: ${settings.isOpen ? 'OPEN' : 'CLOSED'}`, '🏪');
+    }
+
+    function populateAdminSettingsFields() {
+      renderStoreStatusPill();
+      document.getElementById('cfgWaOrderInput').value = settings.waOrderNumber;
+      document.getElementById('cfgWaEventInput').value = settings.waEventNumber;
+
+      const overridesContainer = document.getElementById('customPhotoOverridesList');
+      overridesContainer.innerHTML = MENU_DATA.slice(0, 5).map((drink) => {
+        const val = (settings.customDrinkPhotos && settings.customDrinkPhotos[drink.id]) || '';
+        return `
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1.5">
+            <label class="text-[11px] font-bold text-macha-forest sm:w-36 shrink-0">${drink.name}</label>
+            <input
+              type="url"
+              data-drink-photo-id="${drink.id}"
+              value="${val}"
+              placeholder="URL foto ${drink.name} (opsional)"
+              class="flex-1 px-3 py-1.5 rounded-xl bg-macha-cream border border-macha-border text-xs"
+            />
+          </div>
+        `;
+      }).join('');
+    }
+
+    function saveOwnerSettings() {
+      const waOrder = document.getElementById('cfgWaOrderInput').value.replace(/[^0-9]/g, '') || DEFAULT_SETTINGS.waOrderNumber;
+      const waEvent = document.getElementById('cfgWaEventInput').value.replace(/[^0-9]/g, '') || DEFAULT_SETTINGS.waEventNumber;
+
+      const customPhotos = {};
+      document.querySelectorAll('[data-drink-photo-id]').forEach((inp) => {
+        const id = inp.getAttribute('data-drink-photo-id');
+        const url = inp.value.trim();
+        if (url) customPhotos[id] = url;
+      });
+
+      settings.waOrderNumber = waOrder;
+      settings.waEventNumber = waEvent;
+      settings.customDrinkPhotos = customPhotos;
+
+      saveSettingsToStorage();
+      renderMenuCards();
+      showToast('Pengaturan Owner berhasil disimpan!', '✅');
+    }
+
+    function resetOwnerSettings() {
+      settings = { ...DEFAULT_SETTINGS, customDrinkPhotos: {} };
+      saveSettingsToStorage();
+      populateAdminSettingsFields();
+      renderMenuCards();
+      showToast('Pengaturan dikembalikan ke default.', '🔄');
+    }
+
+    function renderAdminRecapList() {
+      const orders = loadOrders();
+      const feed = document.getElementById('adminOrdersFeed');
+
+      let totalCups = 0;
+      let totalOmzet = 0;
+      orders.forEach((o) => {
+        totalCups += o.totalCups || 0;
+        totalOmzet += o.subtotal || 0;
+      });
+
+      document.getElementById('adminStatOrders').textContent = String(orders.length);
+      document.getElementById('adminStatCups').textContent = String(totalCups);
+      document.getElementById('adminStatOmzet').textContent = formatRupiah(totalOmzet);
+
+      if (orders.length === 0) {
+        feed.innerHTML = `
+          <div class="rounded-2xl border border-dashed border-macha-border bg-white p-6 text-center text-xs text-macha-ink/65">
+            Belum ada pesanan masuk.<br/>
+            Order baru yang dikirim customer lewat <strong>"Kirim Order ke WhatsApp"</strong> akan otomatis muncul di sini.
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = orders.map((ord) => {
+        const itemSummary = ord.items.map((it) =>
+          `• <strong>${it.name}</strong> (x${it.qty}) — ${it.powderLabel} | ${it.milk} | ${it.sugar}${it.note ? ` <em>(${it.note})</em>` : ''}`
+        ).join('<br/>');
+
+        const schedText = ord.customer.scheduleLabel || ord.customer.batch || '-';
+
+        return `
+          <div class="bg-white rounded-2xl p-4 border border-macha-border space-y-2">
+            <div class="flex items-center justify-between gap-2 border-b border-macha-border/60 pb-2">
+              <div>
+                <span class="px-2 py-0.5 rounded-full bg-macha-forest text-white text-[10px] font-bold">#${ord.orderId}</span>
+                <strong class="text-xs sm:text-sm text-macha-forest ml-1">${ord.customer.name}</strong>
+                <span class="text-[11px] text-macha-ink/65">(${ord.customer.wa})</span>
+              </div>
+              <span class="font-display font-bold text-sm text-macha-leaf">${formatRupiah(ord.subtotal)}</span>
+            </div>
+            <div class="text-[11px] text-macha-ink/80 space-y-0.5">
+              <p><strong>Jadwal:</strong> ${schedText}</p>
+              <p><strong>Metode:</strong> ${ord.customer.method} • <strong>Alamat:</strong> ${ord.customer.address}</p>
+            </div>
+            <div class="bg-macha-cream rounded-xl p-2.5 text-[11px] text-macha-ink leading-relaxed">
+              ${itemSummary}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function copyDailyDeliveryRecapText() {
+      const orders = loadOrders();
+      if (orders.length === 0) {
+        showToast('Belum ada order untuk direkap.', 'ℹ️');
+        return;
+      }
+
+      // 1. Kitchen Prep Grouping (by Drink + Powder + Milk + Sugar)
+      const kitchenPrepMap = {};
+      let grandCups = 0;
+      let grandOmzet = 0;
+
+      orders.forEach((ord) => {
+        grandCups += ord.totalCups;
+        grandOmzet += ord.subtotal;
+        ord.items.forEach((it) => {
+          const key = `${it.name} [${it.powderLabel} | ${it.milk} | ${it.sugar}]`;
+          kitchenPrepMap[key] = (kitchenPrepMap[key] || 0) + it.qty;
+        });
+      });
+
+      const kitchenLines = Object.entries(kitchenPrepMap)
+        .map(([spec, count], i) => `${i + 1}. ${spec} = *${count} cup*`)
+        .join('\n');
+
+      // 2. Customer Delivery Route & Flexible Date/Time Schedule
+      const routeLines = orders.map((ord, idx) => {
+        const schedText = ord.customer.scheduleLabel || ord.customer.batch || '-';
+        const itemsCompact = ord.items
+          .map((it) => `   - ${it.name} (x${it.qty}) | ${it.powderLabel}, ${it.milk}, ${it.sugar}${it.note ? ` [${it.note}]` : ''}`)
+          .join('\n');
+        return [
+          `*${idx + 1}. ${ord.customer.name}* (#${ord.orderId}) — WA: ${ord.customer.wa}`,
+          `   📅 Jadwal: ${schedText}`,
+          `   📍 ${ord.customer.method}: ${ord.customer.address}`,
+          itemsCompact,
+          `   💰 Estimasi Total: ${formatRupiah(ord.subtotal)}`
+        ].join('\n');
+      }).join('\n\n');
+
+      const fullRecap = [
+        `*REKAP PRODUKSI & PENGANTARAN — MĂCHA GO SURABAYA* 🍵📋`,
+        `Total Pesanan: ${orders.length} Order (${grandCups} Cup)`,
+        `Total Estimasi Omzet: ${formatRupiah(grandOmzet)}`,
+        `════════════════════════════`,
+        `*RINGKASAN PRODUKSI BAR (KITCHEN PREP):*`,
+        kitchenLines,
+        `════════════════════════════`,
+        `*JADWAL & RUTE PENGANTARAN CUSTOMER:*`,
+        routeLines
+      ].join('\n');
+
+      copyTextSafe(fullRecap, 'Rekap produksi & jadwal pengantaran disalin!');
+    }
+
+    function resetDailyOrders() {
+      saveOrdersToStorage([]);
+      updateCartAndBadges();
+      renderAdminRecapList();
+      showToast('Daftar order telah direset.', '🗑️');
+    }
+  </script>
+</body>
+</html>
