@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>macha.go — Halal Certified Matcha &amp; Self-Checkout Surabaya</title>
+  <meta name="description" content="Daily matcha rituals, crafted in Surabaya. Halal-certified pure &amp; ceremonial grade matcha by macha.go with Oatmilk &amp; Blend options." />
+
+  <!-- ===================================================================== -->
+  <!-- ★ MASTER PENGATURAN MACHA.GO (EDIT SEMUA DI BAGIAN PALING ATAS INI!) ★ -->
+  <!-- ===================================================================== -->
+  <script id="machago-master-config">
+    /**
+     * PANDUAN SINGKAT EDIT (TIDAK PERLU SCROLL JAUH KE BAWAH):
+     * 1. Semua foto/logo/maskot bisa langsung pakai link "Bagikan / Copy link" dari Google Drive.
+     *    Pastikan akses file Google Drive diset ke: "Siapa saja yang memiliki link" (Anyone with the link).
+     * 2. Untuk foto Event/Workshop, cukup paste 3-4 link Google Drive ke bawah (1 link per baris)
+     *    di dalam tanda backtick (` ... `) tanpa perlu tanda kutip atau koma!
+     */
+    window.SITE_CONFIG = {
+      // 1. NAMA BRAND & STATUS TOKO ('open' = hijau Open, 'closed' = merah Closed)
+      brandName: 'macha.go',
+      storeStatus: 'open',
+
+      // 2. NOMOR WHATSAPP BUSINESS (Awali dengan 62 tanpa tanda +)
+      whatsappOrder: '62882022714701',
+      whatsappEvent: '62882022714701',
+
+      // 3. LOGO PNG & MASKOT ASLI (Paste link Google Drive PNG transparan di sini)
+      // Jika dikosongkan '', otomatis memakai logo teks & maskot bawaan macha.go.
+      logoUrl: '',
+      mascotUrl: '',
+
+      // 4. TEKS & FOTO OPENING (HERO SECTION PALING ATAS)
+      hero: {
+        badgeText: 'Halal Certified • Surabaya Home Café',
+        headline: 'matcha rituals, crafted in Surabaya.',
+        subheadline: 'Ceremonial & pure grade matcha whisked fresh to order — paired with Oatside oatmilk or creamy house blend.',
+        primaryCtaText: 'Order Now',
+        secondaryCtaText: 'Plan your Event',
+        mascotNote: 'Freshly whisked with bamboo chasen • Pilih tanggal & jam pengantaran sendiri',
+        // Foto suasana ceremonial matcha bar (bukan foto cup produk)
+        backgroundUrl: 'https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=1600&q=85'
+      },
+
+      // 5. ALAMAT & GET DIRECTIONS + JAM BUKA
+      location: {
+        eyebrow: 'FIND US',
+        addressDisplay: 'Perumahan Griya Airlangga Blok C8, Wonorejo, Rungkut, Surabaya, Jawa Timur',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Perumahan+Griya+Airlangga+Blok+C8,+Wonorejo,+Rungkut,+Surabaya,+Jawa+Timur',
+        openingHours: [
+          { day: 'Monday', hours: '09:00 – 18:00 WIB' },
+          { day: 'Tuesday', hours: '09:00 – 18:00 WIB' },
+          { day: 'Wednesday', hours: '09:00 – 18:00 WIB' },
+          { day: 'Thursday', hours: '09:00 – 18:00 WIB' },
+          { day: 'Friday', hours: '09:00 – 18:00 WIB' },
+          { day: 'Saturday', hours: '09:00 – 19:00 WIB' },
+          { day: 'Sunday', hours: '09:00 – 19:00 WIB' }
+        ]
+      },
+
+      // 6. LINK ONLINE FOOD DELIVERY (GOFOOD, SHOPEEFOOD, GRABFOOD)
+      onlineFood: {
+        heading: 'Also Available On',
+        subtext: 'Mau pesan instan lewat aplikasi ojek online favoritmu? Klik platform di bawah:',
+        gofoodUrl: 'https://gofood.co.id',
+        shopeefoodUrl: 'https://shopee.co.id/m/shopeefood',
+        grabfoodUrl: 'https://food.grab.com/id/id/'
+      },
+
+      // 7. TEMPLATE CHAT REKAP ORDER YANG TERHUBUNG KE WHATSAPP
+      // Variabel otomatis: {order_id}, {nama}, {no_wa}, {metode}, {alamat}, {tanggal}, {jam}, {catatan_order}, {items}, {subtotal}
+      whatsappTemplate: {
+        messagePattern: [
+          'Halo *macha.go*! 🍵✨ Saya mau konfirmasi self-checkout order:',
+          'Order ID: *#{order_id}*',
+          '────────────────────────',
+          '*Data Pemesan:*',
+          '• Nama: {nama}',
+          '• No. WA: {no_wa}',
+          '• Metode: {metode}',
+          '• Alamat: {alamat}',
+          '• Jadwal Kirim/Ambil: *{tanggal}, Pukul {jam} WIB*{catatan_order}',
+          '────────────────────────',
+          '*Detail Pesanan:*',
+          '{items}',
+          '────────────────────────',
+          '*Estimasi Total:* *{subtotal}*',
+          '_(Mohon info total akhir beserta ongkir & kirimkan QRIS pembayarannya ya kak. Terima kasih!)_ 🙏'
+        ].join('\n')
+      },
+
+      // 8. COMPANY PROFILE (ABOUT US) + FOTO DOKUMENTASI BRAND
+      about: {
+        eyebrow: 'ABOUT US',
+        headline: 'A home bar, a bamboo whisk, and a lot of heart.',
+        shortText: 'macha.go started in Surabaya from a simple daily ritual: slowing down with a bowl of freshly whisked green tea before the city rushes in. Certified Halal Indonesia, we craft each cup to order using pure & ceremonial grade matcha powders paired with creamy Oatside oatmilk or our signature 50:50 house blend.',
+        moreText: 'From intimate home deliveries in Rungkut to brand workshops, sports pop-up booths, and wellness event supplies across Surabaya, every cup of macha.go is whisked by hand with warmth, honest ingredients, and zero shortcuts.',
+        // Paste maksimal 2 link Google Drive foto brand/bar di sini
+        photos: [
+          'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=85'
+        ]
+      },
+
+      // 9. DAFTAR MENU & FOTO PRODUK (Paste link Google Drive foto tiap produk di kolom image: '')
+      menuItems: [
+        {
+          id: 'matcha-latte',
+          name: 'Matcha Latte',
+          price: 22000,
+          category: 'Drinks',
+          badge: 'Best Seller',
+          isNew: false,
+          description: 'Classic hand-whisked matcha poured smoothly over chilled creamy milk.',
+          image: '' // <-- Paste link Google Drive foto Matcha Latte di sini
+        },
+        {
+          id: 'ube-matcha',
+          name: 'Ube Matcha',
+          price: 29000,
+          category: 'Seasonal',
+          badge: 'New',
+          isNew: true,
+          description: 'Velvety purple ube paste layered with creamy milk and ceremonial-grade matcha cloud.',
+          image: '' // <-- Paste link Google Drive foto Ube Matcha di sini
+        },
+        {
+          id: 'coconut-matcha',
+          name: 'Coconut Matcha',
+          price: 25000,
+          category: 'Drinks',
+          badge: 'Refreshing',
+          isNew: false,
+          description: 'Refreshing tropical coconut water and light cream topped with frothy green matcha.',
+          image: '' // <-- Paste link Google Drive foto Coconut Matcha di sini
+        },
+        {
+          id: 'ichigo-matcha',
+          name: 'Ichigo Matcha',
+          price: 28000,
+          category: 'Seasonal',
+          badge: 'New',
+          isNew: true,
+          description: 'Housemade chunky strawberry compote, silky milk, and vibrant whisked matcha.',
+          image: '' // <-- Paste link Google Drive foto Ichigo Matcha di sini
+        },
+        {
+          id: 'chocolate-matcha',
+          name: 'Chocolate Matcha',
+          price: 27000,
+          category: 'Drinks',
+          badge: 'Rich Cocoa',
+          isNew: false,
+          description: 'Rich dark chocolate ganache base layered beneath chilled milk and earthy matcha.',
+          image: '' // <-- Paste link Google Drive foto Chocolate Matcha di sini
+        }
+      ],
+
+      // 10. OPSI POWDER, MILK & SUGAR UNTUK CUSTOMIZATION
+      powderOptions: [
+        { id: 'pure', label: 'Pure Grade', addon: 0, note: 'Smooth & balanced daily matcha' },
+        { id: 'china', label: 'Ceremonial Grade China', addon: 6000, note: 'Aromatic, floral & vibrant green' },
+        { id: 'japan', label: 'Ceremonial Grade Japan', addon: 20000, note: 'Deep rich umami & velvety finish' }
+      ],
+      milkOptions: [
+        'Oatmilk (Oatside)',
+        'Blend (Freshmilk + Oatmilk)'
+      ],
+      sugarOptions: [
+        'Normal Sugar (100%)',
+        'Less Sugar (50%)',
+        'No Sugar (0%)'
+      ],
+
+      // 11. DOKUMENTASI EVENTS: WORKSHOP, POP-UP BOOTH & EVENT SUPPLY
+      // ★ CARA ISI FOTO: Paste 3-4 link Google Drive ke bawah di dalam ` ... ` (1 link per baris)
+      events: [
+        // ================= KATEGORI 1: WORKSHOP =================
+        {
+          category: 'Workshop',
+          title: 'Matcha Workshop with Larissa',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Sesi interaktif meracik ceremonial matcha & edukasi antioksidan bersama komunitas dan tim Larissa.',
+          photos: `
+            https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Workshop',
+          title: 'Matcha Session with JETE Run',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Workshop santai seputar manfaat clean energy & recovery matcha untuk komunitas pelari JETE Run.',
+          photos: `
+            https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Workshop',
+          title: 'macha.go Signature Workshop',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Kelas hands-on teknik bamboo chasen whisking hingga meracik kreasi signature macha.go dari nol.',
+          photos: `
+            https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85
+          `
+        },
+
+        // ================= KATEGORI 2: POP-UP BOOTH =================
+        {
+          category: 'Pop-up Booth',
+          title: 'Pop-up Booth at Fun Run',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Menyegarkan garis finis para pelari Fun Run dengan ratusan cup iced matcha latte & oatmilk segar.',
+          photos: `
+            https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Pop-up Booth',
+          title: 'Pop-up Bar at Yoga Event',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Pop-up matcha bar berkonsep tenang untuk menemani momen mindful recovery peserta seusai sesi yoga.',
+          photos: `
+            https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Pop-up Booth',
+          title: 'Pop-up Collaboration with Tropicana Slim',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Kolaborasi spesial menyajikan varian matcha rendah kalori & ramah gaya hidup sehat bersama Tropicana Slim.',
+          photos: `
+            https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=900&q=85
+          `
+        },
+
+        // ================= KATEGORI 3: EVENT SUPPLY =================
+        {
+          category: 'Event Supply',
+          title: 'Matcha Supply for Yoga Event',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Penyediaan puluhan hingga ratusan cup & botol matcha siap saji untuk sesi komunitas Yoga di Surabaya.',
+          photos: `
+            https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Event Supply',
+          title: 'Matcha Supply for Pilates Event',
+          date: '2026',
+          location: 'Surabaya',
+          desc: 'Layanan supply minuman matcha oatmilk & signature blend khusus untuk studio dan private event Pilates.',
+          photos: `
+            https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85
+            https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=900&q=85
+          `
+        },
+        {
+          category: 'Event Supply',
+          title: 'Corporate, Birthday & Wedding Supply',
+          date: 'Open Booking',
+          location: 'Surabaya & Sekitarnya',
+          isPromo: true,
+          badgeText: 'Open Custom Package',
+          desc: 'Ingin menghadirkan kesegaran macha.go di acara kantor, ulang tahun, bridal shower, atau wedding? Tersedia paket custom cup label, opsi Oatmilk / Blend, dan harga spesial bulk order!',
+          photos: `` // Dikosongkan agar otomatis tampil sebagai kartu promosi eksklusif
+        }
+      ],
+
+      // 12. LAYANAN PRIVATE EVENTS & WORKSHOPS
+      eventServices: [
+        {
+          icon: '🍵',
+          title: 'Interactive Matcha Workshops',
+          description: 'Kelas meracik matcha dengan bamboo chasen, tasting powder grade, dan kolaborasi brand atau komunitas di Surabaya.',
+          topic: 'Matcha Workshop Collaboration'
+        },
+        {
+          icon: '🎪',
+          title: 'Pop-Up Matcha Booth',
+          description: 'Hadirkan live whisking bar macha.go untuk event lari (Fun Run), sesi Yoga/Pilates, bazar, maupun aktivasi brand.',
+          topic: 'Pop-Up Matcha Booth'
+        },
+        {
+          icon: '🎁',
+          title: 'Corporate, Birthday & Wedding Supply',
+          description: 'Supply paket cup/botol freshly whisked matcha untuk meeting kantor, ulang tahun, bridal shower, dan wedding.',
+          topic: 'Event Supply (Corporate / Birthday / Wedding)'
+        }
+      ],
+
+      // 13. SOSIAL MEDIA DI FOOTER
+      socials: {
+        instagramUrl: 'https://instagram.com',
+        tiktokUrl: 'https://tiktok.com'
+      }
+    };
+  </script>
+  <!-- ===================================================================== -->
+  <!-- ★ AKHIR MASTER PENGATURAN — TIDAK PERLU EDIT KODE DI BAWAH INI ★      -->
+  <!-- ===================================================================== -->
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Fredoka (Rounded Organic Display) & Plus Jakarta Sans (Clean UI/Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Custom Palette & Font Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            macha: {
+              cream: '#F8F5EE',      // Primary Page Background (Warm Oat Cream)
+              parchment: '#EFE8D8',  // Secondary Band / Header / Ticker Background
+              forest: '#2D4C2B',     // Primary Brand Green (Headings, Prices, Primary Buttons)
+              leaf: '#5C8D3E',       // Secondary Accent Green (Badges, '.go', Highlights)
+              sage: '#DCE6D5',       // Soft Product Frame Tint (Sage Mist)
+              border: '#E5DEC9',     // Subtle Warm Card Border
+              pine: '#20381F',       // Footer Surface (Deep Pine Matcha)
+              ink: '#223321',        // Deep Warm Charcoal-Green Text
+            }
+          },
+          fontFamily: {
+            display: ['"Fredoka"', 'system-ui', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 8px 28px -6px rgba(45, 76, 43, 0.07)',
+            'float': '0 16px 38px -8px rgba(32, 56, 31, 0.28)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #F8F5EE;
+      color: #223321;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-display {
+      font-family: 'Fredoka', system-ui, sans-serif;
+    }
+
+    /* Hide scrollbar for horizontal category pills */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Continuous Infinite Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Smooth Modal / Sheet Entry */
+    @keyframes sheetUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-sheet-up {
+      animation: sheetUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-macha-cream text-macha-ink antialiased selection:bg-macha-forest selection:text-white pb-24">
+
+  <!-- ===================================================================== -->
+  <!-- 1. STICKY HEADER NAVBAR & SLIDE-DOWN NAVIGATION DRAWER                -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-macha-parchment/95 backdrop-blur-md border-b border-macha-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+      <!-- Brand Wordmark / PNG Logo from SITE_CONFIG.logoUrl -->
+      <a href="#" id="headerLogoContainer" class="flex items-center shrink-0" aria-label="macha.go Home"></a>
+
+      <!-- Right Controls: Store Status Pill, Cart Button & Hamburger -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Open / Closed Status Pill (Controlled via SITE_CONFIG.storeStatus) -->
+        <div
+          id="storeStatusPill"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-emerald-100/95 text-macha-forest border border-emerald-300/80 select-none"
+        >
+          <span id="storeStatusDot" class="w-2 h-2 rounded-full bg-macha-leaf animate-pulse"></span>
+          <span id="storeStatusText">Open</span>
+        </div>
+
+        <!-- Cart Button -->
+        <button
+          type="button"
+          onclick="openCheckoutDrawer()"
+          aria-label="Buka Keranjang Belanja"
+          class="relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-macha-sage text-macha-forest border border-macha-border text-xs font-bold transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span id="headerCartCount" class="font-display font-bold">0</span>
+        </button>
+
+        <!-- Hamburger Menu Toggle -->
+        <button
+          type="button"
+          onclick="toggleNavDrawer()"
+          aria-label="Menu Navigasi"
+          class="w-9 h-9 rounded-full bg-white hover:bg-macha-sage text-macha-forest border border-macha-border flex items-center justify-center transition-colors"
+        >
+          <svg id="hamburgerIconOpen" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="hamburgerIconClose" class="hidden w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Mobile/Desktop Navigation Drawer -->
+    <nav id="mobileNavDrawer" class="hidden bg-macha-cream border-t border-macha-border px-4 sm:px-6 py-4 space-y-1 shadow-lg">
+      <div class="max-w-5xl mx-auto divide-y divide-macha-border/70 text-sm font-bold text-macha-forest">
+        <a href="#menu" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Menu &amp; Self-Order</a>
+        <a href="#about" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">About Us</a>
+        <a href="#events" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Workshops, Pop-ups &amp; Supply</a>
+        <a href="#services" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Event Packages</a>
+        <a href="#find-us" onclick="closeNavDrawer()" class="block py-3 hover:text-macha-leaf transition-colors">Find Us &amp; Online Delivery</a>
+      </div>
+      <div class="max-w-5xl mx-auto pt-3">
+        <a
+          href="#menu"
+          onclick="closeNavDrawer()"
+          class="w-full inline-flex items-center justify-center gap-2 bg-macha-forest text-white font-bold text-sm py-3 rounded-full"
+        >
+          <span>Order Now</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 2. HERO SHOWCASE (CONTROLLED VIA SITE_CONFIG.hero)                    -->
+  <!-- ===================================================================== -->
+  <section class="relative overflow-hidden border-b border-macha-border min-h-[440px] sm:min-h-[500px] flex items-center">
+    <!-- Background Photo controlled via SITE_CONFIG.hero.backgroundUrl -->
+    <img
+      id="heroBgImage"
+      src=""
+      onerror="this.onerror=null;this.style.display='none';"
+      alt="Suasana ceremonial matcha whisking macha.go Surabaya"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-25 scale-105"
+    />
+    <!-- Warm Oat Cream & Sunlit Parchment Atmospheric Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#F8F5EE]/92 via-[#EFE8D8]/86 to-[#F8F5EE]/96"></div>
+    <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[520px] rounded-full bg-white/55 blur-3xl"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20 relative z-10 w-full text-center space-y-6">
+      <!-- Halal & Surabaya Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-macha-border shadow-2xs">
+        <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-macha-leaf/15 text-macha-leaf text-[10px] font-bold">✦</span>
+        <span id="heroBadgeText" class="text-xs font-semibold text-macha-forest tracking-wide">Halal Certified • Surabaya Home Café</span>
+      </div>
+
+      <!-- Editorial Headline in Fredoka -->
+      <h1 id="heroHeadlineText" class="font-display text-[38px] sm:text-5xl lg:text-[58px] font-bold text-macha-forest leading-[1.12] tracking-tight max-w-2xl mx-auto">
+        matcha rituals, crafted in Surabaya.
+      </h1>
+
+      <!-- Subtitle -->
+      <p id="heroSubheadlineText" class="text-sm sm:text-base lg:text-lg text-macha-ink/85 max-w-xl mx-auto leading-relaxed">
+        Ceremonial &amp; pure grade matcha whisked fresh to order — paired with Oatside oatmilk or creamy house blend.
+      </p>
+
+      <!-- Dual Pill Buttons ('Order Now' + 'Plan your Event') -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a
+          href="#menu"
+          class="inline-flex items-center justify-center gap-2 bg-macha-forest hover:bg-macha-pine text-white font-bold text-sm px-7 py-3.5 rounded-full shadow-card transition-all active:scale-95"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+          <span id="heroPrimaryBtnText">Order Now</span>
+        </a>
+
+        <a
+          href="#events"
+          class="inline-flex items-center justify-center gap-2 bg-white/75 hover:bg-white text-macha-forest border-2 border-macha-forest font-bold text-sm px-7 py-3 rounded-full transition-all active:scale-95"
+        >
+          <span id="heroSecondaryBtnText">Plan your Event</span>
+        </a>
+      </div>
+
+      <!-- Real Mascot Ritual Note Pill (Uses SITE_CONFIG.mascotUrl) -->
+      <div class="pt-3 flex justify-center">
+        <div class="inline-flex items-center gap-2.5 bg-white/90 backdrop-blur-xs rounded-full px-4 py-1.5 border border-macha-border shadow-2xs">
+          <div id="heroMascotContainer" class="w-8 h-8 shrink-0 flex items-center justify-center overflow-hidden rounded-full"></div>
+          <span id="heroMascotNoteText" class="text-xs font-medium text-macha-ink/85">
+            Freshly whisked with bamboo chasen • Pilih tanggal &amp; jam pengantaran sendiri
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. CONTINUOUS MARQUEE TICKER (SOFT MATCHA PARCHMENT #EFE8D8)          -->
+  <!-- ===================================================================== -->
+  <div class="bg-macha-parchment border-b border-macha-border py-2.5 overflow-hidden select-none">
+    <div class="animate-marquee flex items-center gap-8 text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-macha-forest">
+      <span>MACHA.GO SURABAYA</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>HALAL CERTIFIED</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>PURE &amp; CEREMONIAL GRADE</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>OATMILK &amp; BLEND</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>WORKSHOPS • POP-UP BOOTH • EVENT SUPPLY</span>
+      <span class="text-macha-leaf">✦</span>
+      <!-- Duplicated seamlessly for continuous loop -->
+      <span>MACHA.GO SURABAYA</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>HALAL CERTIFIED</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>PURE &amp; CEREMONIAL GRADE</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>OATMILK &amp; BLEND</span>
+      <span class="text-macha-leaf">✦</span>
+      <span>WORKSHOPS • POP-UP BOOTH • EVENT SUPPLY</span>
+      <span class="text-macha-leaf">✦</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 4. MENU SECTION ('- OUR MENU -' & HORIZONTAL CARDS WITH '+ ORDER')    -->
+  <!-- ===================================================================== -->
+  <section id="menu" class="py-12 sm:py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <!-- Centered Editorial Header -->
+      <div class="text-center space-y-2 mb-7">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — OUR MENU —
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight">
+          Craving something<br class="sm:hidden" /> green today?
+        </h2>
+      </div>
+
+      <!-- Framed Category Filter Pill Bar -->
+      <div class="bg-white rounded-2xl border border-macha-border p-2 mb-7 shadow-2xs">
+        <div id="menuCategoryBar" class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar"></div>
+      </div>
+
+      <!-- Category Subheader Row -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2.5">
+          <span id="menuSectionLabel" class="text-xs font-bold uppercase tracking-[0.18em] text-macha-forest/80">
+            ALL HANDCRAFTED DRINKS
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full bg-macha-leaf text-white text-[10px] font-bold uppercase tracking-wider">
+            HALAL
+          </span>
+        </div>
+        <span class="text-[11px] text-macha-ink/65 hidden sm:inline">Klik <strong>+ Order</strong> untuk pilih Powder &amp; Milk</span>
+      </div>
+
+      <!-- Horizontal Menu Cards List -->
+      <div id="menuCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"></div>
+
+      <!-- Powder & Milk Quick Guide Note -->
+      <div class="mt-8 rounded-3xl bg-macha-parchment/75 border border-macha-border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div id="menuFooterMascot" class="w-12 h-12 shrink-0 flex items-center justify-center overflow-hidden rounded-2xl"></div>
+          <div class="text-xs text-macha-ink/85 space-y-1">
+            <p class="font-display text-sm font-bold text-macha-forest">Customisasi Setiap Cup Sesuai Seleramu:</p>
+            <p><strong>Milk:</strong> Oatmilk (Oatside) • Blend (Freshmilk + Oatmilk)</p>
+            <p><strong>Powder:</strong> Pure Grade (+0k) • Ceremonial China (+6k) • Ceremonial Japan (+20k)</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-[11px] font-bold text-macha-forest shrink-0">
+          <span class="px-3 py-1.5 rounded-full bg-white border border-macha-border">Bebas Pilih Tanggal &amp; Jam</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 5. ABOUT US / COMPANY PROFILE (CONTROLLED VIA SITE_CONFIG.about)      -->
+  <!-- ===================================================================== -->
+  <section id="about" class="py-12 sm:py-16 border-t border-macha-border bg-white/60">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+      <div class="space-y-2.5">
+        <p id="aboutEyebrowText" class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — ABOUT US
+        </p>
+        <h2 id="aboutHeadlineText" class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight max-w-xl">
+          A home bar, a bamboo whisk, and a lot of heart.
+        </h2>
+      </div>
+
+      <div class="space-y-3 text-sm sm:text-base text-macha-ink/85 leading-relaxed max-w-2xl">
+        <p id="aboutShortText"></p>
+        <p id="aboutMoreContent" class="hidden"></p>
+        <button
+          type="button"
+          onclick="toggleAboutStory()"
+          class="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-macha-forest hover:text-macha-leaf pt-1 transition-colors"
+        >
+          <span id="aboutReadMoreLabel">Read more ↓</span>
+        </button>
+      </div>
+
+      <!-- 2-Column Rounded Photo Showcase -->
+      <div id="aboutPhotosGrid" class="grid grid-cols-2 gap-3 sm:gap-5 pt-2"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 6. WORKSHOPS, POP-UP BOOTH & EVENT SUPPLY SHOWCASE (MULTI-PHOTO)      -->
+  <!-- ===================================================================== -->
+  <section id="events" class="py-12 sm:py-16 bg-macha-parchment/70 border-t border-macha-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — WORKSHOPS, POP-UPS &amp; EVENT SUPPLY
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest leading-tight">
+          Memories, poured with intention.
+        </h2>
+        <p class="text-xs sm:text-sm text-macha-ink/80 max-w-2xl leading-relaxed">
+          Dari kolaborasi <strong>Workshop</strong> (Larissa, JETE Run, macha.go), <strong>Pop-up Booth</strong> (Fun Run, Yoga Event, Tropicana Slim), hingga <strong>Event Supply</strong> untuk Yoga, Pilates, Corporate, Birthday &amp; Wedding. Geser foto pada setiap kartu untuk melihat dokumentasi lengkap!
+        </p>
+      </div>
+
+      <!-- Category Filter Pills (All / Workshop / Pop-up Booth / Event Supply) -->
+      <div id="eventFilterBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1"></div>
+
+      <!-- Multi-Card Grid with Independent Multi-Photo Gallery & Promo Cards -->
+      <div id="eventsShowcaseGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+
+      <!-- Event Booking CTA Banner -->
+      <div class="pt-6 text-center space-y-3">
+        <p class="text-xs sm:text-sm font-medium text-macha-ink/80">
+          Want to book <strong>macha.go</strong> for your next workshop, pop-up booth, or event supply?
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#services"
+            class="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-macha-sage text-macha-forest border border-macha-forest font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition-colors"
+          >
+            <span>View Packages →</span>
+          </a>
+          <button
+            type="button"
+            onclick="openEventWhatsApp('Workshop / Pop-Up Booth / Event Supply')"
+            class="inline-flex items-center justify-center gap-2 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-full shadow-card transition-all"
+          >
+            <span>💬 Book a Session</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 7. PRIVATE EVENTS & WORKSHOPS SERVICES (SITE_CONFIG.eventServices)    -->
+  <!-- ===================================================================== -->
+  <section id="services" class="py-12 sm:py-16 border-t border-macha-border bg-macha-cream">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-7">
+      <div class="text-center space-y-2 max-w-xl mx-auto">
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — EVENT PACKAGES —
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-macha-forest">
+          macha.go comes to you.
+        </h2>
+        <p class="text-xs sm:text-sm text-macha-ink/80 leading-relaxed">
+          We bring the full hand-whisked matcha bar &amp; supply experience to your venue—whether it’s a brand workshop, sports pop-up, corporate meeting, birthday, or wedding.
+        </p>
+      </div>
+
+      <div id="eventServicesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 8. FIND US (PERUMAHAN GRIYA AIRLANGGA BLOK C8) & ONLINE FOOD LINKS    -->
+  <!-- ===================================================================== -->
+  <section id="find-us" class="py-12 sm:py-16 border-t border-macha-border bg-white/75">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+      <div class="space-y-3">
+        <p id="findUsEyebrowText" class="text-xs font-bold uppercase tracking-[0.22em] text-macha-forest/75">
+          — FIND US
+        </p>
+        <h2 id="findUsAddressHeading" class="font-display text-2xl sm:text-4xl font-bold text-macha-forest leading-snug max-w-2xl">
+          Perumahan Griya Airlangga Blok C8, Wonorejo, Rungkut, Surabaya, Jawa Timur
+        </h2>
+
+        <div class="pt-1">
+          <a
+            id="findUsDirectionsLink"
+            href="https://www.google.com/maps/search/?api=1&query=Perumahan+Griya+Airlangga+Blok+C8,+Wonorejo,+Rungkut,+Surabaya,+Jawa+Timur"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-white hover:bg-macha-forest text-macha-forest hover:text-white border-2 border-macha-forest font-bold text-xs sm:text-sm px-6 py-3 rounded-full transition-all shadow-2xs"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21.71 11.29l-9-9a.996.996 0 00-1.41 0l-9 9a.996.996 0 000 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 000-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+            </svg>
+            <span>Get Directions</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Opening Hours Accordion Card -->
+      <div class="space-y-2 max-w-xl">
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-macha-forest/70">
+          OPENING HOURS
+        </p>
+        <div class="bg-white rounded-2xl border border-macha-border shadow-2xs overflow-hidden">
+          <button
+            type="button"
+            onclick="toggleOpeningHours()"
+            class="w-full px-4 py-3.5 flex items-center justify-between text-xs sm:text-sm font-bold text-macha-forest hover:bg-macha-cream/60 transition-colors"
+          >
+            <span id="todayHoursSummary">Today • 09:00 – 18:00 WIB</span>
+            <svg id="hoursChevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="openingHoursDetails" class="hidden border-t border-macha-border/70 px-4 py-3 bg-macha-cream/40 space-y-1.5 text-xs"></div>
+        </div>
+      </div>
+
+      <!-- ALSO AVAILABLE ON: GOFOOD, SHOPEEFOOD, GRABFOOD -->
+      <div class="pt-4">
+        <div class="rounded-3xl bg-macha-parchment/85 border border-macha-border p-5 sm:p-6 space-y-4">
+          <div class="space-y-1">
+            <span class="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-macha-leaf">
+              ONLINE FOOD DELIVERY
+            </span>
+            <h3 id="onlineFoodHeading" class="font-display text-xl sm:text-2xl font-bold text-macha-forest">
+              Also Available On
+            </h3>
+            <p id="onlineFoodSubtext" class="text-xs text-macha-ink/80">
+              Mau pesan instan lewat aplikasi ojek online favoritmu? Klik platform di bawah:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+            <!-- GoFood -->
+            <a
+              id="linkGofood"
+              href="https://gofood.co.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white hover:bg-emerald-50 border border-macha-border hover:border-emerald-500 transition-all shadow-2xs group"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-full bg-emerald-600 text-white font-display font-bold text-xs flex items-center justify-center shrink-0">
+                  Go
+                </span>
+                <div>
+                  <p class="font-display font-bold text-sm text-macha-forest group-hover:text-emerald-700">GoFood</p>
+                  <p class="text-[10px] text-macha-ink/65">Order via Gojek</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-macha-forest group-hover:translate-x-0.5 transition-transform">→</span>
+            </a>
+
+            <!-- ShopeeFood -->
+            <a
+              id="linkShopeefood"
+              href="https://shopee.co.id/m/shopeefood"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white hover:bg-orange-50 border border-macha-border hover:border-orange-500 transition-all shadow-2xs group"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-full bg-orange-500 text-white font-display font-bold text-xs flex items-center justify-center shrink-0">
+                  S
+                </span>
+                <div>
+                  <p class="font-display font-bold text-sm text-macha-forest group-hover:text-orange-600">ShopeeFood</p>
+                  <p class="text-[10px] text-macha-ink/65">Order via Shopee</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-macha-forest group-hover:translate-x-0.5 transition-transform">→</span>
+            </a>
+
+            <!-- GrabFood -->
+            <a
+              id="linkGrabfood"
+              href="https://food.grab.com/id/id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between px-4 py-3 rounded-2xl bg-white hover:bg-green-50 border border-macha-border hover:border-green-600 transition-all shadow-2xs group"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-full bg-green-600 text-white font-display font-bold text-xs flex items-center justify-center shrink-0">
+                  G
+                </span>
+                <div>
+                  <p class="font-display font-bold text-sm text-macha-forest group-hover:text-green-700">GrabFood</p>
+                  <p class="text-[10px] text-macha-ink/65">Order via Grab</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-macha-forest group-hover:translate-x-0.5 transition-transform">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 9. DEEP PINE FOOTER (#20381F)                                         -->
+  <!-- ===================================================================== -->
+  <footer class="bg-macha-pine text-macha-cream pt-12 pb-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      <!-- Centered Mascot + White/Mint 'macha.go' Logo -->
+      <div class="flex flex-col items-center justify-center gap-3">
+        <div id="footerMascotContainer" class="w-14 h-14 flex items-center justify-center"></div>
+        <div id="footerLogoContainer" class="flex justify-center"></div>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-semibold text-macha-cream/90">
+        <span>✦ Halal Certified Indonesia</span>
+        <span>•</span>
+        <span>Wonorejo, Rungkut — Surabaya</span>
+      </div>
+
+      <p class="text-xs text-macha-cream/75 max-w-md mx-auto leading-relaxed">
+        Perumahan Griya Airlangga Blok C8, Wonorejo, Rungkut, Surabaya, Jawa Timur<br />
+        &copy; 2026 macha.go &middot; Halal Certified Home Café
+      </p>
+
+      <!-- Social Icon Buttons (WhatsApp, Instagram, TikTok, Maps) -->
+      <div class="flex items-center justify-center gap-4 text-macha-cream/80">
+        <!-- WhatsApp -->
+        <button
+          type="button"
+          onclick="openDirectWhatsAppChat()"
+          aria-label="WhatsApp macha.go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+        </button>
+
+        <!-- Instagram -->
+        <a
+          id="footerInstagramLink"
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram macha.go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
+
+        <!-- TikTok -->
+        <a
+          id="footerTiktokLink"
+          href="https://tiktok.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok macha.go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+          </svg>
+        </a>
+
+        <!-- Maps -->
+        <a
+          id="footerMapsLink"
+          href="https://www.google.com/maps/search/?api=1&query=Perumahan+Griya+Airlangga+Blok+C8,+Wonorejo,+Rungkut,+Surabaya,+Jawa+Timur"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Lokasi Google Maps macha.go"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- 10. FLOATING BOTTOM CART BAR (VISIBLE WHEN CART >= 1 ITEM)            -->
+  <!-- ===================================================================== -->
+  <div id="floatingCartBar" class="hidden fixed bottom-4 inset-x-4 z-40 max-w-xl mx-auto animate-sheet-up">
+    <button
+      type="button"
+      onclick="openCheckoutDrawer()"
+      class="w-full bg-macha-forest hover:bg-macha-pine text-white rounded-full p-2.5 pl-4 pr-3 shadow-float flex items-center justify-between gap-3 border border-white/15 transition-all active:scale-[0.99]"
+    >
+      <div class="flex items-center gap-3 text-left">
+        <span id="floatingCartCups" class="w-9 h-9 rounded-full bg-macha-leaf text-white font-display font-bold text-sm flex items-center justify-center shrink-0">
+          0
+        </span>
+        <div>
+          <p class="text-[11px] text-macha-cream/80 font-medium leading-tight">Keranjang macha.go</p>
+          <p id="floatingCartSubtotal" class="font-display font-bold text-base text-white leading-tight">Rp 0</p>
+        </div>
+      </div>
+
+      <span class="inline-flex items-center gap-1.5 bg-macha-cream text-macha-forest font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shrink-0">
+        <span>Checkout</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 11. ITEM CUSTOMIZER MODAL (BOTTOM SHEET ON MOBILE / MODAL ON DESKTOP) -->
+  <!-- ===================================================================== -->
+  <div id="customizerModal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-macha-pine/65 backdrop-blur-xs p-0 sm:p-4">
+    <div class="bg-macha-cream w-full sm:max-w-lg rounded-t-[32px] sm:rounded-[32px] shadow-2xl max-h-[92vh] flex flex-col overflow-hidden border border-macha-border animate-sheet-up">
+      <!-- Top Visual Header -->
+      <div class="relative bg-macha-sage px-5 pt-5 pb-4 border-b border-macha-border flex items-center gap-4 shrink-0">
+        <div id="custPreviewVisual" class="w-20 h-24 rounded-2xl bg-white/80 border border-macha-border flex items-center justify-center p-1.5 shrink-0"></div>
+
+        <div class="flex-1 pr-7">
+          <div class="flex items-center gap-1.5 mb-1">
+            <span id="custBadgeTag" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-macha-forest text-white">Drinks</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-macha-forest border border-macha-border">Halal</span>
+          </div>
+          <h3 id="custDrinkTitle" class="font-display text-xl sm:text-2xl font-bold text-macha-forest leading-tight">Matcha Latte</h3>
+          <p id="custBasePrice" class="text-xs font-bold text-macha-leaf mt-0.5">Base: Rp 22.000</p>
+        </div>
+
+        <button
+          type="button"
+          onclick="closeCustomizerModal()"
+          aria-label="Tutup Modal Kustomisasi"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center shadow-2xs transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Customization Options (NO ICE OPTION) -->
+      <div class="p-5 overflow-y-auto space-y-5 flex-1">
+        <p id="custDrinkDesc" class="text-xs text-macha-ink/80 leading-relaxed -mt-1"></p>
+
+        <!-- 1. Powder Grade -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">1. Powder Grade</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="powderOptionsGrid" class="space-y-2"></div>
+        </div>
+
+        <!-- 2. Milk Option -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">2. Milk Option</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="milkPillsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+        </div>
+
+        <!-- 3. Sugar Level -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">3. Sugar Level</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">Wajib</span>
+          </div>
+          <div id="sugarPillsGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+        </div>
+
+        <!-- 4. Optional Cup Note -->
+        <div>
+          <label for="custCupNoteInput" class="block text-xs font-bold uppercase tracking-wider text-macha-forest mb-1.5">
+            4. Catatan / Nama di Cup <span class="font-normal normal-case text-macha-ink/60">(Opsional)</span>
+          </label>
+          <input
+            id="custCupNoteInput"
+            type="text"
+            placeholder="Contoh: Tulis nama di cup: Acha"
+            class="w-full px-3.5 py-2.5 rounded-2xl bg-white border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest"
+          />
+        </div>
+      </div>
+
+      <!-- Sticky Bottom Action Bar -->
+      <div class="p-4 sm:px-5 bg-white border-t border-macha-border flex items-center gap-3 shrink-0">
+        <div class="inline-flex items-center bg-macha-cream border border-macha-border rounded-full p-1">
+          <button
+            type="button"
+            onclick="stepCustomQty(-1)"
+            aria-label="Kurangi jumlah"
+            class="w-8 h-8 rounded-full hover:bg-white text-macha-forest font-bold text-base flex items-center justify-center"
+          >
+            −
+          </button>
+          <span id="custQtyDisplay" class="w-8 text-center font-display font-bold text-sm text-macha-forest">1</span>
+          <button
+            type="button"
+            onclick="stepCustomQty(1)"
+            aria-label="Tambah jumlah"
+            class="w-8 h-8 rounded-full hover:bg-white text-macha-forest font-bold text-base flex items-center justify-center"
+          >
+            +
+          </button>
+        </div>
+
+        <button
+          id="custAddToCartBtn"
+          type="button"
+          onclick="addCustomizedItemToCart()"
+          class="flex-1 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-full shadow-sm transition-all active:scale-[0.99]"
+        >
+          Add to Cart — Rp 22.000
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 12. SLIDE-OVER SELF-CHECKOUT DRAWER (CALENDAR + TIME -> DIRECT WA)    -->
+  <!-- ===================================================================== -->
+  <div id="checkoutDrawer" class="hidden fixed inset-0 z-50 flex justify-end bg-macha-pine/65 backdrop-blur-xs">
+    <div class="bg-macha-cream w-full max-w-lg h-full flex flex-col shadow-2xl overflow-hidden animate-sheet-up">
+      <!-- Header -->
+      <div class="px-5 py-4 bg-macha-parchment border-b border-macha-border flex items-center justify-between shrink-0">
+        <div>
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-macha-forest">Self-Checkout</h3>
+          <p class="text-[11px] text-macha-ink/75">Atur jadwal kirim &amp; kirim rekap pesanan langsung ke WhatsApp</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeCheckoutDrawer()"
+          aria-label="Tutup Checkout"
+          class="w-9 h-9 rounded-full bg-white hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
+        <!-- Empty Cart State -->
+        <div id="checkoutEmptyState" class="hidden bg-white rounded-3xl p-8 text-center border border-macha-border space-y-4">
+          <div id="emptyCartMascot" class="w-16 h-16 mx-auto"></div>
+          <div>
+            <h4 class="font-display text-xl font-bold text-macha-forest">Keranjang Masih Kosong</h4>
+            <p class="text-xs text-macha-ink/70 mt-1">Pilih varian matcha favoritmu dan atur Powder Grade serta Milk Option.</p>
+          </div>
+          <button
+            type="button"
+            onclick="closeCheckoutDrawer()"
+            class="bg-macha-forest text-white font-bold text-xs px-5 py-3 rounded-full"
+          >
+            Pilih Menu Matcha
+          </button>
+        </div>
+
+        <!-- Active Checkout Flow -->
+        <div id="checkoutFilledState" class="space-y-5">
+          <!-- STEP 1: ORDER SUMMARY -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border border-macha-border shadow-2xs space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-macha-forest">1. Ringkasan Pesanan</span>
+              <button type="button" onclick="closeCheckoutDrawer()" class="text-xs font-bold text-macha-leaf hover:underline">
+                + Tambah Menu
+              </button>
+            </div>
+
+            <div id="checkoutItemsContainer" class="divide-y divide-macha-border/70"></div>
+
+            <div class="pt-3 border-t border-macha-border flex items-center justify-between">
+              <span class="text-xs font-bold text-macha-ink/75">Estimasi Total Pesanan</span>
+              <span id="checkoutTotalDisplay" class="font-display text-2xl font-bold text-macha-forest">Rp 0</span>
+            </div>
+          </div>
+
+          <!-- STEP 2: CUSTOMER DETAILS & FLEXIBLE DATE/TIME CALENDAR -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border border-macha-border shadow-2xs space-y-3.5">
+            <span class="block text-xs font-bold uppercase tracking-wider text-macha-forest">2. Data Pemesan &amp; Jadwal Pengantaran</span>
+
+            <!-- Validation Error Alert -->
+            <div id="checkoutErrorBox" class="hidden rounded-2xl bg-rose-50 border border-rose-200 p-3 text-xs text-rose-700 font-medium"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputCustName" class="block text-xs font-bold text-macha-forest mb-1">
+                  Nama Pemesan <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  id="inputCustName"
+                  type="text"
+                  placeholder="Contoh: Acha"
+                  class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+                />
+              </div>
+              <div>
+                <label for="inputCustWa" class="block text-xs font-bold text-macha-forest mb-1">
+                  Nomor WhatsApp Aktif <span class="text-rose-600">*</span>
+                </label>
+                <input
+                  id="inputCustWa"
+                  type="tel"
+                  placeholder="Contoh: 08123456789"
+                  class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+                />
+              </div>
+            </div>
+
+            <!-- Metode Pengambilan -->
+            <div>
+              <label class="block text-xs font-bold text-macha-forest mb-1.5">
+                Metode Pengambilan <span class="text-rose-600">*</span>
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <button
+                  id="btnMethodDelivery"
+                  type="button"
+                  onclick="selectPickupMethod('Delivery / Kirim Kurir')"
+                  class="p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all"
+                >
+                  <p class="text-xs font-bold text-macha-forest">🛵 Delivery / Kirim Kurir</p>
+                  <p class="text-[10px] text-macha-ink/70 mt-0.5">Area Surabaya</p>
+                </button>
+                <button
+                  id="btnMethodPickup"
+                  type="button"
+                  onclick="selectPickupMethod('Self-Pickup (Griya Airlangga Blok C8, Rungkut)')"
+                  class="p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all"
+                >
+                  <p class="text-xs font-bold text-macha-forest">🏡 Self-Pickup</p>
+                  <p class="text-[10px] text-macha-ink/70 mt-0.5">Griya Airlangga C8, Rungkut</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Alamat Lengkap (Shown when Delivery selected) -->
+            <div id="deliveryAddressBlock">
+              <label for="inputCustAddress" class="block text-xs font-bold text-macha-forest mb-1">
+                Alamat Lengkap &amp; Patokan <span class="text-rose-600">*</span>
+              </label>
+              <textarea
+                id="inputCustAddress"
+                rows="2"
+                placeholder="Nama jalan, nomor rumah/gedung, kecamatan Surabaya, dan patokan jelas..."
+                class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+              ></textarea>
+            </div>
+
+            <!-- Kalender Tanggal & Jam Bebas Pilihan Customer -->
+            <div class="rounded-2xl bg-macha-cream/70 border border-macha-border p-3.5 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-macha-forest">📅 Pilih Tanggal &amp; Jam Sendiri <span class="text-rose-600">*</span></span>
+                <span class="text-[10px] font-semibold text-macha-leaf">WIB (Surabaya)</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label for="inputDeliveryDate" class="block text-[11px] font-bold text-macha-forest mb-1">
+                    Tanggal Pengantaran / Pickup
+                  </label>
+                  <input
+                    id="inputDeliveryDate"
+                    type="date"
+                    class="w-full px-3 py-2.5 rounded-xl bg-white border border-macha-border text-xs sm:text-sm font-semibold text-macha-forest focus:outline-none focus:border-macha-forest"
+                  />
+                </div>
+                <div>
+                  <label for="inputDeliveryTime" class="block text-[11px] font-bold text-macha-forest mb-1">
+                    Jam Pengantaran / Pickup
+                  </label>
+                  <input
+                    id="inputDeliveryTime"
+                    type="time"
+                    value="13:00"
+                    class="w-full px-3 py-2.5 rounded-xl bg-white border border-macha-border text-xs sm:text-sm font-semibold text-macha-forest focus:outline-none focus:border-macha-forest"
+                  />
+                </div>
+              </div>
+              <p class="text-[10px] text-macha-ink/70">
+                Bebas tentukan tanggal (hari ini atau pre-order) dan jam yang kamu inginkan.
+              </p>
+            </div>
+
+            <!-- Catatan Tambahan -->
+            <div>
+              <label for="inputOrderNote" class="block text-xs font-bold text-macha-forest mb-1">
+                Catatan Tambahan <span class="font-normal text-macha-ink/60">(Opsional)</span>
+              </label>
+              <input
+                id="inputOrderNote"
+                type="text"
+                placeholder="Misal: titip ke satpam/resepsionis, kabari jika kurir sudah jalan..."
+                class="w-full px-3.5 py-2.5 rounded-2xl bg-macha-cream/60 border border-macha-border text-xs sm:text-sm focus:outline-none focus:border-macha-forest focus:bg-white"
+              />
+            </div>
+          </div>
+
+          <!-- INFO PEMBAYARAN QRIS VIA WHATSAPP -->
+          <div class="rounded-3xl bg-macha-parchment/85 border border-macha-border p-4 flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-macha-forest text-white flex items-center justify-center text-sm shrink-0 mt-0.5">💬</span>
+            <div class="text-xs text-macha-ink/85 space-y-1 leading-relaxed">
+              <p class="font-display text-sm font-bold text-macha-forest">Pembayaran QRIS Dikirim via WhatsApp</p>
+              <p>
+                Setelah klik tombol di bawah, rekap pesananmu otomatis masuk ke WhatsApp Business <strong>macha.go</strong> dan kode pembayaran <strong>QRIS</strong> akan langsung kami kirimkan melalui chat WhatsApp.
+              </p>
+            </div>
+          </div>
+
+          <!-- Post-Submit Confirmation & Direct Fallback Link -->
+          <div id="waSuccessBox" class="hidden rounded-2xl bg-emerald-50 border border-emerald-200 p-3.5 text-xs text-emerald-950 space-y-2">
+            <p class="font-bold">✅ Rekap Order #<span id="waCreatedOrderId"></span> Tersimpan!</p>
+            <p>Jika WhatsApp tidak terbuka otomatis, klik tombol di bawah untuk langsung mengirim rekap:</p>
+            <a
+              id="waFallbackAnchor"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full text-center bg-macha-forest text-white font-bold py-2.5 rounded-full"
+            >
+              Lanjut ke WhatsApp Sekarang →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Checkout Footer Single Primary WhatsApp CTA -->
+      <div id="checkoutDrawerFooter" class="p-4 bg-white border-t border-macha-border shrink-0">
+        <button
+          type="button"
+          onclick="processOrderAndOpenWhatsApp()"
+          class="w-full bg-macha-forest hover:bg-macha-pine text-white font-bold text-sm py-3.5 px-5 rounded-full shadow-card flex items-center justify-center gap-2 transition-all active:scale-[0.99]"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z" />
+          </svg>
+          <span>Kirim Order ke WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 13. EVENT PHOTO LIGHTBOX MODAL                                        -->
+  <!-- ===================================================================== -->
+  <div id="eventLightboxModal" onclick="closeEventLightbox()" class="hidden fixed inset-0 z-[70] bg-black/85 backdrop-blur-xs flex items-center justify-center p-4">
+    <div onclick="event.stopPropagation()" class="relative max-w-3xl w-full bg-macha-cream rounded-3xl overflow-hidden shadow-2xl border border-macha-border animate-sheet-up">
+      <button
+        type="button"
+        onclick="closeEventLightbox()"
+        aria-label="Tutup Foto"
+        class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center shadow-md font-bold"
+      >
+        ✕
+      </button>
+      <div class="aspect-[4/3] sm:aspect-[16/10] bg-black flex items-center justify-center">
+        <img id="lightboxImg" src="" alt="Dokumentasi Event macha.go" class="w-full h-full object-contain" />
+      </div>
+      <div class="px-5 py-3.5 bg-white flex items-center justify-between gap-3">
+        <div>
+          <p id="lightboxTitle" class="font-display font-bold text-sm sm:text-base text-macha-forest"></p>
+          <p id="lightboxCounter" class="text-[11px] text-macha-ink/70"></p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            onclick="stepLightboxPhoto(-1)"
+            class="w-8 h-8 rounded-full bg-macha-cream hover:bg-macha-forest text-macha-forest hover:text-white font-bold flex items-center justify-center border border-macha-border"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onclick="stepLightboxPhoto(1)"
+            class="w-8 h-8 rounded-full bg-macha-cream hover:bg-macha-forest text-macha-forest hover:text-white font-bold flex items-center justify-center border border-macha-border"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 14. NON-BLOCKING TOAST NOTIFICATION                                   -->
+  <!-- ===================================================================== -->
+  <div id="toastBanner" class="hidden fixed top-20 right-4 z-[60] max-w-xs sm:max-w-sm bg-macha-pine text-white px-4 py-3 rounded-2xl shadow-float border border-white/15 text-xs font-semibold flex items-center gap-2 animate-sheet-up">
+    <span id="toastEmoji">🍵</span>
+    <span id="toastText">Notifikasi</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT APPLICATION LOGIC (READS FROM window.SITE_CONFIG AT TOP)   -->
+  <!-- ===================================================================== -->
+  <script>
+    const CFG = window.SITE_CONFIG || {};
+
+    /**
+     * =========================================================================
+     * KONVERTER OTOMATIS LINK GOOGLE DRIVE -> DIRECT IMAGE URL
+     * =========================================================================
+     */
+    function extractGoogleDriveId(url) {
+      if (!url || typeof url !== 'string') return null;
+      const trimmed = url.trim();
+      if (!trimmed.includes('drive.google.com') && !trimmed.includes('docs.google.com')) {
+        return null;
+      }
+      const fileMatch = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (fileMatch && fileMatch[1]) return fileMatch[1];
+
+      const paramMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (paramMatch && paramMatch[1]) return paramMatch[1];
+
+      const dMatch = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (dMatch && dMatch[1]) return dMatch[1];
+
+      return null;
+    }
+
+    function resolveDriveImage(url) {
+      if (!url || typeof url !== 'string' || url.trim() === '') {
+        return { primary: '', backup: '' };
+      }
+      const trimmed = url.trim();
+      const driveId = extractGoogleDriveId(trimmed);
+      if (driveId) {
+        return {
+          primary: `https://lh3.googleusercontent.com/d/${driveId}`,
+          backup: `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`
+        };
+      }
+      return { primary: trimmed, backup: trimmed };
+    }
+
+    // Parse multi-line backtick string (`link1 \n link2 \n link3`) or array into resolved image objects
+    function parseMultiPhotoList(rawPhotos) {
+      if (!rawPhotos) return [];
+      const list = Array.isArray(rawPhotos)
+        ? rawPhotos
+        : String(rawPhotos).split(/\r?\n|,/);
+
+      return list
+        .map((line) => String(line || '').trim())
+        .filter((line) => line.length > 0)
+        .map((url) => resolveDriveImage(url))
+        .filter((obj) => obj.primary !== '');
+    }
+
+    /**
+     * =========================================================================
+     * STATE & CART STORAGE
+     * =========================================================================
+     */
+    const CART_STORAGE_KEY = 'machago_surabaya_cart_v4';
+    let cart = loadCart();
+    let activeMenuCategory = 'All';
+    let selectedPickupMethod = 'Delivery / Kirim Kurir';
+    let activeEventFilter = 'All';
+    const eventSlideState = {};
+    let lightboxState = { eventIdx: 0, photoIdx: 0 };
+
+    let customizerState = {
+      drink: null,
+      powderId: 'pure',
+      milk: (CFG.milkOptions && CFG.milkOptions[0]) || 'Oatmilk (Oatside)',
+      sugar: (CFG.sugarOptions && CFG.sugarOptions[1]) || 'Less Sugar (50%)',
+      note: '',
+      qty: 1
+    };
+
+    /**
+     * =========================================================================
+     * RENDER BRAND LOGO ('macha.go') & MASCOT
+     * =========================================================================
+     */
+    function getBrandWordmarkSvg(variant = 'header') {
+      const primaryFill = variant === 'footer' ? '#F8F5EE' : '#2D4C2B';
+      const secondaryFill = variant === 'footer' ? '#A4D187' : '#5C8D3E';
+      const widthClass = variant === 'footer' ? 'h-9 sm:h-10' : 'h-7 sm:h-8';
+
+      return `
+        <svg class="${widthClass} w-auto" viewBox="0 0 218 52" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="macha.go">
+          <text x="2" y="38" fill="${primaryFill}" font-family="'Fredoka', sans-serif" font-weight="700" font-size="37" letter-spacing="-0.8">macha</text>
+          <circle cx="131" cy="34" r="3.4" fill="${secondaryFill}"/>
+          <text x="140" y="38" fill="${secondaryFill}" font-family="'Fredoka', sans-serif" font-weight="700" font-size="37" letter-spacing="-0.5">go</text>
+          <path d="M142 44.5C154 49 172 49 184 44.5" stroke="${secondaryFill}" stroke-width="3.2" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    function renderBrandLogoHtml(variant = 'header') {
+      const resolved = resolveDriveImage(CFG.logoUrl);
+      const heightClass = variant === 'footer' ? 'h-11 sm:h-12' : 'h-8 sm:h-9';
+      const footerBgPill = variant === 'footer' ? 'bg-macha-cream/95 px-4 py-1.5 rounded-full shadow-xs' : '';
+
+      if (resolved.primary) {
+        return `
+          <span class="inline-flex items-center ${footerBgPill}">
+            <img
+              src="${resolved.primary}"
+              data-backup="${resolved.backup}"
+              alt="macha.go logo"
+              class="${heightClass} w-auto object-contain"
+              onerror="if(this.dataset.backup && this.src !== this.dataset.backup){this.src=this.dataset.backup;}else{this.parentElement.outerHTML=getBrandWordmarkSvg('${variant}');}"
+            />
+          </span>
+        `;
+      }
+      return getBrandWordmarkSvg(variant);
+    }
+
+    function getMascotFallbackSvg() {
+      return `
+        <svg viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <path d="M25 7H39V13C39 14.1 38.1 15 37 15H27C25.9 15 25 14.1 25 13V7Z" fill="#EFE8D8" stroke="#2D4C2B" stroke-width="2.2"/>
+          <path d="M27 15C21 20 19 28 21 34H43C45 28 43 20 37 15" fill="#F8F5EE" stroke="#2D4C2B" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M29 15V33M32 15V33M35 15V33" stroke="#2D4C2B" stroke-width="1.6" stroke-linecap="round"/>
+          <rect x="20" y="32" width="24" height="24" rx="11" fill="#7AB356" stroke="#2D4C2B" stroke-width="2.2"/>
+          <path d="M26 42L28.5 43.5L26 45" stroke="#2D4C2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="36.5" cy="43.5" r="1.6" fill="#2D4C2B"/>
+          <path d="M30 46.5C31.2 48 33.2 48 34.4 46.5" stroke="#2D4C2B" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M20 42C16 42 15 45 17 47" stroke="#2D4C2B" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M44 42C48 42 49 45 47 47" stroke="#2D4C2B" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M27 56V62M37 56V62" stroke="#2D4C2B" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    function renderMascotHtml() {
+      const resolved = resolveDriveImage(CFG.mascotUrl);
+      if (resolved.primary) {
+        return `
+          <img
+            src="${resolved.primary}"
+            data-backup="${resolved.backup}"
+            alt="Maskot macha.go"
+            class="w-full h-full object-contain"
+            onerror="if(this.dataset.backup && this.src !== this.dataset.backup){this.src=this.dataset.backup;}else{this.parentElement.innerHTML=getMascotFallbackSvg();}"
+          />
+        `;
+      }
+      return getMascotFallbackSvg();
+    }
+
+    /**
+     * =========================================================================
+     * RENDER PRODUCT IMAGE (GOOGLE DRIVE OR LAYERED CUP ILLUSTRATION)
+     * =========================================================================
+     */
+    function getLayeredDrinkSvg(drinkId) {
+      return `
+        <svg viewBox="0 0 130 155" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-xs">
+          ${buildSingleCupInnerSvg(drinkId, drinkId)}
+        </svg>
+      `;
+    }
+
+    function buildSingleCupInnerSvg(drinkId, uid) {
+      let bottomFill = '#F7F4EC';
+      let midFill = '#F7F4EC';
+      let topMatcha = '#4E7E35';
+      let foamHighlight = '#72A852';
+      let extraDetails = '';
+
+      if (drinkId === 'matcha-latte') {
+        bottomFill = '#F7F4EC';
+        midFill = '#EFF2E6';
+        topMatcha = '#477630';
+        foamHighlight = '#6B9F4C';
+      } else if (drinkId === 'ube-matcha') {
+        bottomFill = '#6F42A6';
+        midFill = '#F7F4EC';
+        topMatcha = '#4D7E34';
+        foamHighlight = '#74AA54';
+        extraDetails = `
+          <path d="M30 112C45 106 60 118 75 110C86 105 94 111 100 113V122C100 134 85 142 65 142C45 142 30 134 30 122V112Z" fill="#5D3291"/>
+          <ellipse cx="65" cy="31" rx="22" ry="4" fill="#8C5AC4" opacity="0.7"/>
+        `;
+      } else if (drinkId === 'coconut-matcha') {
+        bottomFill = '#E2F1F4';
+        midFill = '#EEF7F8';
+        topMatcha = '#45742E';
+        foamHighlight = '#699E4B';
+        extraDetails = `
+          <ellipse cx="48" cy="118" rx="6" ry="2.5" fill="#FFFFFF" opacity="0.7"/>
+          <ellipse cx="80" cy="124" rx="7" ry="2.5" fill="#FFFFFF" opacity="0.65"/>
+        `;
+      } else if (drinkId === 'ichigo-matcha') {
+        bottomFill = '#C93847';
+        midFill = '#F7F4EC';
+        topMatcha = '#4D7E34';
+        foamHighlight = '#72A852';
+        extraDetails = `
+          <path d="M30 113C44 107 58 117 72 110C84 105 93 111 100 113V122C100 134 85 142 65 142C45 142 30 134 30 122V113Z" fill="#A92533"/>
+          <circle cx="46" cy="124" r="3.5" fill="#871A26"/>
+          <circle cx="67" cy="128" r="4" fill="#871A26"/>
+          <circle cx="83" cy="121" r="3" fill="#871A26"/>
+        `;
+      } else if (drinkId === 'chocolate-matcha') {
+        bottomFill = '#4E2D20';
+        midFill = '#F7F4EC';
+        topMatcha = '#477630';
+        foamHighlight = '#6B9F4C';
+        extraDetails = `
+          <path d="M30 115C46 110 62 119 78 112C88 108 95 112 100 115V122C100 134 85 142 65 142C45 142 30 134 30 122V115Z" fill="#3B2016"/>
+        `;
+      }
+
+      return `
+        <defs>
+          <clipPath id="cupClip-${uid}">
+            <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z"/>
+          </clipPath>
+        </defs>
+        <ellipse cx="65" cy="146" rx="34" ry="5" fill="#2D4C2B" opacity="0.16"/>
+        <g clip-path="url(#cupClip-${uid})">
+          <rect x="24" y="54" width="82" height="92" fill="${midFill}"/>
+          <rect x="24" y="106" width="82" height="40" fill="${bottomFill}"/>
+          ${extraDetails}
+          <path d="M24 26H106V58C94 64 82 54 68 61C54 68 40 55 24 61V26Z" fill="${topMatcha}"/>
+          <path d="M24 26H106V42C90 46 75 40 62 44C48 48 34 41 24 44V26Z" fill="${foamHighlight}" opacity="0.55"/>
+          <rect x="51" y="66" width="28" height="34" rx="3" fill="#F8F5EE" stroke="#DCD3BE" stroke-width="0.9"/>
+          <text x="65" y="75" text-anchor="middle" fill="#2D4C2B" font-family="'Fredoka', sans-serif" font-weight="700" font-size="5.2">macha.go</text>
+          <line x1="55" y1="81" x2="75" y2="81" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+          <line x1="55" y1="86" x2="72" y2="86" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+          <line x1="55" y1="91" x2="74" y2="91" stroke="#2D4C2B" stroke-width="0.7" opacity="0.45"/>
+        </g>
+        <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.85"/>
+        <path d="M26 28H104L99 116C98.2 132 83.5 143 65 143C46.5 143 31.8 132 31 116L26 28Z" stroke="#2D4C2B" stroke-width="1.1" stroke-opacity="0.22"/>
+        <rect x="23" y="24" width="84" height="5" rx="2.5" fill="#FFFFFF" fill-opacity="0.9" stroke="#2D4C2B" stroke-opacity="0.25" stroke-width="1"/>
+        <path d="M33 36L36 112" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.55"/>
+      `;
+    }
+
+    function renderDrinkVisualHtml(drinkItem) {
+      const resolved = resolveDriveImage(drinkItem.image);
+      if (resolved.primary) {
+        return `
+          <img
+            src="${resolved.primary}"
+            data-backup="${resolved.backup}"
+            alt="${drinkItem.name}"
+            class="w-full h-full object-cover rounded-2xl"
+            onerror="if(this.dataset.backup && this.src !== this.dataset.backup){this.src=this.dataset.backup;}else{this.parentElement.innerHTML=getLayeredDrinkSvg('${drinkItem.id}');}"
+          />
+        `;
+      }
+      return getLayeredDrinkSvg(drinkItem.id);
+    }
+
+    /**
+     * =========================================================================
+     * INITIALIZATION FROM window.SITE_CONFIG
+     * =========================================================================
+     */
+    function getTodayIsoLocal() {
+      const now = new Date();
+      const offsetMs = now.getTimezoneOffset() * 60000;
+      return new Date(now.getTime() - offsetMs).toISOString().split('T')[0];
+    }
+
+    function formatReadableDateIndo(isoDateStr) {
+      if (!isoDateStr) return '-';
+      const parts = isoDateStr.split('-');
+      if (parts.length !== 3) return isoDateStr;
+      const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      return d.toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    function hydrateConfigSections() {
+      // 1. Logo & Mascots
+      const headerLogoEl = document.getElementById('headerLogoContainer');
+      if (headerLogoEl) headerLogoEl.innerHTML = renderBrandLogoHtml('header');
+
+      const footerLogoEl = document.getElementById('footerLogoContainer');
+      if (footerLogoEl) footerLogoEl.innerHTML = renderBrandLogoHtml('footer');
+
+      ['heroMascotContainer', 'menuFooterMascot', 'footerMascotContainer', 'emptyCartMascot'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = renderMascotHtml();
+      });
+
+      // 2. Hero Content
+      const heroCfg = CFG.hero || {};
+      const heroBgEl = document.getElementById('heroBgImage');
+      const heroBgResolved = resolveDriveImage(heroCfg.backgroundUrl);
+      if (heroBgEl && heroBgResolved.primary) {
+        heroBgEl.src = heroBgResolved.primary;
+        if (heroBgResolved.backup) {
+          heroBgEl.dataset.backup = heroBgResolved.backup;
+        }
+      }
+
+      if (heroCfg.badgeText) document.getElementById('heroBadgeText').textContent = heroCfg.badgeText;
+      if (heroCfg.headline) document.getElementById('heroHeadlineText').textContent = heroCfg.headline;
+      if (heroCfg.subheadline) document.getElementById('heroSubheadlineText').textContent = heroCfg.subheadline;
+      if (heroCfg.primaryCtaText) document.getElementById('heroPrimaryBtnText').textContent = heroCfg.primaryCtaText;
+      if (heroCfg.secondaryCtaText) document.getElementById('heroSecondaryBtnText').textContent = heroCfg.secondaryCtaText;
+      if (heroCfg.mascotNote) document.getElementById('heroMascotNoteText').textContent = heroCfg.mascotNote;
+
+      // 3. About Us Content & Photos
+      const aboutCfg = CFG.about || {};
+      if (aboutCfg.eyebrow) document.getElementById('aboutEyebrowText').textContent = `— ${aboutCfg.eyebrow}`;
+      if (aboutCfg.headline) document.getElementById('aboutHeadlineText').textContent = aboutCfg.headline;
+      if (aboutCfg.shortText) document.getElementById('aboutShortText').textContent = aboutCfg.shortText;
+      if (aboutCfg.moreText) document.getElementById('aboutMoreContent').textContent = aboutCfg.moreText;
+
+      const aboutPhotosGrid = document.getElementById('aboutPhotosGrid');
+      if (aboutPhotosGrid && Array.isArray(aboutCfg.photos)) {
+        aboutPhotosGrid.innerHTML = aboutCfg.photos.map((photoUrl, index) => {
+          const resolved = resolveDriveImage(photoUrl);
+          const fallback = `https://placehold.co/600x480/DCE6D5/2D4C2B?text=macha.go+${index + 1}`;
+          const src = resolved.primary || fallback;
+          return `
+            <div class="aspect-[4/3] rounded-3xl overflow-hidden bg-macha-sage border border-macha-border shadow-card">
+              <img
+                src="${src}"
+                data-backup="${resolved.backup}"
+                onerror="if(this.dataset.backup && this.src !== this.dataset.backup){this.src=this.dataset.backup;}else{this.onerror=null;this.src='${fallback}';}"
+                alt="macha.go Surabaya ${index + 1}"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 4. Event Services Grid
+      const servicesGrid = document.getElementById('eventServicesGrid');
+      if (servicesGrid && Array.isArray(CFG.eventServices)) {
+        servicesGrid.innerHTML = CFG.eventServices.map((srv) => `
+          <div class="bg-white rounded-[28px] border border-macha-border p-5 sm:p-6 shadow-card flex flex-col justify-between space-y-4">
+            <div class="space-y-2.5">
+              <span class="w-11 h-11 rounded-2xl bg-macha-sage text-macha-forest text-lg flex items-center justify-center">
+                ${srv.icon || '🍵'}
+              </span>
+              <h3 class="font-display text-xl font-bold text-macha-forest">${srv.title}</h3>
+              <p class="text-xs sm:text-sm text-macha-ink/75 leading-relaxed">${srv.description}</p>
+            </div>
+            <button
+              type="button"
+              onclick="openEventWhatsApp('${String(srv.topic || srv.title).replace(/'/g, "\\'")}')"
+              class="w-full py-2.5 px-4 rounded-full bg-macha-cream hover:bg-macha-forest text-macha-forest hover:text-white border border-macha-border font-bold text-xs transition-colors"
+            >
+              Inquire Package →
+            </button>
+          </div>
+        `).join('');
+      }
+
+      // 5. Find Us Address, Get Directions & Opening Hours
+      const locCfg = CFG.location || {};
+      if (locCfg.eyebrow) document.getElementById('findUsEyebrowText').textContent = `— ${locCfg.eyebrow}`;
+      if (locCfg.addressDisplay) document.getElementById('findUsAddressHeading').textContent = locCfg.addressDisplay;
+      if (locCfg.mapsUrl) {
+        document.getElementById('findUsDirectionsLink').href = locCfg.mapsUrl;
+        document.getElementById('footerMapsLink').href = locCfg.mapsUrl;
+      }
+
+      const hoursContainer = document.getElementById('openingHoursDetails');
+      const todaySummaryEl = document.getElementById('todayHoursSummary');
+      if (hoursContainer && Array.isArray(locCfg.openingHours)) {
+        const dayNamesEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const todayName = dayNamesEn[new Date().getDay()];
+        const todayObj = locCfg.openingHours.find((h) => h.day === todayName) || locCfg.openingHours[0];
+        if (todaySummaryEl && todayObj) {
+          todaySummaryEl.textContent = `Today • ${todayObj.day} (${todayObj.hours})`;
+        }
+
+        hoursContainer.innerHTML = locCfg.openingHours.map((row) => {
+          const isToday = row.day === todayName;
+          return `
+            <div class="flex items-center justify-between py-0.5 ${isToday ? 'font-bold text-macha-forest' : 'text-macha-ink/80'}">
+              <span>${row.day}${isToday ? ' (Today)' : ''}</span>
+              <span>${row.hours}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 6. Online Food Links (GoFood, ShopeeFood, GrabFood) & Socials
+      const foodCfg = CFG.onlineFood || {};
+      if (foodCfg.heading) document.getElementById('onlineFoodHeading').textContent = foodCfg.heading;
+      if (foodCfg.subtext) document.getElementById('onlineFoodSubtext').textContent = foodCfg.subtext;
+      if (foodCfg.gofoodUrl) document.getElementById('linkGofood').href = foodCfg.gofoodUrl;
+      if (foodCfg.shopeefoodUrl) document.getElementById('linkShopeefood').href = foodCfg.shopeefoodUrl;
+      if (foodCfg.grabfoodUrl) document.getElementById('linkGrabfood').href = foodCfg.grabfoodUrl;
+
+      const socialCfg = CFG.socials || {};
+      if (socialCfg.instagramUrl) document.getElementById('footerInstagramLink').href = socialCfg.instagramUrl;
+      if (socialCfg.tiktokUrl) document.getElementById('footerTiktokLink').href = socialCfg.tiktokUrl;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      hydrateConfigSections();
+
+      const dateInput = document.getElementById('inputDeliveryDate');
+      if (dateInput) {
+        const todayStr = getTodayIsoLocal();
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+      }
+
+      renderStoreStatusPill();
+      renderMenuCategoryBar();
+      renderMenuCards();
+      renderEventFilterBar();
+      renderEventsGrid();
+      updateCartAndBadges();
+    });
+
+    function formatRupiah(num) {
+      return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+    }
+
+    function loadCart() {
+      try {
+        const raw = localStorage.getItem(CART_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      } catch (e) {}
+    }
+
+    /**
+     * =========================================================================
+     * TOAST NOTIFICATION
+     * =========================================================================
+     */
+    let toastTimeout = null;
+    function showToast(msg, emoji = '🍵') {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastText').textContent = msg;
+      document.getElementById('toastEmoji').textContent = emoji;
+      banner.classList.remove('hidden');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3000);
+    }
+
+    /**
+     * =========================================================================
+     * HEADER STORE STATUS PILL & HAMBURGER DRAWER
+     * =========================================================================
+     */
+    function renderStoreStatusPill() {
+      const pill = document.getElementById('storeStatusPill');
+      const dot = document.getElementById('storeStatusDot');
+      const text = document.getElementById('storeStatusText');
+      const isOpen = String(CFG.storeStatus).toLowerCase() === 'open';
+
+      if (isOpen) {
+        pill.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-emerald-100/95 text-macha-forest border border-emerald-300/80 select-none';
+        dot.className = 'w-2 h-2 rounded-full bg-macha-leaf animate-pulse';
+        text.textContent = 'Open';
+      } else {
+        pill.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-2xs bg-rose-100/95 text-rose-700 border border-rose-200 select-none';
+        dot.className = 'w-2 h-2 rounded-full bg-rose-500';
+        text.textContent = 'Closed';
+      }
+    }
+
+    function toggleNavDrawer() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const openIcon = document.getElementById('hamburgerIconOpen');
+      const closeIcon = document.getElementById('hamburgerIconClose');
+      const isHidden = drawer.classList.contains('hidden');
+
+      if (isHidden) {
+        drawer.classList.remove('hidden');
+        openIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        closeNavDrawer();
+      }
+    }
+
+    function closeNavDrawer() {
+      document.getElementById('mobileNavDrawer').classList.add('hidden');
+      document.getElementById('hamburgerIconOpen').classList.remove('hidden');
+      document.getElementById('hamburgerIconClose').classList.add('hidden');
+    }
+
+    /**
+     * =========================================================================
+     * MENU SECTION RENDERING & CATEGORY FILTERING
+     * =========================================================================
+     */
+    function renderMenuCategoryBar() {
+      const menuList = CFG.menuItems || [];
+      const dynamicCats = Array.from(new Set(menuList.map((m) => m.category)));
+      const categories = ['All', ...dynamicCats];
+      const bar = document.getElementById('menuCategoryBar');
+      bar.innerHTML = categories.map((cat) => {
+        const active = cat === activeMenuCategory;
+        return `
+          <button
+            type="button"
+            onclick="selectMenuCategory('${cat}')"
+            class="shrink-0 px-5 py-2 rounded-full text-xs font-bold transition-all ${
+              active
+                ? 'bg-macha-forest text-white shadow-2xs'
+                : 'bg-white text-macha-forest/80 hover:bg-macha-sage/60 border border-macha-border'
+            }"
+          >
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectMenuCategory(category) {
+      activeMenuCategory = category;
+      document.getElementById('menuSectionLabel').textContent =
+        category === 'All' ? 'ALL HANDCRAFTED DRINKS' : category.toUpperCase();
+      renderMenuCategoryBar();
+      renderMenuCards();
+    }
+
+    function renderMenuCards() {
+      const grid = document.getElementById('menuCardsGrid');
+      const menuList = CFG.menuItems || [];
+      const items = activeMenuCategory === 'All'
+        ? menuList
+        : menuList.filter((item) => item.category === activeMenuCategory);
+
+      grid.innerHTML = items.map((item) => {
+        const inCartQty = cart
+          .filter((c) => c.drinkId === item.id)
+          .reduce((sum, c) => sum + c.qty, 0);
+
+        const heartNewBadge = item.isNew
+          ? `
+            <span class="absolute -top-2 -right-2 z-20 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-macha-border shadow-xs text-[10px] font-display font-bold text-macha-leaf rotate-6">
+              ♥ New
+            </span>
+          `
+          : '';
+
+        return `
+          <article class="bg-white rounded-[26px] border border-macha-border p-4 sm:p-5 shadow-card hover:border-macha-forest/35 transition-all flex items-stretch justify-between gap-3.5">
+            <!-- Left Info Column -->
+            <div class="flex-1 flex flex-col justify-between py-0.5">
+              <div>
+                <div class="flex flex-wrap items-center gap-1.5 mb-1">
+                  <h3 class="font-display text-lg sm:text-xl font-bold text-macha-forest leading-snug">
+                    ${item.name}
+                  </h3>
+                  ${
+                    inCartQty > 0
+                      ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">${inCartQty}x</span>`
+                      : ''
+                  }
+                </div>
+                <p class="text-xs text-macha-ink/75 leading-relaxed line-clamp-3">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="pt-3 flex items-center gap-2">
+                <span class="font-display text-base sm:text-lg font-bold text-macha-forest">
+                  ${formatRupiah(item.price)}
+                </span>
+                ${
+                  !item.isNew && item.badge
+                    ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream text-macha-leaf border border-macha-border">${item.badge}</span>`
+                    : ''
+                }
+              </div>
+            </div>
+
+            <!-- Right Organic Arched Sage Frame + Product Visual + '+ Order' Pill -->
+            <div class="relative w-28 sm:w-32 shrink-0 flex flex-col items-center">
+              ${heartNewBadge}
+              <div
+                onclick="openCustomizeModal('${item.id}')"
+                class="w-full h-32 rounded-t-[48px] rounded-b-[22px] bg-macha-sage border border-macha-border/80 p-1.5 pb-4 flex items-center justify-center cursor-pointer overflow-hidden group"
+              >
+                <div class="w-full h-full group-hover:scale-105 transition-transform duration-300">
+                  ${renderDrinkVisualHtml(item)}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onclick="openCustomizeModal('${item.id}')"
+                class="-mt-4 relative z-10 inline-flex items-center justify-center gap-1 bg-macha-forest hover:bg-macha-pine text-white font-bold text-xs px-4 py-2 rounded-full shadow-sm transition-all active:scale-95"
+              >
+                <span>+ Order</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * =========================================================================
+     * ITEM CUSTOMIZER MODAL LOGIC (NO ICE OPTION)
+     * =========================================================================
+     */
+    function openCustomizeModal(drinkId) {
+      const drink = (CFG.menuItems || []).find((d) => d.id === drinkId);
+      if (!drink) return;
+
+      const powders = CFG.powderOptions || [];
+      const milks = CFG.milkOptions || ['Oatmilk (Oatside)', 'Blend (Freshmilk + Oatmilk)'];
+      const sugars = CFG.sugarOptions || ['Normal Sugar (100%)', 'Less Sugar (50%)', 'No Sugar (0%)'];
+
+      customizerState = {
+        drink,
+        powderId: (powders[0] && powders[0].id) || 'pure',
+        milk: milks[0],
+        sugar: sugars[1] || sugars[0],
+        note: '',
+        qty: 1
+      };
+
+      document.getElementById('custPreviewVisual').innerHTML = renderDrinkVisualHtml(drink);
+      document.getElementById('custBadgeTag').textContent = drink.category;
+      document.getElementById('custDrinkTitle').textContent = drink.name;
+      document.getElementById('custBasePrice').textContent = `Harga Dasar: ${formatRupiah(drink.price)}`;
+      document.getElementById('custDrinkDesc').textContent = drink.description;
+      document.getElementById('custCupNoteInput').value = '';
+      document.getElementById('custQtyDisplay').textContent = '1';
+
+      renderCustomizerChoices();
+      updateCustomizerButtonPrice();
+
+      document.getElementById('customizerModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCustomizerModal() {
+      document.getElementById('customizerModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function renderCustomizerChoices() {
+      const powders = CFG.powderOptions || [];
+      const milks = CFG.milkOptions || [];
+      const sugars = CFG.sugarOptions || [];
+
+      document.getElementById('powderOptionsGrid').innerHTML = powders.map((p) => {
+        const selected = customizerState.powderId === p.id;
+        const addonLabel = p.addon === 0 ? '+Rp 0' : `+${formatRupiah(p.addon)}`;
+        return `
+          <button
+            type="button"
+            onclick="selectPowderGrade('${p.id}')"
+            class="w-full p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-sage/75'
+                : 'border-macha-border bg-white hover:bg-macha-parchment/40'
+            }"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                selected ? 'border-macha-forest bg-macha-forest' : 'border-macha-ink/35'
+              }">
+                ${selected ? '<span class="w-1.5 h-1.5 rounded-full bg-white"></span>' : ''}
+              </span>
+              <div>
+                <p class="text-xs font-bold text-macha-forest">${p.label}</p>
+                <p class="text-[10px] text-macha-ink/65">${p.note || ''}</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold shrink-0 ${p.addon > 0 ? 'text-macha-leaf' : 'text-macha-ink/65'}">
+              ${addonLabel}
+            </span>
+          </button>
+        `;
+      }).join('');
+
+      document.getElementById('milkPillsGrid').innerHTML = milks.map((milk) => {
+        const selected = customizerState.milk === milk;
+        return `
+          <button
+            type="button"
+            onclick="selectMilkChoice('${milk.replace(/'/g, "\\'")}')"
+            class="py-2.5 px-3 rounded-2xl text-xs font-bold border text-center transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-forest text-white'
+                : 'border-macha-border bg-white text-macha-forest hover:bg-macha-sage/50'
+            }"
+          >
+            ${milk}
+          </button>
+        `;
+      }).join('');
+
+      document.getElementById('sugarPillsGrid').innerHTML = sugars.map((sugar) => {
+        const selected = customizerState.sugar === sugar;
+        return `
+          <button
+            type="button"
+            onclick="selectSugarChoice('${sugar.replace(/'/g, "\\'")}')"
+            class="py-2.5 px-2 rounded-2xl text-xs font-bold border text-center transition-all ${
+              selected
+                ? 'border-2 border-macha-forest bg-macha-forest text-white'
+                : 'border-macha-border bg-white text-macha-forest hover:bg-macha-sage/50'
+            }"
+          >
+            ${sugar}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectPowderGrade(id) {
+      customizerState.powderId = id;
+      renderCustomizerChoices();
+      updateCustomizerButtonPrice();
+    }
+
+    function selectMilkChoice(milk) {
+      customizerState.milk = milk;
+      renderCustomizerChoices();
+    }
+
+    function selectSugarChoice(sugar) {
+      customizerState.sugar = sugar;
+      renderCustomizerChoices();
+    }
+
+    function stepCustomQty(delta) {
+      const next = customizerState.qty + delta;
+      if (next < 1 || next > 50) return;
+      customizerState.qty = next;
+      document.getElementById('custQtyDisplay').textContent = String(next);
+      updateCustomizerButtonPrice();
+    }
+
+    function updateCustomizerButtonPrice() {
+      const { drink, powderId, qty } = customizerState;
+      if (!drink) return;
+      const powders = CFG.powderOptions || [];
+      const powderObj = powders.find((p) => p.id === powderId) || powders[0] || { addon: 0 };
+      const unitPrice = drink.price + (powderObj.addon || 0);
+      const total = unitPrice * qty;
+      document.getElementById('custAddToCartBtn').textContent = `Add to Cart — ${formatRupiah(total)}`;
+    }
+
+    function addCustomizedItemToCart() {
+      const { drink, powderId, milk, sugar, qty } = customizerState;
+      if (!drink) return;
+
+      const powders = CFG.powderOptions || [];
+      const powderObj = powders.find((p) => p.id === powderId) || powders[0] || { id: 'pure', label: 'Pure Grade', addon: 0 };
+      const note = document.getElementById('custCupNoteInput').value.trim();
+      const unitPrice = drink.price + (powderObj.addon || 0);
+      const signature = `${drink.id}|${powderObj.id}|${milk}|${sugar}|${note.toLowerCase()}`;
+
+      const existing = cart.find((c) => c.signature === signature);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          uid: 'ITEM-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+          signature,
+          drinkId: drink.id,
+          name: drink.name,
+          powderLabel: powderObj.label,
+          powderAddon: powderObj.addon || 0,
+          milk,
+          sugar,
+          note,
+          unitPrice,
+          qty
+        });
+      }
+
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+      closeCustomizerModal();
+      showToast(`${drink.name} (${qty}x) masuk keranjang!`, '🍵');
+    }
+
+    /**
+     * =========================================================================
+     * CART & CHECKOUT DRAWER LOGIC
+     * =========================================================================
+     */
+    function getCartSummary() {
+      const totalCups = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = cart.reduce((sum, item) => sum + item.unitPrice * item.qty, 0);
+      return { totalCups, subtotal };
+    }
+
+    function updateCartAndBadges() {
+      const { totalCups, subtotal } = getCartSummary();
+
+      document.getElementById('headerCartCount').textContent = String(totalCups);
+
+      const floatingBar = document.getElementById('floatingCartBar');
+      if (totalCups > 0) {
+        floatingBar.classList.remove('hidden');
+        document.getElementById('floatingCartCups').textContent = `${totalCups}x`;
+        document.getElementById('floatingCartSubtotal').textContent = formatRupiah(subtotal);
+      } else {
+        floatingBar.classList.add('hidden');
+      }
+
+      const emptyState = document.getElementById('checkoutEmptyState');
+      const filledState = document.getElementById('checkoutFilledState');
+      const drawerFooter = document.getElementById('checkoutDrawerFooter');
+
+      if (totalCups === 0) {
+        emptyState.classList.remove('hidden');
+        filledState.classList.add('hidden');
+        drawerFooter.classList.add('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        filledState.classList.remove('hidden');
+        drawerFooter.classList.remove('hidden');
+        renderCheckoutItems();
+        document.getElementById('checkoutTotalDisplay').textContent = formatRupiah(subtotal);
+      }
+    }
+
+    function renderCheckoutItems() {
+      const container = document.getElementById('checkoutItemsContainer');
+      container.innerHTML = cart.map((item, idx) => {
+        const lineTotal = item.unitPrice * item.qty;
+        return `
+          <div class="py-3 first:pt-0 last:pb-0 flex items-start justify-between gap-3">
+            <div class="space-y-1 flex-1">
+              <p class="font-display text-sm font-bold text-macha-forest">${idx + 1}. ${item.name}</p>
+              <div class="flex flex-wrap gap-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-macha-sage text-macha-forest">${item.powderLabel}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream border border-macha-border text-macha-ink">${item.milk}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-macha-cream border border-macha-border text-macha-ink">${item.sugar}</span>
+              </div>
+              ${item.note ? `<p class="text-[11px] text-macha-leaf italic">Catatan Cup: "${item.note}"</p>` : ''}
+              <p class="text-xs font-bold text-macha-forest pt-0.5">${formatRupiah(lineTotal)}</p>
+            </div>
+
+            <div class="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onclick="changeCartItemQty('${item.uid}', -1)"
+                class="w-7 h-7 rounded-full border border-macha-border text-macha-forest hover:bg-macha-sage font-bold text-xs flex items-center justify-center"
+              >
+                −
+              </button>
+              <span class="w-5 text-center text-xs font-bold text-macha-forest">${item.qty}</span>
+              <button
+                type="button"
+                onclick="changeCartItemQty('${item.uid}', 1)"
+                class="w-7 h-7 rounded-full border border-macha-border text-macha-forest hover:bg-macha-sage font-bold text-xs flex items-center justify-center"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onclick="deleteCartItem('${item.uid}')"
+                aria-label="Hapus item"
+                class="ml-1 p-1 text-macha-ink/40 hover:text-rose-600"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function changeCartItemQty(uid, delta) {
+      const idx = cart.findIndex((c) => c.uid === uid);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+    }
+
+    function deleteCartItem(uid) {
+      cart = cart.filter((c) => c.uid !== uid);
+      saveCartToStorage();
+      renderMenuCards();
+      updateCartAndBadges();
+      showToast('Item dihapus dari keranjang', '🗑️');
+    }
+
+    function openCheckoutDrawer() {
+      document.getElementById('checkoutErrorBox').classList.add('hidden');
+      document.getElementById('waSuccessBox').classList.add('hidden');
+
+      const dateInput = document.getElementById('inputDeliveryDate');
+      if (dateInput && !dateInput.value) {
+        dateInput.value = getTodayIsoLocal();
+      }
+
+      updateCartAndBadges();
+      document.getElementById('checkoutDrawer').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutDrawer() {
+      document.getElementById('checkoutDrawer').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function selectPickupMethod(method) {
+      selectedPickupMethod = method;
+      const btnDel = document.getElementById('btnMethodDelivery');
+      const btnPick = document.getElementById('btnMethodPickup');
+      const addrBlock = document.getElementById('deliveryAddressBlock');
+
+      if (method.startsWith('Delivery')) {
+        btnDel.className = 'p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all';
+        btnPick.className = 'p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all';
+        addrBlock.classList.remove('hidden');
+      } else {
+        btnPick.className = 'p-3 rounded-2xl border-2 border-macha-forest bg-macha-sage/60 text-left transition-all';
+        btnDel.className = 'p-3 rounded-2xl border border-macha-border bg-white hover:bg-macha-cream/50 text-left transition-all';
+        addrBlock.classList.add('hidden');
+      }
+    }
+
+    /**
+     * =========================================================================
+     * WHATSAPP STRUCTURED RECEIPT USING SITE_CONFIG.whatsappTemplate
+     * =========================================================================
+     */
+    function buildWhatsAppReceiptText(orderId, customer) {
+      const { subtotal } = getCartSummary();
+
+      const itemLines = cart.map((item, index) => {
+        const lineTotal = item.unitPrice * item.qty;
+        const notePart = item.note ? `\n   • Catatan Cup: ${item.note}` : '';
+        return [
+          `${index + 1}. *${item.name}* (x${item.qty})`,
+          `   • Powder: ${item.powderLabel}`,
+          `   • Milk: ${item.milk}`,
+          `   • Sugar: ${item.sugar}${notePart}`,
+          `   • Subtotal: ${formatRupiah(lineTotal)}`
+        ].join('\n');
+      }).join('\n');
+
+      const extraOrderNote = customer.extraNote
+        ? `\n• Catatan Tambahan: ${customer.extraNote}`
+        : '';
+
+      const pattern = (CFG.whatsappTemplate && CFG.whatsappTemplate.messagePattern) || [
+        'Halo *macha.go*! 🍵✨ Saya mau konfirmasi self-checkout order:',
+        'Order ID: *#{order_id}*',
+        '────────────────────────',
+        '*Data Pemesan:*',
+        '• Nama: {nama}',
+        '• No. WA: {no_wa}',
+        '• Metode: {metode}',
+        '• Alamat: {alamat}',
+        '• Jadwal Kirim/Ambil: *{tanggal}, Pukul {jam} WIB*{catatan_order}',
+        '────────────────────────',
+        '*Detail Pesanan:*',
+        '{items}',
+        '────────────────────────',
+        '*Estimasi Total:* *{subtotal}*',
+        '_(Mohon info total akhir beserta ongkir & kirimkan QRIS pembayarannya ya kak. Terima kasih!)_ 🙏'
+      ].join('\n');
+
+      return pattern
+        .replace(/\{order_id\}/g, orderId)
+        .replace(/\{nama\}/g, customer.name)
+        .replace(/\{no_wa\}/g, customer.wa)
+        .replace(/\{metode\}/g, customer.method)
+        .replace(/\{alamat\}/g, customer.address)
+        .replace(/\{tanggal\}/g, customer.readableDate)
+        .replace(/\{jam\}/g, customer.timeStr)
+        .replace(/\{catatan_order\}/g, extraOrderNote)
+        .replace(/\{items\}/g, itemLines)
+        .replace(/\{subtotal\}/g, formatRupiah(subtotal));
+    }
+
+    function processOrderAndOpenWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Keranjang masih kosong!', '⚠️');
+        return;
+      }
+
+      const errorBox = document.getElementById('checkoutErrorBox');
+      errorBox.classList.add('hidden');
+
+      const name = document.getElementById('inputCustName').value.trim();
+      const wa = document.getElementById('inputCustWa').value.trim();
+      const addressRaw = document.getElementById('inputCustAddress').value.trim();
+      const deliveryDate = document.getElementById('inputDeliveryDate').value;
+      const deliveryTime = document.getElementById('inputDeliveryTime').value;
+      const extraNote = document.getElementById('inputOrderNote').value.trim();
+
+      const errs = [];
+      if (!name) errs.push('Nama Pemesan wajib diisi.');
+      if (!wa) errs.push('Nomor WhatsApp Aktif wajib diisi.');
+      if (selectedPickupMethod.startsWith('Delivery') && !addressRaw) {
+        errs.push('Alamat Lengkap & Patokan wajib diisi untuk pengiriman Delivery.');
+      }
+      if (!deliveryDate) errs.push('Tanggal pengantaran / pickup wajib dipilih.');
+      if (!deliveryTime) errs.push('Jam pengantaran / pickup wajib dipilih.');
+
+      if (errs.length > 0) {
+        errorBox.innerHTML = '⚠️ <strong>Mohon lengkapi data berikut:</strong><br/>• ' + errs.join('<br/>• ');
+        errorBox.classList.remove('hidden');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const pickupAddress = (CFG.location && CFG.location.addressDisplay) || 'Perumahan Griya Airlangga Blok C8, Wonorejo, Rungkut, Surabaya';
+      const addressFinal = selectedPickupMethod.startsWith('Delivery')
+        ? addressRaw
+        : `Self-Pickup (${pickupAddress})`;
+
+      const readableDate = formatReadableDateIndo(deliveryDate);
+
+      const customer = {
+        name,
+        wa,
+        method: selectedPickupMethod,
+        address: addressFinal,
+        readableDate,
+        timeStr: deliveryTime,
+        extraNote
+      };
+
+      const orderId = 'MG' + Math.floor(1000 + Math.random() * 9000);
+      const waMessage = buildWhatsAppReceiptText(orderId, customer);
+
+      const cleanTargetWa = String(CFG.whatsappOrder || '62882022714701').replace(/[^0-9]/g, '');
+      const waLink = `https://wa.me/${cleanTargetWa}?text=${encodeURIComponent(waMessage)}`;
+
+      document.getElementById('waCreatedOrderId').textContent = orderId;
+      document.getElementById('waFallbackAnchor').href = waLink;
+      document.getElementById('waSuccessBox').classList.remove('hidden');
+
+      window.open(waLink, '_blank', 'noopener,noreferrer');
+      showToast(`Order #${orderId} diarahkan ke WhatsApp!`, '🍵');
+    }
+
+    /**
+     * =========================================================================
+     * ABOUT US TOGGLE, MULTI-PHOTO EVENTS SHOWCASE & LIGHTBOX
+     * =========================================================================
+     */
+    function toggleAboutStory() {
+      const more = document.getElementById('aboutMoreContent');
+      const label = document.getElementById('aboutReadMoreLabel');
+      const isHidden = more.classList.contains('hidden');
+      if (isHidden) {
+        more.classList.remove('hidden');
+        label.textContent = 'Read less ↑';
+      } else {
+        more.classList.add('hidden');
+        label.textContent = 'Read more ↓';
+      }
+    }
+
+    function renderEventFilterBar() {
+      const eventsList = CFG.events || [];
+      const dynamicCats = Array.from(new Set(eventsList.map((e) => e.category)));
+      const filters = ['All', ...dynamicCats];
+      const bar = document.getElementById('eventFilterBar');
+      if (!bar) return;
+
+      bar.innerHTML = filters.map((f) => {
+        const active = f === activeEventFilter;
+        return `
+          <button
+            type="button"
+            onclick="selectEventFilter('${f}')"
+            class="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all ${
+              active
+                ? 'bg-macha-forest text-white shadow-2xs'
+                : 'bg-white/80 text-macha-forest border border-macha-border hover:bg-white'
+            }"
+          >
+            ${f}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectEventFilter(filter) {
+      activeEventFilter = filter;
+      renderEventFilterBar();
+      renderEventsGrid();
+    }
+
+    function stepEventCardSlide(originalIdx, delta, totalPhotos) {
+      if (totalPhotos <= 1) return;
+      const cur = eventSlideState[originalIdx] || 0;
+      eventSlideState[originalIdx] = (cur + delta + totalPhotos) % totalPhotos;
+      renderEventsGrid();
+    }
+
+    function setEventCardSlide(originalIdx, targetIdx) {
+      eventSlideState[originalIdx] = targetIdx;
+      renderEventsGrid();
+    }
+
+    function renderEventsGrid() {
+      const grid = document.getElementById('eventsShowcaseGrid');
+      if (!grid) return;
+
+      const allEvents = CFG.events || [];
+      const filtered = allEvents
+        .map((ev, originalIdx) => ({ ...ev, originalIdx }))
+        .filter((ev) => activeEventFilter === 'All' || ev.category === activeEventFilter);
+
+      grid.innerHTML = filtered.map((ev) => {
+        const photoObjs = parseMultiPhotoList(ev.photos || ev.images);
+        const hasPhotos = photoObjs.length > 0;
+        const descText = ev.desc || ev.description || '';
+
+        // PROMO CARD (When no photos yet, e.g. Corporate, Birthday & Wedding Supply)
+        if (!hasPhotos || ev.isPromo) {
+          const cleanWa = String(CFG.whatsappEvent || '62882022714701').replace(/[^0-9]/g, '');
+          const waMsg = encodeURIComponent(
+            `Halo Tim *macha.go Surabaya*! 🍵\n\nSaya tertarik tanya pricelist & paket *${ev.title}* untuk acara kami.\n• Jenis Acara: [Corporate / Birthday / Wedding]\n• Tanggal: [Isi tanggal]\n• Estimasi Cup/Botol: [Isi jumlah]\n\nBoleh dibantu info detailnya? Terima kasih! 🙏`
+          );
+
+          return `
+            <article class="rounded-[28px] bg-gradient-to-br from-macha-forest to-macha-pine text-macha-cream p-6 flex flex-col justify-between shadow-card border border-macha-leaf/30">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/20">
+                    ${ev.category}
+                  </span>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-macha-sage text-macha-forest">
+                    ${ev.badgeText || 'Open Booking'}
+                  </span>
+                </div>
+
+                <h3 class="font-display text-2xl font-bold leading-snug text-white pt-1">
+                  ${ev.title}
+                </h3>
+
+                <p class="text-xs font-semibold text-macha-sage flex items-center gap-1.5">
+                  <span>📍</span>
+                  <span>${ev.location || 'Surabaya'}</span>
+                </p>
+
+                <p class="text-xs sm:text-sm text-macha-cream/90 leading-relaxed pt-1">
+                  ${descText}
+                </p>
+              </div>
+
+              <div class="pt-6 mt-4 border-t border-white/15">
+                <a
+                  href="https://wa.me/${cleanWa}?text=${waMsg}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-macha-cream hover:bg-white text-macha-forest font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95"
+                >
+                  <span>💬 Tanya Paket &amp; Pricelist via WA</span>
+                </a>
+              </div>
+            </article>
+          `;
+        }
+
+        // MULTI-PHOTO EVENT CARD
+        const currentSlide = (eventSlideState[ev.originalIdx] || 0) % photoObjs.length;
+        const activePhotoObj = photoObjs[currentSlide];
+        const fallbackUrl = `https://placehold.co/800x600/2D4C2B/F8F5EE?text=${encodeURIComponent(ev.title)}`;
+
+        return `
+          <article class="rounded-[28px] bg-white overflow-hidden shadow-card border border-macha-border flex flex-col">
+            <div class="relative aspect-[4/3] bg-macha-sage overflow-hidden group">
+              <img
+                src="${activePhotoObj.primary}"
+                data-backup="${activePhotoObj.backup}"
+                onclick="openEventLightbox(${ev.originalIdx}, ${currentSlide})"
+                onerror="if(this.dataset.backup && this.src !== this.dataset.backup){this.src=this.dataset.backup;}else{this.onerror=null;this.src='${fallbackUrl}';}"
+                alt="${ev.title} - Foto ${currentSlide + 1}"
+                class="w-full h-full object-cover cursor-zoom-in group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15"></div>
+
+              <!-- Category Badge -->
+              <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-macha-forest/90 text-white backdrop-blur-xs">
+                ${ev.category}
+              </span>
+
+              <!-- Photo Counter Badge -->
+              ${photoObjs.length > 1 ? `
+                <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-black/60 text-white backdrop-blur-xs">
+                  ${currentSlide + 1} / ${photoObjs.length}
+                </span>
+
+                <button
+                  type="button"
+                  onclick="stepEventCardSlide(${ev.originalIdx}, -1, ${photoObjs.length})"
+                  aria-label="Foto Sebelumnya"
+                  class="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center shadow-md font-bold transition-colors"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onclick="stepEventCardSlide(${ev.originalIdx}, 1, ${photoObjs.length})"
+                  aria-label="Foto Berikutnya"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 hover:bg-macha-forest text-macha-forest hover:text-white flex items-center justify-center shadow-md font-bold transition-colors"
+                >
+                  ›
+                </button>
+
+                <!-- Slide Indicator Dots -->
+                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+                  ${photoObjs.map((_, dotIdx) => `
+                    <button
+                      type="button"
+                      onclick="setEventCardSlide(${ev.originalIdx}, ${dotIdx})"
+                      aria-label="Pilih Foto ${dotIdx + 1}"
+                      class="h-1.5 rounded-full transition-all ${
+                        dotIdx === currentSlide ? 'w-5 bg-white' : 'w-1.5 bg-white/60 hover:bg-white'
+                      }"
+                    ></button>
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-2">
+              <div>
+                <div class="flex items-center gap-1.5 text-[11px] font-bold text-macha-leaf mb-1">
+                  <span>📍 ${ev.location || 'Surabaya'}</span>
+                  <span>•</span>
+                  <span>${ev.date || '2026'}</span>
+                </div>
+                <h3 class="font-display text-lg sm:text-xl font-bold text-macha-forest leading-snug mb-1.5">
+                  ${ev.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-macha-ink/80 leading-relaxed">
+                  ${descText}
+                </p>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openEventLightbox(eventIdx, photoIdx) {
+      const ev = (CFG.events || [])[eventIdx];
+      if (!ev) return;
+      const photoObjs = parseMultiPhotoList(ev.photos || ev.images);
+      if (photoObjs.length === 0) return;
+
+      lightboxState = { eventIdx, photoIdx };
+      renderLightboxContent();
+      document.getElementById('eventLightboxModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEventLightbox() {
+      document.getElementById('eventLightboxModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function stepLightboxPhoto(delta) {
+      const ev = (CFG.events || [])[lightboxState.eventIdx];
+      if (!ev) return;
+      const photoObjs = parseMultiPhotoList(ev.photos || ev.images);
+      if (photoObjs.length <= 1) return;
+
+      lightboxState.photoIdx = (lightboxState.photoIdx + delta + photoObjs.length) % photoObjs.length;
+      renderLightboxContent();
+    }
+
+    function renderLightboxContent() {
+      const ev = (CFG.events || [])[lightboxState.eventIdx];
+      if (!ev) return;
+      const photoObjs = parseMultiPhotoList(ev.photos || ev.images);
+      const photo = photoObjs[lightboxState.photoIdx] || photoObjs[0];
+      if (!photo) return;
+
+      const imgEl = document.getElementById('lightboxImg');
+      imgEl.src = photo.primary;
+      imgEl.dataset.backup = photo.backup;
+      imgEl.onerror = function () {
+        if (this.dataset.backup && this.src !== this.dataset.backup) {
+          this.src = this.dataset.backup;
+        }
+      };
+
+      document.getElementById('lightboxTitle').textContent = ev.title;
+      document.getElementById('lightboxCounter').textContent =
+        `${ev.category} • Foto ${lightboxState.photoIdx + 1} dari ${photoObjs.length}`;
+    }
+
+    function openEventWhatsApp(serviceTopic) {
+      const cleanWa = String(CFG.whatsappEvent || '62882022714701').replace(/[^0-9]/g, '');
+      const text = [
+        `Halo Tim *macha.go Surabaya*! 🍵`,
+        ``,
+        `Saya tertarik untuk booking & diskusi paket:`,
+        `• *Layanan:* ${serviceTopic}`,
+        `• *Tanggal Acara:* [Isi tanggal]`,
+        `• *Estimasi Tamu / Cup:* [Isi jumlah]`,
+        `• *Lokasi Acara (Surabaya):* [Isi lokasi]`,
+        ``,
+        `Boleh dibantu share pricelist & detail paketnya? Terima kasih! 🙏`
+      ].join('\n');
+
+      window.open(`https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function openDirectWhatsAppChat() {
+      const cleanWa = String(CFG.whatsappOrder || '62882022714701').replace(/[^0-9]/g, '');
+      const text = 'Halo macha.go Surabaya! 🍵 Saya mau tanya seputar menu matcha hari ini.';
+      window.open(`https://wa.me/${cleanWa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function toggleOpeningHours() {
+      const details = document.getElementById('openingHoursDetails');
+      const chevron = document.getElementById('hoursChevron');
+      const isHidden = details.classList.contains('hidden');
+      if (isHidden) {
+        details.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        details.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+  </script>
+</body>
+</html>
